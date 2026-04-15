@@ -34,50 +34,61 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — abstract data-flow graphic */}
-          <div className="hidden md:block" aria-hidden>
-            <svg width="420" height="420" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Background rings */}
-              <circle cx="210" cy="210" r="200" stroke="#E8DDD4" strokeWidth="1" strokeDasharray="5 7" />
-              <circle cx="210" cy="210" r="140" stroke="#E8DDD4" strokeWidth="1" strokeDasharray="5 7" />
+          {/* Right — profile photo with data-flow graphic */}
+          <div className="hidden md:block relative" style={{ width: 420, height: 480 }}>
+            {/* Profile photo */}
+            <img
+              src="/profile.jpg"
+              alt="Elaine Liang"
+              className="rounded-2xl object-cover shadow-lg"
+              style={{ width: 340, height: 440, objectPosition: 'center 15%' }}
+            />
 
-              {/* Connection lines */}
-              <line x1="85" y1="115" x2="178" y2="178" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="178" y1="178" x2="302" y2="148" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="178" y1="178" x2="210" y2="305" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="302" y1="148" x2="332" y2="270" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="210" y1="305" x2="332" y2="270" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
+            {/* SVG graphic — upper right, overlapping the photo */}
+            <div className="absolute" style={{ top: -160, right: -210 }} aria-hidden>
+              <svg width="400" height="400" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Background rings */}
+                <circle cx="210" cy="210" r="200" stroke="#E8DDD4" strokeWidth="1" strokeDasharray="5 7" />
+                <circle cx="210" cy="210" r="140" stroke="#E8DDD4" strokeWidth="1" strokeDasharray="5 7" />
 
-              {/* Nodes */}
-              <circle cx="85" cy="115" r="36" fill="#D97355" fillOpacity="0.08" stroke="#D97355" strokeWidth="1.5" />
-              <text x="85" y="120" textAnchor="middle" fill="#D97355" fontSize="15" fontFamily="monospace" fontWeight="600">DATA</text>
+                {/* Connection lines */}
+                <line x1="85" y1="115" x2="178" y2="178" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="178" y1="178" x2="302" y2="148" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="178" y1="178" x2="210" y2="305" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="302" y1="148" x2="332" y2="270" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="210" y1="305" x2="332" y2="270" stroke="url(#line-grad)" strokeWidth="2.5" strokeLinecap="round" />
 
-              <circle cx="178" cy="178" r="42" fill="#D97355" fillOpacity="0.12" stroke="#D97355" strokeWidth="2" />
-              <text x="178" y="173" textAnchor="middle" fill="#D97355" fontSize="15" fontFamily="monospace" fontWeight="600">ML</text>
-              <text x="178" y="190" textAnchor="middle" fill="#D97355" fontSize="12" fontFamily="monospace">model</text>
+                {/* Nodes */}
+                <circle cx="85" cy="115" r="36" fill="#D97355" fillOpacity="0.08" stroke="#D97355" strokeWidth="1.5" />
+                <text x="85" y="120" textAnchor="middle" fill="#D97355" fontSize="15" fontFamily="monospace" fontWeight="600">DATA</text>
 
-              <circle cx="302" cy="148" r="34" fill="#E8A87C" fillOpacity="0.08" stroke="#E8A87C" strokeWidth="1.5" />
-              <text x="302" y="153" textAnchor="middle" fill="#E8A87C" fontSize="15" fontFamily="monospace" fontWeight="600">RAG</text>
+                <circle cx="178" cy="178" r="42" fill="#D97355" fillOpacity="0.12" stroke="#D97355" strokeWidth="2" />
+                <text x="178" y="173" textAnchor="middle" fill="#D97355" fontSize="15" fontFamily="monospace" fontWeight="600">ML</text>
+                <text x="178" y="190" textAnchor="middle" fill="#D97355" fontSize="12" fontFamily="monospace">model</text>
 
-              <circle cx="210" cy="305" r="34" fill="#E8A87C" fillOpacity="0.08" stroke="#E8A87C" strokeWidth="1.5" />
-              <text x="210" y="310" textAnchor="middle" fill="#E8A87C" fontSize="15" fontFamily="monospace" fontWeight="600">API</text>
+                <circle cx="302" cy="148" r="34" fill="#E8A87C" fillOpacity="0.08" stroke="#E8A87C" strokeWidth="1.5" />
+                <text x="302" y="153" textAnchor="middle" fill="#E8A87C" fontSize="15" fontFamily="monospace" fontWeight="600">RAG</text>
 
-              <circle cx="332" cy="270" r="38" fill="#4A9E7C" fillOpacity="0.08" stroke="#4A9E7C" strokeWidth="1.5" />
-              <text x="332" y="265" textAnchor="middle" fill="#4A9E7C" fontSize="14" fontFamily="monospace" fontWeight="600">PROD</text>
-              <text x="332" y="281" textAnchor="middle" fill="#4A9E7C" fontSize="12" fontFamily="monospace">app</text>
+                <circle cx="210" cy="305" r="34" fill="#E8A87C" fillOpacity="0.08" stroke="#E8A87C" strokeWidth="1.5" />
+                <text x="210" y="310" textAnchor="middle" fill="#E8A87C" fontSize="15" fontFamily="monospace" fontWeight="600">API</text>
 
-              {/* Small accent dots */}
-              <circle cx="130" cy="250" r="7" fill="#D97355" fillOpacity="0.15" />
-              <circle cx="265" cy="235" r="6" fill="#E8A87C" fillOpacity="0.15" />
-              <circle cx="375" cy="195" r="8" fill="#4A9E7C" fillOpacity="0.10" />
+                <circle cx="332" cy="270" r="38" fill="#4A9E7C" fillOpacity="0.08" stroke="#4A9E7C" strokeWidth="1.5" />
+                <text x="332" y="265" textAnchor="middle" fill="#4A9E7C" fontSize="14" fontFamily="monospace" fontWeight="600">PROD</text>
+                <text x="332" y="281" textAnchor="middle" fill="#4A9E7C" fontSize="12" fontFamily="monospace">app</text>
 
-              <defs>
-                <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D97355" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#E8A87C" stopOpacity="0.3" />
-                </linearGradient>
-              </defs>
-            </svg>
+                {/* Small accent dots */}
+                <circle cx="130" cy="250" r="7" fill="#D97355" fillOpacity="0.15" />
+                <circle cx="265" cy="235" r="6" fill="#E8A87C" fillOpacity="0.15" />
+                <circle cx="375" cy="195" r="8" fill="#4A9E7C" fillOpacity="0.10" />
+
+                <defs>
+                  <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#D97355" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#E8A87C" stopOpacity="0.3" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
           </div>
 
         </div>
