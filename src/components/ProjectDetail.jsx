@@ -72,7 +72,7 @@ export default function ProjectDetail({ project, onBack }) {
 
         <div className="w-full rounded-2xl overflow-hidden mb-8 border border-border shadow-sm">
           <ProjectGraphic
-            icon={project.icon}
+            id={project.id}
             gradient={project.gradient}
             title={project.title}
             className="w-full h-64 md:h-80"
@@ -146,7 +146,7 @@ export default function ProjectDetail({ project, onBack }) {
         </div>
 
         <div className="flex items-center gap-5 mt-10 pt-8 border-t border-border">
-          {project.links && project.links.github && (
+          {project.links && project.links.github && project.links.github !== '#' && (
             <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="btn-primary">
               View on GitHub →
             </a>

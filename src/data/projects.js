@@ -3,11 +3,11 @@ export const projects = [
     id: 'career-coach',
     title: 'CareerCoach — LangGraph Multi-Agent System',
     icon: '🧭',
-    gradient: ['#D97355', '#D4943A'],
+    gradient: ['#C4683A', '#D4943A'],
     featured: true,
     status: 'Shipped',
     oneliner:
-      'A multi-agent career coaching app that routes job seeker queries through specialized Claude-based agents — gap analysis, resume rewriting, mock interviews, and outreach — all orchestrated by a LangGraph state graph.',
+      'LangGraph career coach with 9 routed agents, SQLite checkpointing, and separate nodes for resume rewriting, interview prep, outreach, gap analysis, and synthesis.',
     problem:
       'Job seekers juggle disconnected tools for resume help, interview prep, and networking. There\'s no single system that understands your profile, target roles, and projects holistically and coaches you across all dimensions.',
     solution:
@@ -37,7 +37,6 @@ export const projects = [
     ],
     metrics: ['9 specialized agents', '6 intent-routed paths', 'Cross-session persistence'],
     links: {
-      github: '#',
       demo: 'https://careerofferengine.streamlit.app',
     },
   },
@@ -45,11 +44,11 @@ export const projects = [
     id: 'fraud-copilot',
     title: 'AI Fraud Investigation Copilot',
     icon: '🛡️',
-    gradient: ['#D97355', '#E8A87C'],
+    gradient: ['#1E2D4A', '#2D4A6B'],
     featured: true,
     status: 'Shipped',
     oneliner:
-      'Built for fraud analysts who spend hours manually reviewing flagged transactions — this copilot explains why a transaction was flagged, surfaces similar historical cases, and recommends next steps, all in one report.',
+      'Fraud investigation pipeline that combines XGBoost scoring, SHAP feature explanations, FAISS retrieval, and Claude-generated analyst reports.',
     problem:
       'Fraud detection models flag suspicious transactions but give analysts nothing to work with — no explanation, no context, no suggested action. That turns every flagged case into a slow, inconsistent manual investigation.',
     solution:
@@ -75,18 +74,17 @@ export const projects = [
     metrics: ['95%+ precision', '0.98 AUC'],
     links: {
       github: 'https://github.com/yeeelaineeeliang/fraud-copilot.git',
-      demo: '#',
     },
   },
   {
     id: 'hri-memory',
     title: 'Memory-Aware Rapport Engine (HRI Research)',
     icon: '🤖',
-    gradient: ['#C4603F', '#D97355'],
-    featured: false,
+    gradient: ['#2D6B5E', '#4A8B7A'],
+    featured: true,
     status: 'Research',
     oneliner:
-      'Exploring whether a social robot can actually remember you. Built the memory and conversation system that lets the Temi robot pick up where it left off — then studied whether that continuity changes how people relate to it.',
+      'Kotlin/Android rapport engine for a Temi robot, with prior-session memory retrieval and LLM-generated responses constrained for a research study.',
     problem:
       'Social robots typically have no memory of previous interactions, which makes any sense of ongoing relationship impossible. The research question: can an LLM-powered memory system make robot rapport feel meaningfully continuous?',
     solution:
@@ -112,11 +110,11 @@ export const projects = [
     id: 'calpin',
     title: 'CalPin — Peer Support Platform',
     icon: '📍',
-    gradient: ['#E8A87C', '#F0C5A8'],
+    gradient: ['#4A5BA8', '#6B7EC4'],
     featured: true,
     status: 'In Progress',
     oneliner:
-      'A full-stack iOS app that makes peer support on campus as easy as opening a map — connect with someone nearby who can help, right when you need it.',
+      'SwiftUI and Node/Postgres peer-support app with Berkeley OAuth, map-based requests, distance sorting, and guardrails around request matching.',
     problem:
       'Students in distress often don\'t know who around them can help, and existing campus resources aren\'t always accessible in the moment. CalPin was built to close that gap.',
     solution:
@@ -147,11 +145,11 @@ export const projects = [
     id: 'crypto-pipeline',
     title: 'Crypto Trading ML Pipeline',
     icon: '📈',
-    gradient: ['#D4943A', '#E8A87C'],
+    gradient: ['#2D2D2D', '#4A4A4A'],
     featured: false,
     status: 'Shipped',
     oneliner:
-      'End-to-end ML pipeline for BTC/ETH price direction prediction — built from raw Binance data to feature selection to evaluation, with a focus on preventing the model from fooling itself on noisy, collinear signals.',
+      'BTC/ETH directional prediction pipeline from Binance data through feature engineering, VIF-based selection, logistic regression, and held-out evaluation.',
     problem:
       'Crypto price signals are noisy and highly collinear. Without principled feature selection, models overfit on lagged price data and look great in training but fail out of sample.',
     solution:

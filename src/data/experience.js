@@ -16,9 +16,9 @@ export const experience = [
     dates: 'Jun 2024 – Aug 2024',
     location: 'Charlotte, NC',
     bullets: [
-      'Built a Python/SQL pipeline that pulled and processed 40,000+ customer records from Teradata, tracking campaign performance across email, direct mail, branch, and online channels to measure real ROI',
-      'Developed a customer segmentation model using KMeans and PCA to surface five high-value groups, projected to improve targeted campaign response rates by 10 to 30%',
-      'Collaborated across four teams on a capstone project that redesigned the mobile transaction flow, cutting access time by 57%',
+      'Built a Python/SQL pipeline on top of Teradata to pull and process 40k+ customer records — the goal was tracking real campaign ROI across email, direct mail, branch, and online in one place rather than four separate reports',
+      'Used KMeans and PCA to segment customers into five groups that actually meant something to the marketing team — the model surfaced patterns they hadn\'t been deliberately targeting, which kicked off a conversation about how they\'d been allocating budget',
+      'Worked across four teams on a capstone redesign of the mobile transaction flow — we cut access time by 57%, which mostly came down to removing steps that existed for historical reasons nobody could quite remember',
     ],
   },
   {

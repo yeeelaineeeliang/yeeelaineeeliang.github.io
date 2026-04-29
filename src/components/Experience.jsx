@@ -6,19 +6,16 @@ export default function Experience() {
       <div className="container-content">
         <h2 className="section-title fade-in">Experience</h2>
 
-        <ol className="fade-in relative pl-8 space-y-12">
-          {/* Connecting line */}
-          <div className="absolute left-[9px] top-2 bottom-2 w-px bg-gradient-to-b from-accent via-border to-border" />
+        <ol className="fade-in relative pl-8 space-y-10">
+          <div className="absolute left-[9px] top-2 bottom-2 w-px bg-border" />
 
           {experience.map((e, i) => (
-            <li key={i} className="relative group">
-              {/* Timeline dot */}
+            <li key={i} className="relative">
               <span className="absolute -left-8 top-2 flex items-center justify-center">
-                <span className="absolute w-5 h-5 rounded-full bg-accent/15 group-hover:bg-accent/25 transition-colors duration-300" />
-                <span className="relative w-3 h-3 rounded-full bg-accent ring-2 ring-bg" />
+                <span className="relative w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-bg" />
               </span>
 
-              <div className="bg-surface border border-border rounded-2xl p-5 shadow-sm group-hover:border-accent/30 group-hover:shadow-md transition-all duration-200">
+              <div className="border-b border-border pb-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-1">
                   <h3 className="font-bold text-xl">{e.role}</h3>
                   <span className="font-mono text-sm text-accent">{e.dates}</span>
@@ -30,7 +27,7 @@ export default function Experience() {
                 <ul className="space-y-2">
                   {e.bullets.map((b, j) => (
                     <li key={j} className="flex gap-2.5 text-base text-muted leading-relaxed">
-                      <span className="text-teal shrink-0 mt-0.5 text-sm">▸</span>
+                      <span className="text-muted-2 shrink-0 mt-0.5">-</span>
                       {b}
                     </li>
                   ))}

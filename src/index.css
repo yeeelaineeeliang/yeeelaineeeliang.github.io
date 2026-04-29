@@ -27,7 +27,7 @@
   }
 
   .section {
-    @apply py-24;
+    @apply py-20;
   }
 
   .section-title {
@@ -38,22 +38,21 @@
     content: '';
     display: block;
     width: 40px;
-    height: 3px;
-    background: linear-gradient(to right, #D97355, #E8A87C);
-    border-radius: 2px;
+    height: 1px;
+    background: #D97355;
     margin-top: 8px;
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-sm rounded-xl transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-sm rounded-lg transition-colors duration-200;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-accent text-accent font-semibold text-sm rounded-xl transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-border text-text font-semibold text-sm rounded-lg transition-colors duration-200;
   }
 
   .btn-outline:hover {
-    background-color: rgba(217,115,85,0.08);
+    background-color: rgba(217,115,85,0.06);
   }
 
   .chip {
@@ -70,12 +69,11 @@
   }
 
   .card-warm {
-    @apply bg-surface border border-border rounded-2xl transition-all duration-200;
+    @apply bg-surface border border-border rounded-xl transition-colors duration-200;
   }
 
   .card-warm:hover {
     @apply border-accent/30;
-    box-shadow: 0 8px 30px rgba(217, 115, 85, 0.08);
   }
 }
 

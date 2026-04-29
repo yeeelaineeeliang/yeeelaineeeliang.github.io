@@ -12,23 +12,15 @@ const LinkedInIcon = () => (
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative section bg-bg-alt overflow-hidden">
-      {/* Soft glow */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[120px] opacity-[0.12]"
-        style={{ background: 'radial-gradient(circle, #D97355 0%, transparent 70%)' }}
-        aria-hidden
-      />
-
-      <div className="container-content relative z-10">
+    <section id="contact" className="section bg-bg-alt">
+      <div className="container-content">
         <div className="fade-in max-w-lg mx-auto text-center">
-          <h2 className="section-title mx-auto">Let's Talk</h2>
+          <h2 className="section-title mx-auto">Let&apos;s Talk</h2>
 
           <p className="text-lg text-muted leading-relaxed mt-8 mb-8">
-            I'm actively looking for full-time roles in data engineering, AI/ML engineering, or
-            applied AI starting Summer/Fall 2026. If you're working on something interesting with
-            data pipelines, automation, or AI systems, I'd love to hear about it. Also happy to
-            chat about research collabs or just connect.
+            I&apos;m looking for full-time data engineering, AI/ML engineering, and applied AI roles
+            starting Summer/Fall 2026. The best fit is work involving retrieval, model explanation,
+            automation, or production data pipelines.
           </p>
 
           <a href="mailto:elaineliang0124@gmail.com" className="btn-primary mx-auto">
