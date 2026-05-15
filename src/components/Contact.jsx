@@ -15,10 +15,10 @@ export default function Contact() {
     <section id="contact" className="section bg-bg-alt">
       <div className="container-content">
         <div className="fade-in max-w-lg mx-auto text-center">
-          <h2 className="section-title mx-auto">Let&apos;s Talk</h2>
+          <h2 className="section-title mx-auto">Let&apos;s Connect!</h2>
 
           <p className="text-lg text-muted leading-relaxed mt-8 mb-8">
-            I&apos;m looking for internship or full-time roles in data engineering, AI/ML engineering,
+            I&apos;m actively looking for internship or full-time roles in data engineering, AI/ML engineering,
             and applied AI starting Summer/Fall 2026.
           </p>
 
