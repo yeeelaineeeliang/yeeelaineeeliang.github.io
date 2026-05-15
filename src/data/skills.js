@@ -5,6 +5,7 @@ export const skills = [
     skills: [
       { name: 'Python', tier: 'production' },
       { name: 'SQL', tier: 'production' },
+      { name: 'TypeScript', tier: 'production' },
       { name: 'Swift', tier: 'production' },
       { name: 'JavaScript', tier: 'production' },
       { name: 'Kotlin', tier: 'working' },
@@ -30,7 +31,9 @@ export const skills = [
     category: 'Data Engineering',
     skills: [
       { name: 'Pandas', tier: 'production' },
+      { name: 'PySpark', tier: 'production' },
       { name: 'PostgreSQL', tier: 'production' },
+      { name: 'Supabase', tier: 'production' },
       { name: 'Teradata', tier: 'production' },
       { name: 'Feature engineering', tier: 'production' },
       { name: 'Vector databases', tier: 'production' },
@@ -41,6 +44,8 @@ export const skills = [
     category: 'Backend & APIs',
     skills: [
       { name: 'Node.js', tier: 'production' },
+      { name: 'Next.js', tier: 'production' },
+      { name: 'React', tier: 'production' },
       { name: 'Express', tier: 'production' },
       { name: 'REST API design', tier: 'production' },
       { name: 'Streamlit', tier: 'production' },

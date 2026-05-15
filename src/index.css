@@ -39,7 +39,7 @@
     display: block;
     width: 40px;
     height: 1px;
-    background: #D97355;
+    background: #A33F2F;
     margin-top: 8px;
   }
 
@@ -52,7 +52,19 @@
   }
 
   .btn-outline:hover {
-    background-color: rgba(217,115,85,0.06);
+    background-color: rgba(163,63,47,0.06);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 bg-accent/[0.06] text-accent font-semibold text-sm rounded-lg transition-colors duration-200;
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(163,63,47,0.10);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-3 py-2.5 text-muted hover:text-accent font-semibold text-sm transition-colors duration-200;
   }
 
   .chip {
@@ -69,7 +81,7 @@
   }
 
   .card-warm {
-    @apply bg-surface border border-border rounded-xl transition-colors duration-200;
+    @apply bg-surface border border-border rounded-lg transition-colors duration-200;
   }
 
   .card-warm:hover {
@@ -111,10 +123,10 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #FFFAF6;
+    background: #F7F8F5;
   }
   ::-webkit-scrollbar-thumb {
-    background: #E8DDD4;
+    background: #D7DED9;
     border-radius: 3px;
   }
 }

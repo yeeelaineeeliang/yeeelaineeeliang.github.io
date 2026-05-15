@@ -11,7 +11,7 @@ export const experience = [
     ],
   },
   {
-    org: 'Wells Fargo — CSBB Marketing Team',
+    org: 'Wells Fargo — CSBB Marketing Sciences Team',
     role: 'Analyst Intern',
     dates: 'Jun 2024 – Aug 2024',
     location: 'Charlotte, NC',

@@ -1,9 +1,9 @@
 const currentFocus = [
   'RAG and retrieval systems',
+  'Civic-data simulation products',
   'Model explanations for high-pressure workflows',
   'Memory in human-robot interaction',
   'Data pipelines that survive real usage',
-  'Automation for repetitive operational work',
 ]
 
 export default function About() {
@@ -15,12 +15,12 @@ export default function About() {
         <div className="fade-in grid md:grid-cols-[1fr_280px] gap-12 items-start">
           <div>
             <p className="text-muted leading-relaxed text-base mb-8">
-              I studied statistics at Berkeley, but the interesting problems kept turning out to be
-              systems problems: using data to understand what is happening, then building tools
-              that turn those insights into something people can use. That pulled me into software.
-              Now I am interested in products that use AI, agents, and automation to make work
-              easier: a fraud investigation copilot, a peer support app, and a robot rapport engine
-              that retrieves context from earlier conversations.
+              A lot of my projects start from a practical gap I ran into and wanted to make
+              usable. Most recently, I built CityLiving Sim, a Chicago neighborhood simulator that
+              combines civic datasets, maps, Street View, and a grounded AI advisor to help people
+              understand what daily life could feel like before choosing where to live. That work
+              pushed me deeper into data quality, schema normalization, and product interfaces that
+              translate raw civic data into decisions.
             </p>
 
             <p className="font-mono text-xs text-muted-2 uppercase tracking-widest mb-4">

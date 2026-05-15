@@ -58,7 +58,16 @@ function SectionHeader({ icon, label, color }) {
 
 import ProjectGraphic from './ProjectGraphic'
 
+function getMetricsGridClass(count) {
+  if (count >= 3) return 'sm:grid-cols-3'
+  if (count === 2) return 'sm:grid-cols-2'
+  return ''
+}
+
 export default function ProjectDetail({ project, onBack }) {
+  const hasDemo = Boolean(project.links?.demo && project.links.demo !== '#')
+  const hasGithub = Boolean(project.links?.github && project.links.github !== '#')
+
   return (
     <div className="min-h-screen bg-bg text-text">
       <div className="container-content py-12">
@@ -70,7 +79,7 @@ export default function ProjectDetail({ project, onBack }) {
           ← Back to Projects
         </button>
 
-        <div className="w-full rounded-2xl overflow-hidden mb-8 border border-border shadow-sm">
+        <div className="w-full rounded-lg overflow-hidden mb-8 border border-border shadow-sm">
           <ProjectGraphic
             id={project.id}
             gradient={project.gradient}
@@ -79,14 +88,21 @@ export default function ProjectDetail({ project, onBack }) {
           />
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-3">{project.title}</h1>
+        <div className="flex flex-wrap items-start gap-3 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold leading-tight">{project.title}</h1>
+          {project.status && (
+            <span className="mt-1 shrink-0 rounded-md border border-accent/20 bg-accent/[0.08] px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest text-accent">
+              {project.status}
+            </span>
+          )}
+        </div>
 
         <p className="text-lg text-muted leading-relaxed mb-6">{project.oneliner}</p>
 
         <div className="flex flex-wrap gap-2 items-center mb-10">
           <span className="text-xs font-mono font-semibold text-muted-2 uppercase tracking-widest mr-1">Stack</span>
           {project.stack.map(s => (
-            <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-md bg-accent/8 text-accent border border-accent/15">
+            <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-md bg-accent/[0.08] text-accent border border-accent/15">
               {s}
             </span>
           ))}
@@ -95,27 +111,27 @@ export default function ProjectDetail({ project, onBack }) {
         <div className="space-y-6">
 
           {/* PROBLEM */}
-          <div className="rounded-2xl border border-warning/25 bg-warning/[0.05] p-6 shadow-sm">
+          <div className="rounded-lg border border-warning/25 bg-warning/[0.05] p-6 shadow-sm">
             <SectionHeader icon={<ProblemIcon />} label="The Problem" color="orange" />
             <p className="text-base text-muted leading-relaxed">{project.problem}</p>
           </div>
 
           {/* SOLUTION */}
-          <div className="rounded-2xl border border-accent/25 bg-accent/[0.04] p-6 shadow-sm">
+          <div className="rounded-lg border border-accent/25 bg-accent/[0.04] p-6 shadow-sm">
             <SectionHeader icon={<SolutionIcon />} label="The Solution" color="violet" />
             <p className="text-base text-muted leading-relaxed">{project.solution}</p>
           </div>
 
           {/* ARCHITECTURE */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+          <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
             <SectionHeader icon={<ArchIcon />} label="How It Works" color="code" />
-            <pre className="font-mono text-sm text-muted bg-bg-alt rounded-xl p-5 overflow-x-auto leading-relaxed border border-border">
+            <pre className="font-mono text-sm text-muted bg-bg-alt rounded-lg p-5 overflow-x-auto leading-relaxed border border-border">
               {project.pipeline}
             </pre>
           </div>
 
           {/* KEY DECISIONS */}
-          <div className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+          <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
             <SectionHeader icon={<DecisionIcon />} label="Key Decisions" color="blue" />
             <ol className="space-y-4">
               {project.decisions.map((d, i) => (
@@ -131,11 +147,11 @@ export default function ProjectDetail({ project, onBack }) {
 
           {/* RESULTS */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="rounded-2xl border border-success/25 bg-success/[0.04] p-6 shadow-sm">
+            <div className="rounded-lg border border-success/25 bg-success/[0.04] p-6 shadow-sm">
               <SectionHeader icon={<ResultsIcon />} label="Results" color="green" />
-              <div className={`grid grid-cols-1 ${project.metrics.length > 1 ? 'sm:grid-cols-' + Math.min(project.metrics.length, 3) : ''} gap-4`}>
+              <div className={`grid grid-cols-1 ${getMetricsGridClass(project.metrics.length)} gap-4`}>
                 {project.metrics.map(m => (
-                  <div key={m} className="bg-success/[0.06] border border-success/15 rounded-xl px-5 py-4 text-center">
+                  <div key={m} className="bg-success/[0.06] border border-success/15 rounded-lg px-5 py-4 text-center">
                     <p className="font-mono text-success font-bold text-lg leading-snug">{m}</p>
                   </div>
                 ))}
@@ -146,15 +162,19 @@ export default function ProjectDetail({ project, onBack }) {
         </div>
 
         <div className="flex items-center gap-5 mt-10 pt-8 border-t border-border">
-          {project.links && project.links.github && project.links.github !== '#' && (
-            <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              View on GitHub →
+          {hasDemo && (
+            <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              Live Demo →
             </a>
           )}
-          {project.links && project.links.demo && project.links.demo !== '#' && (
-            <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
-              className="text-sm font-semibold text-muted hover:text-text transition-colors duration-200">
-              Live Demo →
+          {hasGithub && (
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={hasDemo ? 'text-sm font-semibold text-muted hover:text-text transition-colors duration-200' : 'btn-primary'}
+            >
+              View on GitHub →
             </a>
           )}
         </div>

@@ -18,9 +18,8 @@ export default function Contact() {
           <h2 className="section-title mx-auto">Let&apos;s Talk</h2>
 
           <p className="text-lg text-muted leading-relaxed mt-8 mb-8">
-            I&apos;m looking for full-time data engineering, AI/ML engineering, and applied AI roles
-            starting Summer/Fall 2026. The best fit is work involving retrieval, model explanation,
-            automation, or production data pipelines.
+            I&apos;m looking for internship or full-time roles in data engineering, AI/ML engineering,
+            and applied AI starting Summer/Fall 2026.
           </p>
 
           <a href="mailto:elaineliang0124@gmail.com" className="btn-primary mx-auto">

@@ -1,4 +1,30 @@
 const illustrations = {
+  'cityliving-sim': (
+    <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M21 81 C42 67 61 73 80 58 C99 42 119 47 141 31" stroke="white" strokeWidth="2.4" strokeOpacity="0.36" strokeLinecap="round" />
+      <path d="M22 31 H145 M22 55 H145 M44 18 V92 M73 18 V92 M102 18 V92 M131 18 V92" stroke="white" strokeWidth="0.9" strokeOpacity="0.15" />
+
+      <rect x="20" y="23" width="45" height="29" rx="7" fill="white" fillOpacity="0.16" />
+      <rect x="20" y="23" width="45" height="29" rx="7" stroke="white" strokeWidth="1.3" strokeOpacity="0.64" />
+      <path d="M32 44 V34 M42 44 V30 M52 44 V37" stroke="white" strokeWidth="2.1" strokeOpacity="0.75" strokeLinecap="round" />
+      <text x="42.5" y="61" textAnchor="middle" fill="white" fillOpacity="0.78" fontSize="6.7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">CIVIC DATA</text>
+
+      <rect x="82" y="17" width="52" height="33" rx="8" fill="white" fillOpacity="0.2" />
+      <rect x="82" y="17" width="52" height="33" rx="8" stroke="white" strokeWidth="1.5" strokeOpacity="0.74" />
+      <path d="M95 41 L101 27 L109 36 L116 23 L123 41" stroke="white" strokeWidth="2" strokeOpacity="0.78" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="108" y="59" textAnchor="middle" fill="white" fillOpacity="0.82" fontSize="6.7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">MONTH SIM</text>
+
+      <rect x="42" y="66" width="76" height="24" rx="8" fill="white" fillOpacity="0.24" />
+      <rect x="42" y="66" width="76" height="24" rx="8" stroke="white" strokeWidth="1.7" strokeOpacity="0.82" />
+      <path d="M59 78 H78 M86 78 H103" stroke="white" strokeWidth="1.8" strokeOpacity="0.72" strokeLinecap="round" />
+      <circle cx="57" cy="78" r="3.8" fill="#F3C677" />
+      <circle cx="105" cy="78" r="3.8" fill="#9AD0C2" />
+      <text x="80" y="101" textAnchor="middle" fill="white" fillOpacity="0.82" fontSize="7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">GROUNDING TOOLS</text>
+
+      <path d="M65 52 C76 58 88 58 99 50" stroke="white" strokeWidth="1.3" strokeOpacity="0.42" strokeDasharray="4 3" />
+      <path d="M79 66 V56" stroke="white" strokeWidth="1.3" strokeOpacity="0.42" strokeDasharray="4 3" />
+    </svg>
+  ),
   'career-coach': (
     <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M80 26 L39 54 M80 26 L78 56 M80 26 L121 54 M39 69 L78 84 M121 69 L78 84" stroke="white" strokeWidth="2.2" strokeOpacity="0.4" />
