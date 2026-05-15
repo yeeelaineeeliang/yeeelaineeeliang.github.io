@@ -155,10 +155,42 @@ const illustrations = {
   ),
 }
 
-export default function ProjectGraphic({ id, gradient, title, className = '' }) {
+const projectImages = {
+  'cityliving-sim': '/project-images/cityliving-sim.png',
+  'career-coach': '/project-images/career-coach.png',
+  'fraud-copilot': '/project-images/fraud-copilot.png',
+  'hri-memory': '/project-images/hri-memory.png',
+  'calpin': '/project-images/calpin.png',
+  'crypto-pipeline': '/project-images/crypto-pipeline.png',
+}
+
+const detailProjectImages = {
+  'calpin': '/project-images/calpin-architecture.png',
+}
+
+export default function ProjectGraphic({ id, gradient, title, className = '', variant = 'card' }) {
   const [from, to] = gradient
   const safeId = title.replace(/[^a-zA-Z0-9]/g, '')
   const patternId = `dots-${safeId}`
+  const imageSrc = variant === 'detail'
+    ? detailProjectImages[id] ?? projectImages[id]
+    : projectImages[id]
+
+  if (imageSrc) {
+    return (
+      <div
+        className={`relative overflow-hidden bg-bg-alt ${className}`}
+        style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
+      >
+        <img
+          src={imageSrc}
+          alt={`${title} project visual`}
+          className="h-full w-full object-cover object-center"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
 
   return (
     <div

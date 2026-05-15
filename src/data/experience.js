@@ -1,34 +1,51 @@
 export const experience = [
   {
-    org: 'University of Chicago — HRI Research Lab',
     role: 'Research Assistant',
+    org: 'University of Chicago',
+    team: 'HRI Research Lab',
+    teamUrl: 'https://hri.cs.uchicago.edu',
     dates: 'Jan 2026 – Present',
     location: 'Chicago, IL',
+    summary:
+      'Building a memory-aware conversation engine for a Temi social robot deployed in a longitudinal HRI study.',
+    metrics: ['2-week study', '2×2 experiment design', 'Robot dialogue system'],
+    tags: ['LLM Prompting', 'RAG', 'Android/Kotlin', 'Human-Robot Interaction', 'Study Design'],
     bullets: [
-      'Building the memory and conversation engine for a Temi social robot — responsible for everything from LLM prompt design and retrieval logic to Android/Kotlin deployment',
-      'Working within randomized study constraints (2×2 between-subjects design) means every engineering decision needs to be documented and defensible, which has made me much more intentional about system design',
-      'Cut down on hallucinated self-disclosures by tightening the prompt structure and adding a validation step before responses reach the robot',
+      'Built the memory and conversation layer for a Temi social robot, connecting LLM prompt design, retrieval logic, and Android/Kotlin deployment.',
+      'Worked within a 2×2 randomized study design, making engineering decisions traceable, documented, and valid for longitudinal HRI research.',
+      'Reduced hallucinated self-disclosures by tightening prompt structure and adding a validation step before responses reached the robot.',
     ],
   },
   {
-    org: 'Wells Fargo — CSBB Marketing Sciences Team',
     role: 'Analyst Intern',
+    org: 'Wells Fargo',
+    team: 'CSBB Marketing Sciences Team',
     dates: 'Jun 2024 – Aug 2024',
     location: 'Charlotte, NC',
+    summary:
+      'Built data and ML workflows to understand campaign performance and customer behavior across acquisition channels.',
+    metrics: ['40k+ customer records', '5 customer segments', '57% faster access flow'],
+    tags: ['Python', 'SQL', 'Teradata', 'KMeans', 'PCA', 'Marketing Analytics'],
     bullets: [
-      'Built a Python/SQL pipeline on top of Teradata to pull and process 40k+ customer records — the goal was tracking real campaign ROI across email, direct mail, branch, and online in one place rather than four separate reports',
-      'Used KMeans and PCA to segment customers into five groups that actually meant something to the marketing team — the model surfaced patterns they hadn\'t been deliberately targeting, which kicked off a conversation about how they\'d been allocating budget',
-      'Worked across four teams on a capstone redesign of the mobile transaction flow — we cut access time by 57%, which mostly came down to removing steps that existed for historical reasons nobody could quite remember',
+      'Built a Python/SQL pipeline on Teradata to process 40k+ customer records across five acquisition channels, giving the team one source of truth for campaign ROI.',
+      'Used KMeans and PCA to segment customers into five behavioral groups, surfacing under-targeted patterns that informed marketing allocation discussions.',
+      'Collaborated across four teams on a mobile transaction flow redesign, reducing customer access time by 57% by removing redundant legacy steps.',
     ],
   },
   {
-    org: 'Dawnrise Inc.',
     role: 'Data Analyst Intern',
-    dates: '2023',
+    org: 'Dawnrise Inc.',
+    orgUrl: 'https://www.dawnrise.com',
+    dates: 'May 2023 – Aug 2023',
     location: 'Diamond Bar, CA',
+    summary:
+      'Automated competitive intelligence workflows using scraping, structured data, and GPT-based parsing.',
+    metrics: ['10k+ SKU specs', '40 hrs → 2 hrs', '80% manual research reduction'],
+    tags: ['Python', 'Selenium', 'Async Scraping', 'PostgreSQL', 'GPT Parsing'],
     bullets: [
-      'Spotted a recurring manual data collection bottleneck and scoped out an automation solution that freed up meaningful time for the team',
-      'Co-built a GPT-3.5 integration for internal tooling — my first real exposure to building something with an LLM, and what got me genuinely excited about the space',
+      'Built an automated competitive intelligence pipeline using Python, Selenium, async scraping, and GPT-based parsing to extract 10k+ SKU specs from e-commerce sources.',
+      'Reduced manual data collection from around 40 hours to 2 hours, giving the team faster access to structured market research.',
+      'Helped define PostgreSQL schema, reporting specs, and prompt strategies during a two-week agile delivery cycle.',
     ],
   },
 ]

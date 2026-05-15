@@ -1,13 +1,13 @@
 const credibilityFacts = [
-  ['Education', 'M.S. Computer Science, UChicago'],
-  ['Education', 'B.A. Statistics & Data Science, UC Berkeley']
+  { label: 'Current', value: 'M.S. Computer Science, UChicago' },
+  { label: 'Undergraduate', timeline: '2021-2025', value: 'B.A. Statistics & B.A. Data Science, UC Berkeley' }
 ]
 
 export default function Hero({ onNavigate }) {
   return (
     <section id="home" className="relative min-h-[calc(100vh-64px)] flex items-center section">
       <div className="container-content">
-        <div className="fade-in grid md:grid-cols-[1fr_auto] gap-12 items-center">
+        <div className="fade-in grid md:grid-cols-[minmax(0,1fr)_440px] lg:grid-cols-[minmax(0,1fr)_500px] gap-10 lg:gap-12 items-center">
 
           {/* Left - text content */}
           <div className="max-w-xl">
@@ -51,25 +51,28 @@ export default function Hero({ onNavigate }) {
           </div>
 
           {/* Right - profile photo and evidence */}
-          <div className="hidden md:block w-[360px]">
-            <div className="-rotate-1 rounded-lg border border-border bg-surface p-2 shadow-[0_24px_70px_rgba(31,42,36,0.16)] transition-transform duration-300 hover:rotate-0">
+          <div className="hidden md:block w-full">
+            <div className="mx-auto w-full max-w-[400px] -rotate-1 rounded-lg border border-border bg-surface p-2 shadow-[0_24px_70px_rgba(31,42,36,0.16)] transition-transform duration-300 hover:rotate-0">
               <img
                 src="/profile.jpg"
                 alt="Elaine Liang"
                 className="h-[390px] w-full rounded-md object-cover"
-                style={{ objectPosition: 'center 15%' }}
+                style={{ objectPosition: 'center 80%' }}
               />
             </div>
 
             <div className="mt-5 rounded-lg border border-border bg-surface/95 p-4 shadow-sm">
               <p className="font-mono text-xs uppercase tracking-widest text-muted-2 mb-3">
-                Background
+                Education
               </p>
               <dl className="grid grid-cols-1 gap-2">
-                {credibilityFacts.map(([label, value]) => (
-                  <div key={label} className="grid grid-cols-[88px_1fr] gap-3 text-sm">
-                    <dt className="font-mono text-xs text-muted-2">{label}</dt>
-                    <dd className="text-text leading-snug">{value}</dd>
+                {credibilityFacts.map(({ label, value, timeline }) => (
+                  <div key={`${label}-${value}`} className="grid gap-1 text-xs xl:text-sm">
+                    <dt className="font-mono text-xs text-muted-2">
+                      {label}
+                      {timeline && <span className="ml-2"> {timeline}</span>}
+                    </dt>
+                    <dd className="text-text leading-snug whitespace-nowrap">{value}</dd>
                   </div>
                 ))}
               </dl>

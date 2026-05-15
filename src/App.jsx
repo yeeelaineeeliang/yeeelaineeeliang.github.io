@@ -11,12 +11,12 @@ import ProjectDetail from './components/ProjectDetail'
 const homePath = '/AboutMe'
 const pageOrder = ['home', 'projects', 'experience', 'contact']
 const pageLabels = {
-  home: 'Home',
+  home: 'AboutMe',
   projects: 'Projects',
   experience: 'Experience',
   contact: 'Contact',
 }
-const navLinks = pageOrder.filter(id => id !== 'home').map(id => ({ id, label: pageLabels[id] }))
+const navLinks = pageOrder.map(id => ({ id, label: pageLabels[id] }))
 
 function getInitialPage() {
   if (typeof window === 'undefined') return 'home'

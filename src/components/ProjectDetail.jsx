@@ -64,9 +64,24 @@ function getMetricsGridClass(count) {
   return ''
 }
 
+function getStackGroups(project) {
+  if (project.stackGroups?.length) return project.stackGroups
+  return [{ label: 'Stack', items: project.stack ?? [] }]
+}
+
+function getMeta(project) {
+  return [
+    ['Role', project.role],
+    ['Status', project.maturity],
+    ['Focus', project.focus],
+  ].filter(([, value]) => Boolean(value))
+}
+
 export default function ProjectDetail({ project, onBack }) {
   const hasDemo = Boolean(project.links?.demo && project.links.demo !== '#')
   const hasGithub = Boolean(project.links?.github && project.links.github !== '#')
+  const stackGroups = getStackGroups(project)
+  const meta = getMeta(project)
 
   return (
     <div className="min-h-screen bg-bg text-text">
@@ -85,27 +100,43 @@ export default function ProjectDetail({ project, onBack }) {
             gradient={project.gradient}
             title={project.title}
             className="w-full h-64 md:h-80"
+            variant="detail"
           />
         </div>
 
         <div className="flex flex-wrap items-start gap-3 mb-3">
           <h1 className="text-3xl md:text-4xl font-bold leading-tight">{project.title}</h1>
-          {project.status && (
-            <span className="mt-1 shrink-0 rounded-md border border-accent/20 bg-accent/[0.08] px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest text-accent">
-              {project.status}
-            </span>
-          )}
         </div>
 
-        <p className="text-lg text-muted leading-relaxed mb-6">{project.oneliner}</p>
+        <p className="text-lg text-muted leading-relaxed mb-6">{project.summary ?? project.oneliner}</p>
 
-        <div className="flex flex-wrap gap-2 items-center mb-10">
-          <span className="text-xs font-mono font-semibold text-muted-2 uppercase tracking-widest mr-1">Stack</span>
-          {project.stack.map(s => (
-            <span key={s} className="text-xs font-mono px-2.5 py-1 rounded-md bg-accent/[0.08] text-accent border border-accent/15">
-              {s}
-            </span>
-          ))}
+        <div className="grid gap-4 mb-10 lg:grid-cols-[0.85fr_1.15fr]">
+          {meta.length > 0 && (
+            <div className="grid gap-3 rounded-lg border border-border bg-surface p-4 sm:grid-cols-3 lg:grid-cols-1">
+              {meta.map(([label, value]) => (
+                <p key={label}>
+                  <span className="block font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-2">
+                    {label}
+                  </span>
+                  <span className="text-sm font-medium leading-relaxed text-text">{value}</span>
+                </p>
+              ))}
+            </div>
+          )}
+
+          {stackGroups.length > 0 && (
+            <div className="grid gap-2 rounded-lg border border-accent/15 bg-accent/[0.04] p-4">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-accent">
+                Stack
+              </p>
+              {stackGroups.map(group => (
+                <p key={group.label} className="text-sm leading-relaxed">
+                  <span className="font-semibold text-text">{group.label}: </span>
+                  <span className="font-mono text-muted">{group.items.join(', ')}</span>
+                </p>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">
@@ -116,10 +147,24 @@ export default function ProjectDetail({ project, onBack }) {
             <p className="text-base text-muted leading-relaxed">{project.problem}</p>
           </div>
 
-          {/* SOLUTION */}
+          {/* WHAT I BUILT */}
           <div className="rounded-lg border border-accent/25 bg-accent/[0.04] p-6 shadow-sm">
-            <SectionHeader icon={<SolutionIcon />} label="The Solution" color="violet" />
-            <p className="text-base text-muted leading-relaxed">{project.solution}</p>
+            <SectionHeader icon={<SolutionIcon />} label="What I Built" color="violet" />
+            <div className="space-y-4">
+              <p className="text-base text-muted leading-relaxed">
+                {project.technicalContribution ?? project.solution}
+              </p>
+              {project.highlights && project.highlights.length > 0 && (
+                <ul className="grid gap-3 md:grid-cols-2">
+                  {project.highlights.map(item => (
+                    <li key={item} className="flex gap-3 rounded-md bg-bg/70 p-3 text-sm leading-relaxed text-muted">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
           {/* ARCHITECTURE */}
@@ -156,6 +201,21 @@ export default function ProjectDetail({ project, onBack }) {
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* NEXT IMPROVEMENTS */}
+          {project.nextImprovements && project.nextImprovements.length > 0 && (
+            <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
+              <SectionHeader icon={<DecisionIcon />} label="Next Improvements" color="blue" />
+              <ul className="grid gap-3">
+                {project.nextImprovements.map(item => (
+                  <li key={item} className="flex gap-3 text-base leading-relaxed text-muted">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 

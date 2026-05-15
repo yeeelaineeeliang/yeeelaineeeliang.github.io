@@ -46,7 +46,7 @@ export default function About() {
                 <p className="text-muted text-sm mt-0.5">University of Chicago · 2025–2026</p>
               </div>
               <div className="pl-3 border-l-2 border-teal/40">
-                <p className="text-text font-semibold">B.A. Statistics &amp; Data Science</p>
+                <p className="text-text font-semibold">B.A. Statistics &amp; B.A. Data Science</p>
                 <p className="text-muted text-sm mt-0.5">UC Berkeley · 2021–2025</p>
               </div>
             </div>
