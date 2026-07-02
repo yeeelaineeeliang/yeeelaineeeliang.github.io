@@ -28,16 +28,37 @@ export default function Nav({ activePage = 'home', links = [], onNavigate = () =
               <button
                 type="button"
                 onClick={() => go(l.id)}
-                className={`text-sm font-medium transition-colors duration-200 ${
+                className={`relative pb-1 text-sm font-medium transition-colors duration-200 ${
                   activePage === l.id ? 'text-accent' : 'text-muted hover:text-accent'
                 }`}
                 aria-current={activePage === l.id ? 'page' : undefined}
               >
                 {l.label}
+                <span
+                  className="absolute -bottom-0.5 left-0 h-0.5 rounded-full bg-accent transition-all duration-300"
+                  style={{ width: activePage === l.id ? '100%' : '0%' }}
+                />
               </button>
             </li>
           ))}
         </ul>
+
+        {/* Page position dots */}
+        <div className="hidden md:flex items-center gap-1.5 ml-6" aria-hidden="true">
+          {links.map(l => (
+            <button
+              key={l.id}
+              type="button"
+              onClick={() => go(l.id)}
+              aria-label={`Go to ${l.label}`}
+              className={`rounded-full bg-accent transition-all duration-300 ${
+                activePage === l.id
+                  ? 'w-4 h-1.5 opacity-100'
+                  : 'w-1.5 h-1.5 opacity-20 hover:opacity-50'
+              }`}
+            />
+          ))}
+        </div>
 
         <button
           className="md:hidden flex flex-col gap-1.5 p-1"

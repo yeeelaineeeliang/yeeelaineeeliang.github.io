@@ -9,10 +9,11 @@ export const projects = [
     maturity: 'In Progress',
     role: 'Solo full-stack builder',
     focus: 'Civic data, grounded AI, map UX',
+    category: ['Current Work', 'AI Systems', 'Full-Stack', 'Agents', 'RAG', 'Data Engineering'],
     summary:
-      'A decision-support tool for choosing where to live in Chicago, grounded in real civic data instead of AI guesswork. It combines neighborhood datasets, interactive maps, Street View context, and a grounded AI advisor to help users compare daily-life tradeoffs across communities.',
+      'Choosing where to live is more than rent math. I built this to answer the question with real data: transit reliability, crime patterns, 311 response times, and Street View across 77 Chicago neighborhoods — with an AI advisor that has to check actual civic datasets before it tells you anything.',
     oneliner:
-      'A decision-support tool for choosing where to live in Chicago, grounded in real civic data instead of AI guesswork.',
+      'A neighborhood tool that pulls real Chicago data together so you can figure out where to live without just guessing.',
     technicalContribution:
       'Integrated neighborhood-level civic datasets, map layers, Street View context, and grounded AI explanations into one searchable decision interface.',
     problem:
@@ -84,13 +85,14 @@ export const projects = [
     icon: '🧭',
     gradient: ['#C4683A', '#D4943A'],
     featured: false,
+    category: ['AI Systems', 'Agents'],
     maturity: 'Shipped',
     role: 'Solo AI systems builder',
     focus: 'Agent routing, career workflows, persistent context',
     summary:
-      'A LangGraph-powered career coach that helps job seekers manage resume tailoring, interview prep, outreach, and skill-gap analysis through specialized agents that share context across the workflow.',
+      'Job searching is fragmented across a dozen tools that don\'t talk to each other. This routes your question to the right specialist — resume rewriter, mock interviewer, gap analyzer, outreach drafter — and each one knows what the others figured out, so you\'re not starting from scratch every time.',
     oneliner:
-      'A LangGraph-powered career coach that routes resume, interview, outreach, and skill-gap questions to specialized agents, then synthesizes their outputs into one actionable response while preserving context across sessions.',
+      'A multi-agent career coach where each specialist shares what it learned, so downstream agents build on upstream findings instead of starting over.',
     technicalContribution:
       'Designed a routed multi-agent workflow where specialized career agents share state, persist progress, and synthesize one coherent answer.',
     problem:
@@ -147,13 +149,14 @@ export const projects = [
     icon: '🛡️',
     gradient: ['#1E2D4A', '#2D4A6B'],
     featured: false,
+    category: ['AI Systems', 'ML', 'RAG', 'Data Engineering'],
     maturity: 'Shipped',
     role: 'Solo ML pipeline builder',
     focus: 'Explainable ML, retrieval, analyst reports',
     summary:
-      'Turns a flagged transaction into a full investigation brief with model scores, plain-English explanations, and historical precedents pulled automatically.',
+      'Fraud models flag transactions. Then what? This takes a flagged transaction and automatically builds out the full picture: what the model scored and why, what similar past cases looked like, and what an analyst should probably do next. The analyst still decides — the tool just does the legwork.',
     oneliner:
-      'Turns a flagged transaction into a full investigation brief with model scores, plain-English explanations, and historical precedents pulled automatically.',
+      'Takes a flagged transaction and builds out the full picture automatically — model score, explanation, historical precedents — while keeping the analyst in charge.',
     technicalContribution:
       'Combined fraud scoring, SHAP explanations, vector retrieval, and LLM-generated reports into one analyst-in-the-loop investigation flow.',
     problem:
@@ -204,6 +207,7 @@ export const projects = [
     icon: '🤖',
     gradient: ['#2D6B5E', '#4A8B7A'],
     featured: false,
+    category: ['Research', 'AI Systems', 'RAG'],
     maturity: 'In Progress',
     role: 'HRI research engineer',
     focus: 'Robot memory, constrained generation, rapport',
@@ -255,6 +259,7 @@ export const projects = [
     icon: '📍',
     gradient: ['#4A5BA8', '#6B7EC4'],
     featured: false,
+    category: ['Full-Stack', 'Mobile'],
     maturity: 'SHIPPED PROTOTYPE',
     role: 'Full-stack mobile builder',
     focus: 'Campus support, location matching, safety guardrails',
@@ -312,6 +317,7 @@ export const projects = [
     icon: '📈',
     gradient: ['#2D2D2D', '#4A4A4A'],
     featured: false,
+    category: ['ML', 'Data Engineering'],
     maturity: 'Shipped',
     role: 'ML pipeline builder',
     focus: 'Feature selection, held-out evaluation, directional prediction',

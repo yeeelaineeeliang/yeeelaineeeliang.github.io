@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 998;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 250px;
+}
+
+@keyframes wordUp {
+  from { opacity: 0; transform: translateY(32px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes drawDown {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -37,18 +64,26 @@
   .section-title::after {
     content: '';
     display: block;
-    width: 40px;
-    height: 1px;
+    width: 0;
+    height: 2px;
     background: #A33F2F;
-    margin-top: 8px;
+    margin-top: 10px;
+    border-radius: 2px;
+    transition: width 0.5s ease 0.2s;
+  }
+
+  /* Trigger underline growth when parent or self becomes visible */
+  .fade-in.visible .section-title::after,
+  .section-title.fade-in.visible::after {
+    width: 48px;
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-sm rounded-lg transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-sm rounded-lg transition-all duration-200 hover:-translate-y-px hover:shadow-md;
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-border text-text font-semibold text-sm rounded-lg transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-border text-text font-semibold text-sm rounded-lg transition-all duration-200 hover:-translate-y-px;
   }
 
   .btn-outline:hover {
@@ -81,7 +116,7 @@
   }
 
   .card-warm {
-    @apply bg-surface border border-border rounded-lg transition-colors duration-200;
+    @apply bg-surface border border-border rounded-xl transition-all duration-300;
   }
 
   .card-warm:hover {
@@ -90,6 +125,25 @@
 }
 
 @layer utilities {
+  /* Hero word-by-word reveal */
+  .word-up {
+    display: inline-block;
+    opacity: 0;
+    animation: wordUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Hero element entrance (replaces fade-in for above-fold content) */
+  .animate-in {
+    opacity: 0;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* Timeline line draw-down */
+  .timeline-draw {
+    transform-origin: top;
+    animation: drawDown 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+
   .fade-in {
     opacity: 0;
     transform: translateY(16px);
@@ -128,5 +182,32 @@
   ::-webkit-scrollbar-thumb {
     background: #D7DED9;
     border-radius: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .fade-in-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .word-up {
+    opacity: 1 !important;
+    filter: none !important;
+    animation: none !important;
+  }
+  .animate-in {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  .timeline-draw {
+    transform: scaleY(1) !important;
+    animation: none !important;
+  }
+  .section-title::after {
+    transition: none !important;
+    animation: none !important;
   }
 }

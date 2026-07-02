@@ -1,26 +1,34 @@
 import ProjectGraphic from './ProjectGraphic'
 
-export default function ProjectCard({ project, onViewDetail }) {
+export default function ProjectCard({ project, onViewDetail, index = 0 }) {
   const hasDemo = Boolean(project.links?.demo && project.links.demo !== '#')
   const hasGithub = Boolean(project.links?.github && project.links.github !== '#')
   const status = project.maturity ?? project.status
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden card-warm border-border/60 shadow-sm hover:shadow-md">
-      {/* Project graphic */}
+    <article className="group flex h-full flex-col overflow-hidden card-warm border-border/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      {/* Project graphic with slide-up overlay */}
       <div className="relative shrink-0 overflow-hidden">
         <ProjectGraphic
           id={project.id}
           gradient={project.gradient}
           title={project.title}
-          className="h-48 w-full transition-transform duration-300 group-hover:scale-105"
+          className="h-52 w-full transition-transform duration-500 group-hover:scale-105"
         />
+        <div className="absolute inset-0 flex items-end translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent p-4">
+          <p className="text-white text-sm font-medium leading-snug line-clamp-3">
+            {project.oneliner ?? project.summary}
+          </p>
+        </div>
       </div>
 
       {/* Content */}
       <div className="flex flex-1 flex-col gap-4 p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <h3 className="text-lg font-bold leading-snug">
+          <span className="font-mono text-xs font-bold text-muted-2/50 select-none">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <h3 className="w-full text-lg font-bold leading-snug">
             <button
               type="button"
               onClick={() => onViewDetail(project)}
@@ -31,9 +39,16 @@ export default function ProjectCard({ project, onViewDetail }) {
           </h3>
         </div>
 
-        <p className="text-sm text-muted leading-relaxed line-clamp-4">
-          {project.summary ?? project.oneliner}
-        </p>
+        <div className="relative min-h-[5rem]">
+          <p className="text-sm text-muted leading-relaxed line-clamp-4 transition-opacity duration-200 group-hover:opacity-0">
+            {project.summary ?? project.oneliner}
+          </p>
+          {project.decisions?.[0] && (
+            <p className="absolute inset-0 overflow-hidden text-sm italic leading-relaxed text-muted-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100 border-l-2 border-accent/40 pl-3">
+              {project.decisions[0]}
+            </p>
+          )}
+        </div>
 
         {status && (
           <span className="w-fit rounded-md border border-accent/20 bg-accent/[0.08] px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-widest text-accent">
