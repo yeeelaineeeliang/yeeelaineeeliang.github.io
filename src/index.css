@@ -29,10 +29,19 @@ body::before {
   to   { transform: scaleY(1); }
 }
 
+/* Suppress native details marker globally */
+details summary::-webkit-details-marker { display: none; }
+details summary::marker { display: none; }
+
+/* Gentle entrance when a <details> opens */
+details[open] summary ~ * {
+  animation: fadeSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 64px;
+    scroll-padding-top: 68px; /* 64px nav + 2px progress bar + 2px buffer */
   }
 
   body {
@@ -208,6 +217,10 @@ body::before {
   }
   .section-title::after {
     transition: none !important;
+    animation: none !important;
+  }
+  /* Disable details open animation */
+  details[open] summary ~ * {
     animation: none !important;
   }
 }

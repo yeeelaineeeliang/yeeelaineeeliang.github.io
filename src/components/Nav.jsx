@@ -1,6 +1,11 @@
 import { useState } from 'react'
 
-export default function Nav({ activePage = 'home', links = [], onNavigate = () => {} }) {
+export default function Nav({
+  activePage = 'home',
+  links = [],
+  onNavigate = () => {},
+  scrollProgress = 0,
+}) {
   const [open, setOpen] = useState(false)
 
   function go(pageId) {
@@ -22,6 +27,7 @@ export default function Nav({ activePage = 'home', links = [], onNavigate = () =
           EL
         </button>
 
+        {/* Desktop nav links */}
         <ul className="hidden md:flex items-center gap-8">
           {links.map(l => (
             <li key={l.id}>
@@ -43,7 +49,7 @@ export default function Nav({ activePage = 'home', links = [], onNavigate = () =
           ))}
         </ul>
 
-        {/* Page position dots */}
+        {/* Chapter position dots */}
         <div className="hidden md:flex items-center gap-1.5 ml-6" aria-hidden="true">
           {links.map(l => (
             <button
@@ -60,11 +66,13 @@ export default function Nav({ activePage = 'home', links = [], onNavigate = () =
           ))}
         </div>
 
+        {/* Hamburger (mobile) */}
         <button
           className="md:hidden flex flex-col gap-1.5 p-1"
           onClick={() => setOpen(o => !o)}
-          aria-label="Toggle menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-menu"
         >
           <span className={`block w-5 h-0.5 bg-text rounded transition-transform duration-200 ${open ? 'translate-y-2 rotate-45' : ''}`} />
           <span className={`block w-5 h-0.5 bg-text rounded transition-opacity duration-200 ${open ? 'opacity-0' : ''}`} />
@@ -72,26 +80,38 @@ export default function Nav({ activePage = 'home', links = [], onNavigate = () =
         </button>
       </nav>
 
-      {open && (
-        <div className="md:hidden bg-bg/95 backdrop-blur-md border-b border-border px-6 pb-4">
-          <ul className="flex flex-col gap-4 pt-2">
-            {links.map(l => (
-              <li key={l.id}>
-                <button
-                  type="button"
-                  onClick={() => go(l.id)}
-                  className={`text-sm font-medium transition-colors duration-200 ${
-                    activePage === l.id ? 'text-accent' : 'text-muted hover:text-accent'
-                  }`}
-                  aria-current={activePage === l.id ? 'page' : undefined}
-                >
-                  {l.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {/* Mobile menu */}
+      <div
+        id="mobile-menu"
+        className={`md:hidden bg-bg/95 backdrop-blur-md border-b border-border overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+          open ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <ul className="flex flex-col gap-4 px-6 py-4">
+          {links.map(l => (
+            <li key={l.id}>
+              <button
+                type="button"
+                onClick={() => go(l.id)}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  activePage === l.id ? 'text-accent' : 'text-muted hover:text-accent'
+                }`}
+                aria-current={activePage === l.id ? 'page' : undefined}
+              >
+                {l.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Scroll progress bar */}
+      <div className="h-0.5 bg-border/30" aria-hidden="true">
+        <div
+          className="h-full bg-accent/70 transition-[width] duration-150 ease-out"
+          style={{ width: `${Math.round(scrollProgress * 100)}%` }}
+        />
+      </div>
     </header>
   )
 }

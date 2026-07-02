@@ -1,136 +1,125 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+import About from './components/About'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ProjectDetail from './components/ProjectDetail'
 
-const homePath = '/AboutMe'
-const pageOrder = ['home', 'projects', 'experience', 'contact']
-const pageLabels = {
-  home: 'AboutMe',
-  projects: 'Projects',
-  experience: 'Experience',
-  contact: 'Contact',
-}
-const navLinks = pageOrder.map(id => ({ id, label: pageLabels[id] }))
+const NAV_LINKS = [
+  { id: 'home', label: 'AboutMe' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
+]
 
-function getInitialPage() {
-  if (typeof window === 'undefined') return 'home'
-  const hash = window.location.hash.replace('#', '')
-  if (hash === 'skills') return 'projects'
-  return pageOrder.includes(hash) ? hash : 'home'
-}
+// All scrollable section IDs in order
+const ALL_SECTIONS = ['home', 'about', 'projects', 'experience', 'contact']
 
-function getUrlForPage(pageId) {
-  if (pageId === 'home') return homePath
-  return `${homePath}#${pageId}`
+// 'about' lives visually inside the 'home' nav entry
+const SECTION_TO_NAV = {
+  home: 'home',
+  about: 'home',
+  projects: 'projects',
+  experience: 'experience',
+  contact: 'contact',
 }
 
 export default function App() {
-  const [activePage, setActivePage] = useState(getInitialPage)
+  const [activePage, setActivePage] = useState('home')
   const [selectedProject, setSelectedProject] = useState(null)
-  const pageRefs = useRef({})
-  const activeIndex = pageOrder.indexOf(activePage)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
-  function handleNavigate(pageId) {
-    if (!pageOrder.includes(pageId)) return
-
-    setSelectedProject(null)
-    setActivePage(pageId)
-
-    window.history.pushState(null, '', getUrlForPage(pageId))
-  }
-
+  // Chapter progress bar (0–1)
   useEffect(() => {
-    function syncFromHash() {
-      const next = getInitialPage()
-      setSelectedProject(null)
-      setActivePage(next)
+    function onScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0)
     }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
-    window.addEventListener('hashchange', syncFromHash)
-    window.addEventListener('popstate', syncFromHash)
-    return () => {
-      window.removeEventListener('hashchange', syncFromHash)
-      window.removeEventListener('popstate', syncFromHash)
+  // Active section: last section whose top is within 64px (nav) + 100px buffer
+  useEffect(() => {
+    if (selectedProject) return
+    function updateActive() {
+      const offset = 64 + 100
+      let current = 'home'
+      for (const id of ALL_SECTIONS) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = SECTION_TO_NAV[id]
+        }
+      }
+      setActivePage(current)
+    }
+    window.addEventListener('scroll', updateActive, { passive: true })
+    updateActive()
+    return () => window.removeEventListener('scroll', updateActive)
+  }, [selectedProject])
+
+  // Sync URL hash with active section
+  useEffect(() => {
+    if (selectedProject) return
+    const hash = activePage === 'home' ? '' : `#${activePage}`
+    window.history.replaceState(null, '', `/AboutMe${hash}`)
+  }, [activePage, selectedProject])
+
+  // Restore scroll position from URL hash on initial load
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '')
+    if (hash && ALL_SECTIONS.includes(hash) && hash !== 'home') {
+      const timer = setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView()
+      }, 120)
+      return () => clearTimeout(timer)
     }
   }, [])
 
+  // Fade-in on scroll — re-observe whenever project detail closes
   useEffect(() => {
-    if (window.location.pathname !== homePath || window.location.hash === '#skills') {
-      window.history.replaceState(null, '', getUrlForPage(activePage))
-    }
-  }, [activePage])
-
-  // Fade-in on scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            observer.unobserve(entry.target)
+    const io = new IntersectionObserver(
+      entries =>
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible')
+            io.unobserve(e.target)
           }
-        })
-      },
-      { threshold: 0.08 }
+        }),
+      { threshold: 0.08 },
     )
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el))
+    return () => io.disconnect()
   }, [selectedProject])
 
-  useEffect(() => {
-    pageRefs.current[activePage]?.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [activePage])
+  // Navigate scrolls to a section or nav page ID
+  function handleNavigate(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   function handleViewDetail(project) {
-    setActivePage('projects')
     setSelectedProject(project)
-    window.history.replaceState(null, '', getUrlForPage('projects'))
+    window.scrollTo({ top: 0 })
   }
 
   function handleBack() {
     setSelectedProject(null)
-    setActivePage('projects')
-    window.history.replaceState(null, '', getUrlForPage('projects'))
+    setTimeout(() => document.getElementById('projects')?.scrollIntoView(), 60)
   }
-
-  const pages = [
-    {
-      id: 'home',
-      content: <Hero onNavigate={handleNavigate} />,
-    },
-    {
-      id: 'projects',
-      content: <Projects onViewDetail={handleViewDetail} />,
-    },
-    {
-      id: 'experience',
-      content: <Experience />,
-    },
-    {
-      id: 'contact',
-      content: (
-        <>
-          <Contact />
-          <Footer />
-        </>
-      ),
-    },
-  ]
 
   if (selectedProject) {
     return (
       <div className="min-h-screen bg-bg text-text">
         <Nav
-          activePage={activePage}
-          links={navLinks}
+          activePage="projects"
+          links={NAV_LINKS}
           onNavigate={handleNavigate}
+          scrollProgress={1}
         />
-        <main className="h-[calc(100vh-64px)] overflow-y-auto">
+        <main>
           <ProjectDetail project={selectedProject} onBack={handleBack} />
         </main>
       </div>
@@ -141,27 +130,17 @@ export default function App() {
     <div className="min-h-screen bg-bg text-text">
       <Nav
         activePage={activePage}
-        links={navLinks}
+        links={NAV_LINKS}
         onNavigate={handleNavigate}
+        scrollProgress={scrollProgress}
       />
-      <main className="h-[calc(100vh-64px)] overflow-hidden">
-        <div
-          className="flex h-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-        >
-          {pages.map(page => (
-            <div
-              key={page.id}
-              ref={node => {
-                if (node) pageRefs.current[page.id] = node
-              }}
-              className="h-full w-full shrink-0 overflow-y-auto"
-              aria-hidden={activePage !== page.id}
-            >
-              {page.content}
-            </div>
-          ))}
-        </div>
+      <main>
+        <Hero onNavigate={handleNavigate} />
+        <About />
+        <Projects onViewDetail={handleViewDetail} />
+        <Experience />
+        <Contact />
+        <Footer />
       </main>
     </div>
   )
