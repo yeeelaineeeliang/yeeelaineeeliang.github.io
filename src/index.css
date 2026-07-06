@@ -223,4 +223,11 @@ details[open] summary ~ * {
   details[open] summary ~ * {
     animation: none !important;
   }
+  .hero-cursor-glow {
+    opacity: 0 !important;
+  }
+  .hero-dot-grid {
+    transform: none !important;
+    transition: none !important;
+  }
 }

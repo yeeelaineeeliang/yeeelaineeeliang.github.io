@@ -9,7 +9,7 @@ import Footer from './components/Footer'
 import ProjectDetail from './components/ProjectDetail'
 
 const NAV_LINKS = [
-  { id: 'home', label: 'AboutMe' },
+  { id: 'home', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'contact', label: 'Contact' },

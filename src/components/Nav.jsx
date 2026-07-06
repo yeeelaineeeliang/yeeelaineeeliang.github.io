@@ -49,23 +49,6 @@ export default function Nav({
           ))}
         </ul>
 
-        {/* Chapter position dots */}
-        <div className="hidden md:flex items-center gap-1.5 ml-6" aria-hidden="true">
-          {links.map(l => (
-            <button
-              key={l.id}
-              type="button"
-              onClick={() => go(l.id)}
-              aria-label={`Go to ${l.label}`}
-              className={`rounded-full bg-accent transition-all duration-300 ${
-                activePage === l.id
-                  ? 'w-4 h-1.5 opacity-100'
-                  : 'w-1.5 h-1.5 opacity-20 hover:opacity-50'
-              }`}
-            />
-          ))}
-        </div>
-
         {/* Hamburger (mobile) */}
         <button
           className="md:hidden flex flex-col gap-1.5 p-1"
