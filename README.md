@@ -2,7 +2,7 @@
 
 ## About
 
-I'm Elaine, a M.S Computer Science with specialization in AI student at UChicago (previously statistics + data science at UC Berkeley). I build AI systems that have to work for real people under real conditions — fraud investigation tools that analysts can actually trust, a social robot that remembers prior conversations, a peer support app for students, a multi-agent career coaching system.
+I'm Elaine, a M.S Computer Science with specialization in AI student at UChicago (previously statistics + data science at UC Berkeley). I am interested in data security and building trustworthy agents. I work across machine learning, LLMs, data pipelines, and applied AI systems. Right now, my focus is on reducing reasoning cost in LLM systems.
 
 ## Contact
 

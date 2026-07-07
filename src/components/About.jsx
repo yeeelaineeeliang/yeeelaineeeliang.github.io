@@ -1,40 +1,46 @@
-const OBSERVATIONS = [
+const NOTICE_QUESTIONS = [
   {
     n: '01',
-    headline: 'Manual processes that persist because no one has rebuilt them',
-    body: 'Sometimes it is a 40-hour research workflow with an obvious automation waiting inside it.',
+    question: 'What work keeps repeating?',
+    answer: 'Manual steps often reveal a simpler automation path.',
   },
   {
     n: '02',
-    headline: 'Decisions disconnected from the data that could inform them',
-    body: 'And where the data already exists somewhere, just not connected to the decision.',
+    question: 'What decision needs better evidence?',
+    answer: 'Useful data can exist while the decision still runs on old assumptions.',
   },
   {
     n: '03',
-    headline: 'AI recommendations people cannot inspect',
-    body: 'A recommendation without a reason cannot be trusted. A lot changes when the reason is visible.',
+    question: 'What happens when the answer is wrong?',
+    answer: 'I look for evidence, fallbacks, and a way for people to check the answer.',
   },
 ]
 
 const APPROACH_STEPS = [
   {
-    label: 'Start with the person',
-    body: 'Understand the decision they are trying to make, not only the feature they first request.',
+    n: '01',
+    verb: 'Observe',
+    label: 'Find the decision',
+    body: 'Understand what someone needs to decide before choosing the tool.',
   },
   {
-    label: 'Map what already exists',
-    body: 'Sparse data is a constraint to surface, not hide. Gaps in the data are part of the answer.',
+    n: '02',
+    verb: 'Map',
+    label: 'Map the evidence',
+    body: 'Look at available data, missing data, and assumptions already inside the workflow.',
   },
   {
-    label: 'Build with fallbacks',
-    body: 'A tool that fails silently is worse than no tool. Reliability matters more than capability.',
+    n: '03',
+    verb: 'Build',
+    label: 'Build the fallback path',
+    body: 'Show weak answers clearly instead of hiding them behind a confident interface.',
   },
 ]
 
 const TOOLKIT_GROUPS = [
   {
     label: 'Data & ML',
-    items: ['Python', 'PyTorch', 'PySpark', 'FAISS'],
+    items: ['Python', 'PyTorch', 'PySpark', 'Numpy', 'FAISS'],
   },
   {
     label: 'Agents & APIs',
@@ -48,128 +54,129 @@ const TOOLKIT_GROUPS = [
 
 export default function About() {
   return (
-    <section id="about" className="section bg-bg-alt">
-      <div className="container-content">
+    <section
+      id="about"
+      className="section relative pt-14 bg-bg-alt"
+      style={{
+        background: `
+          radial-gradient(circle at 85% 15%, rgba(190, 75, 52, 0.04), transparent 32%),
+          radial-gradient(circle at 10% 85%, rgba(47, 143, 131, 0.06), transparent 36%),
+          #EDF4F1
+        `,
+      }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(94, 111, 104, 0.02) 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+          zIndex: 0,
+        }}
+      />
+
+      <div className="container-content" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Opening */}
-        <div className="fade-in mb-16 max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-widest text-accent mb-4">How I think</p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight mb-5">
-            I&apos;m drawn to situations where people are working around systems that should work better.
+        <div className="fade-in mb-8 max-w-3xl">
+          <p className="font-mono text-xs uppercase tracking-wide text-accent mb-3">How I think</p>
+          <h2 className="text-2xl sm:text-3xl font-bold leading-[1.15] mb-4">
+            I notice{' '}
+            <span className="bg-accent/10 rounded px-1">broken workflows</span>{' '}
+            before they look like technical problems.
           </h2>
-          <p className="text-base text-muted leading-relaxed">
-            Most of my projects start with a gap I encountered firsthand. I look at what data already
-            exists, what the person actually needs, and what system could connect the two.
-          </p>
         </div>
 
-        {/* Observations — three cards */}
-        <div className="fade-in mb-14">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-6">
+        {/* Notice — question panel */}
+        <div className="fade-in mb-8">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-wide text-muted mb-3">
             What I tend to notice
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {OBSERVATIONS.map(({ n, headline, body }) => (
-              <div key={n} className="rounded-xl border border-border bg-bg p-5">
-                <span className="font-mono text-xs text-muted-2/50 block mb-3 select-none">{n}</span>
-                <p className="text-base font-semibold text-text leading-snug mb-2">{headline}</p>
-                <p className="text-sm text-muted leading-relaxed">{body}</p>
-              </div>
-            ))}
+          <div className="rounded-xl border border-border bg-bg/60 p-6">
+            <p className="text-base font-bold text-text mb-5">Before I build, I usually ask:</p>
+            <div className="border-l border-border/50 pl-5 divide-y divide-border/25">
+              {NOTICE_QUESTIONS.map(({ n, question, answer }) => (
+                <div key={n} className="flex gap-4 py-4 first:pt-0 last:pb-0">
+                  <span className="font-mono text-xs text-accent/40 pt-0.5 shrink-0">{n}</span>
+                  <div>
+                    <p className="text-base font-semibold text-text mb-1">{question}</p>
+                    <p className="text-sm text-muted leading-relaxed">{answer}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Approach */}
-        <div className="fade-in mb-14 border-t border-border pt-10">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-6">
-            How I approach new problems
+        <div className="fade-in mb-8">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-wide text-muted mb-6">
+            How I approach the build
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10">
-            {APPROACH_STEPS.map(({ label, body }) => (
-              <div key={label}>
-                <p className="font-semibold text-base text-text mb-2">{label}</p>
-                <p className="text-sm text-muted leading-relaxed">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Currently + Curious */}
-        <div className="fade-in grid md:grid-cols-2 gap-8 border-t border-border pt-10 mb-10">
-          <div className="rounded-xl border border-accent/15 bg-accent/[0.05] p-5">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-4">
-              Currently
-            </p>
-            <div className="space-y-4">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-1.5">
-                  Building
-                </p>
-                <p className="text-sm leading-relaxed text-muted">
-                  <strong className="font-semibold text-text">CityLiving Sim</strong>, a grounded AI
-                  advisor that helps people compare Chicago neighborhoods using civic data.
-                </p>
-                <a
-                  href="https://citysim-gamma.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent hover:underline transition-colors duration-200 mt-2"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-                  CityLiving Sim — live
-                </a>
-              </div>
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-1.5">
-                  Researching
-                </p>
-                <p className="text-sm leading-relaxed text-muted">
-                  How memory and self-disclosure affect rapport with a Temi social robot at
-                  UChicago&apos;s HRI Lab.
-                </p>
+          <div className="grid lg:grid-cols-[2fr_1fr] gap-6 items-center">
+            <div className="relative max-w-none">
+              <div aria-hidden="true" className="absolute left-[13px] top-2 bottom-2 w-px bg-border" />
+              <div className="space-y-3">
+                {APPROACH_STEPS.map(({ n, verb, label, body }) => (
+                  <div key={label} className="flex gap-4">
+                    <span className="relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-accent/25 bg-bg-alt font-mono text-xs font-semibold text-accent">
+                      {n}
+                    </span>
+                    <div className="pt-1">
+                      <p className="font-mono text-[10px] uppercase tracking-wide text-accent mb-1">{verb}</p>
+                      <p className="font-bold text-base text-text mb-1">{label}</p>
+                      <p className="text-sm text-muted leading-relaxed">{body}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-3">
-              Curious about
-            </p>
-            <ul className="space-y-2.5">
-              <li className="text-sm leading-relaxed text-muted">
-                How AI systems stay useful when their data is sparse, outdated, or wrong
-              </li>
-              <li className="text-sm leading-relaxed text-muted">
-                What makes people trust or distrust an automated recommendation
-              </li>
-              <li className="text-sm leading-relaxed text-muted">
-                When grounding changes model behavior rather than only its presentation
-              </li>
-            </ul>
+            {/* Faint systems sketch, aligned to the three process rows: Observe/Map/Build as Input/Decision/Fallback */}
+            <svg
+              aria-hidden="true"
+              className="hidden lg:block"
+              width="100%"
+              height="140"
+              viewBox="0 0 200 140"
+              fill="none"
+            >
+              <path
+                d="M20 20 C 70 20, 30 70, 80 70 C 130 70, 90 120, 150 120"
+                stroke="rgba(94,111,104,0.4)"
+                strokeWidth="1.25"
+                strokeDasharray="3 3"
+              />
+              <circle cx="20" cy="20" r="4.5" fill="rgba(163,63,47,0.6)" />
+              <circle cx="80" cy="70" r="4.5" fill="rgba(163,63,47,0.6)" />
+              <circle cx="150" cy="120" r="4.5" fill="rgba(163,63,47,0.6)" />
+              <text x="30" y="16" className="font-mono" fontSize="9" letterSpacing="0.5" fill="rgba(94,111,104,0.85)">
+                INPUT
+              </text>
+              <text x="90" y="66" className="font-mono" fontSize="9" letterSpacing="0.5" fill="rgba(94,111,104,0.85)">
+                DECISION
+              </text>
+              <text x="100" y="134" className="font-mono" fontSize="9" letterSpacing="0.5" fill="rgba(94,111,104,0.85)">
+                FALLBACK
+              </text>
+            </svg>
           </div>
         </div>
 
         {/* Toolkit */}
-        <div className="fade-in border-t border-border pt-8">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-3">
-            How I work
-          </p>
-          <p className="text-sm text-muted leading-relaxed mb-6 max-w-xl">
-            I work across the full path from data to product. That usually means Python for pipelines
-            and models, TypeScript for the product layer, and APIs that make the system usable outside
-            a notebook.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="fade-in border-t border-border/40 pt-6">
+          <p className="text-sm text-muted mb-2">What I build with</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {TOOLKIT_GROUPS.map(({ label, items }) => (
               <div key={label}>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-2 mb-2">
+                <p className="font-mono text-[10px] font-medium uppercase tracking-wide text-muted mb-1.5">
                   {label}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
                   {items.map(item => (
                     <span
                       key={item}
-                      className="rounded-md border border-border/80 bg-bg px-2.5 py-1 font-mono text-xs text-muted"
+                      className="rounded-md border border-border/80 bg-bg px-2 py-0.5 font-mono text-xs text-muted transition-colors duration-200 hover:border-accent/40 hover:bg-accent/[0.06]"
                     >
                       {item}
                     </span>
