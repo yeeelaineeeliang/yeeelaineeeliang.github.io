@@ -29,6 +29,16 @@ body::before {
   to   { transform: scaleY(1); }
 }
 
+@keyframes targetGlow {
+  0%, 65% { box-shadow: 0 0 0 3px rgba(163, 63, 47, 0.45); }
+  100%    { box-shadow: 0 0 0 3px rgba(163, 63, 47, 0); }
+}
+
+/* Jump-nav landing cue — highlights whichever project card a pill link scrolled to */
+[id^="project-"]:target {
+  animation: targetGlow 2.2s ease-out;
+}
+
 /* Suppress native details marker globally */
 details summary::-webkit-details-marker { display: none; }
 details summary::marker { display: none; }
@@ -63,7 +73,7 @@ details[open] summary ~ * {
   }
 
   .section {
-    @apply py-20;
+    @apply py-20 scroll-mt-20;
   }
 
   .section-title {
@@ -122,6 +132,18 @@ details[open] summary ~ * {
 
   .chip-working {
     @apply chip border border-border text-muted-2;
+  }
+
+  .chip-metric {
+    @apply inline-flex items-center rounded-lg border border-teal/30 bg-teal/[0.06] px-3 py-1.5 font-mono text-sm font-semibold text-teal;
+  }
+
+  .chip-glass {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/35 backdrop-blur-sm px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wide text-white;
+  }
+
+  .chip-metric-dark {
+    @apply inline-flex items-center rounded-lg bg-accent px-3 py-1.5 font-mono text-sm font-semibold text-white shadow-sm;
   }
 
   .card-warm {
@@ -229,5 +251,8 @@ details[open] summary ~ * {
   .hero-dot-grid {
     transform: none !important;
     transition: none !important;
+  }
+  [id^="project-"]:target {
+    animation: none !important;
   }
 }

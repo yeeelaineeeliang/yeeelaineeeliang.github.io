@@ -40,7 +40,7 @@ The Storyteller vertical scroll structure is approved and must not be redesigned
 - Do not reintroduce horizontal carousel navigation.
 - Do not restructure the page order (Hero → About → Projects → Experience → Contact).
 - Do not add new top-level nav destinations without discussion.
-- Do not remove `<details>/<summary>` progressive disclosure — it is the accessibility pattern for expandable content on this site.
+- The `<details>/<summary>` progressive disclosure pattern was intentionally removed from the Projects page (FeaturedProject.jsx) during the gallery redesign — all technical depth (stack, pipeline, decisions) now lives on Project Story pages instead. If expandable content is reintroduced anywhere, keep the same accessible pattern (`focus-visible` + hidden native marker).
 
 ---
 
@@ -60,12 +60,12 @@ The Storyteller vertical scroll structure is approved and must not be redesigned
 - Grain texture overlay (body::before in index.css)
 - Magnetic button interactions (MagneticButton component)
 - Scroll progress bar in Nav
-- `<details>/<summary>` disclosure pattern with `focus-visible` and `[&::-webkit-details-marker]:hidden`
+- ~~`<details>/<summary>` disclosure pattern with `focus-visible` and `[&::-webkit-details-marker]:hidden`~~ — removed from FeaturedProject.jsx during the gallery redesign; no longer used site-wide (see Architecture constraints note above).
 - IntersectionObserver fade-in system (`fade-in` / `fade-in.visible`)
 - Timeline draw animation in Experience (`timeline-draw`)
 - Copy-to-clipboard email with `✓ copied` feedback
 - `prefers-reduced-motion` coverage (comprehensive — all animations, details transitions)
 - CityLiving Sim live link with pulse indicator in About
 - URL hash sync via `window.history.replaceState`
-- Domain filter in Projects (3 categories: AI & Agents, Data & ML, Product)
+- ~~Domain filter in Projects (3 categories: AI & Agents, Data & ML, Product)~~ — intentionally removed in favor of a static positioning line ("Applied AI · Data Products · Human-in-the-loop Systems") in the Projects intro as part of the gallery redesign; do not restore.
 - Hero positioning: "I build AI and data systems people can actually rely on."

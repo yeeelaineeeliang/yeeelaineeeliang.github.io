@@ -1,18 +1,18 @@
-const NOTICE_QUESTIONS = [
+const NOTICE_ITEMS = [
   {
-    n: '01',
-    question: 'What work keeps repeating?',
-    answer: 'Manual steps often reveal a simpler automation path.',
+    title: 'Repeated work',
+    description: 'Tasks people do again and again',
+    icon: 'loop',
   },
   {
-    n: '02',
-    question: 'What decision needs better evidence?',
-    answer: 'Useful data can exist while the decision still runs on old assumptions.',
+    title: 'Weak evidence',
+    description: 'Decisions made with missing data',
+    icon: 'document',
   },
   {
-    n: '03',
-    question: 'What happens when the answer is wrong?',
-    answer: 'I look for evidence, fallbacks, and a way for people to check the answer.',
+    title: 'Verification gaps',
+    description: 'Answers people need a way to check',
+    icon: 'check',
   },
 ]
 
@@ -20,27 +20,27 @@ const APPROACH_STEPS = [
   {
     n: '01',
     verb: 'Observe',
-    label: 'Find the decision',
-    body: 'Understand what someone needs to decide before choosing the tool.',
+    label: 'Start with the decision',
+    question: 'What choice does this system need to support?',
   },
   {
     n: '02',
     verb: 'Map',
     label: 'Map the evidence',
-    body: 'Look at available data, missing data, and assumptions already inside the workflow.',
+    question: 'What data supports the answer, and what is still missing?',
   },
   {
     n: '03',
     verb: 'Build',
     label: 'Build the fallback path',
-    body: 'Show weak answers clearly instead of hiding them behind a confident interface.',
+    question: 'What should the system show when the answer is uncertain?',
   },
 ]
 
 const TOOLKIT_GROUPS = [
   {
     label: 'Data & ML',
-    items: ['Python', 'PyTorch', 'PySpark', 'Numpy', 'FAISS'],
+    items: ['Python', 'PyTorch', 'PySpark', 'NumPy', 'FAISS'],
   },
   {
     label: 'Agents & APIs',
@@ -51,6 +51,37 @@ const TOOLKIT_GROUPS = [
     items: ['TypeScript', 'Next.js', 'Supabase'],
   },
 ]
+
+function NoticeIcon({ type }) {
+  const common = { width: 14, height: 14, viewBox: '0 0 18 18', fill: 'none', 'aria-hidden': true }
+  if (type === 'loop') {
+    return (
+      <svg {...common}>
+        <path
+          d="M4 8a5 5 0 1 1 1.5 3.6"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+        <path d="M4 11.5V8h3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    )
+  }
+  if (type === 'document') {
+    return (
+      <svg {...common}>
+        <rect x="4" y="2.5" width="10" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M6.5 6.5h5M6.5 9h5M6.5 11.5h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    )
+  }
+  return (
+    <svg {...common}>
+      <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6 9.2l1.8 1.8L12 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
 
 export default function About() {
   return (
@@ -78,30 +109,29 @@ export default function About() {
       <div className="container-content" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Opening */}
-        <div className="fade-in mb-8 max-w-3xl">
-          <p className="font-mono text-xs uppercase tracking-wide text-accent mb-3">How I think</p>
-          <h2 className="text-2xl sm:text-3xl font-bold leading-[1.15] mb-4">
-            I notice{' '}
-            <span className="bg-accent/10 rounded px-1">broken workflows</span>{' '}
-            before they look like technical problems.
+        <div className="fade-in mb-5 max-w-2xl">
+          <p className="font-mono text-sm uppercase tracking-wide text-accent mb-3">How I think</p>
+          <h2 className="text-2xl sm:text-3xl font-bold leading-[1.15]">
+            I look for{' '}
+            <span className="bg-accent/[0.12] rounded-md px-1.5 py-0.5 box-decoration-clone">
+              the gap
+            </span>{' '}
+            between how people actually work and how the system expects them to work.
           </h2>
         </div>
 
         {/* Notice — question panel */}
-        <div className="fade-in mb-8">
-          <p className="font-mono text-[10px] font-medium uppercase tracking-wide text-muted mb-3">
-            What I tend to notice
-          </p>
-          <div className="rounded-xl border border-border bg-bg/60 p-6">
-            <p className="text-base font-bold text-text mb-5">Before I build, I usually ask:</p>
-            <div className="border-l border-border/50 pl-5 divide-y divide-border/25">
-              {NOTICE_QUESTIONS.map(({ n, question, answer }) => (
-                <div key={n} className="flex gap-4 py-4 first:pt-0 last:pb-0">
-                  <span className="font-mono text-xs text-accent/40 pt-0.5 shrink-0">{n}</span>
-                  <div>
-                    <p className="text-base font-semibold text-text mb-1">{question}</p>
-                    <p className="text-sm text-muted leading-relaxed">{answer}</p>
+        <div className="fade-in mb-5">
+          <div className="rounded-xl border border-border/80 border-t border-t-accent/25 bg-bg/60 shadow-sm p-4">
+            <p className="text-lg font-bold text-text mb-3">Before I build, I usually look for:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border/40">
+              {NOTICE_ITEMS.map(({ title, description, icon }) => (
+                <div key={title} className="pt-3 first:pt-0 sm:pt-0 sm:px-4 sm:first:pl-0 sm:last:pr-0">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/[0.06] text-accent/70 mb-2">
+                    <NoticeIcon type={icon} />
                   </div>
+                  <p className="text-base font-semibold text-text mb-1">{title}</p>
+                  <p className="text-sm text-text/70 leading-relaxed">{description}</p>
                 </div>
               ))}
             </div>
@@ -109,76 +139,78 @@ export default function About() {
         </div>
 
         {/* Approach */}
-        <div className="fade-in mb-8">
-          <p className="font-mono text-[10px] font-medium uppercase tracking-wide text-muted mb-6">
+        <div className="fade-in mb-4">
+          <p className="text-lg font-semibold text-text mb-3">
             How I approach the build
           </p>
-          <div className="grid lg:grid-cols-[2fr_1fr] gap-6 items-center">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-1 items-stretch">
             <div className="relative max-w-none">
-              <div aria-hidden="true" className="absolute left-[13px] top-2 bottom-2 w-px bg-border" />
-              <div className="space-y-3">
-                {APPROACH_STEPS.map(({ n, verb, label, body }) => (
+              <div aria-hidden="true" className="absolute left-[12px] top-2 bottom-2 w-px bg-border/80" />
+              <div className="flex flex-col gap-1.5">
+                {APPROACH_STEPS.map(({ n, verb, label, question }) => (
                   <div key={label} className="flex gap-4">
-                    <span className="relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-accent/25 bg-bg-alt font-mono text-xs font-semibold text-accent">
+                    <span className="relative z-10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-bg-alt font-mono text-xs font-bold text-accent">
                       {n}
                     </span>
                     <div className="pt-1">
-                      <p className="font-mono text-[10px] uppercase tracking-wide text-accent mb-1">{verb}</p>
+                      <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-accent mb-1">{verb}</p>
                       <p className="font-bold text-base text-text mb-1">{label}</p>
-                      <p className="text-sm text-muted leading-relaxed">{body}</p>
+                      <p className="text-sm text-text/80 leading-relaxed">{question}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Faint systems sketch, aligned to the three process rows: Observe/Map/Build as Input/Decision/Fallback */}
-            <svg
-              aria-hidden="true"
-              className="hidden lg:block"
-              width="100%"
-              height="140"
-              viewBox="0 0 200 140"
-              fill="none"
-            >
-              <path
-                d="M20 20 C 70 20, 30 70, 80 70 C 130 70, 90 120, 150 120"
-                stroke="rgba(94,111,104,0.4)"
-                strokeWidth="1.25"
-                strokeDasharray="3 3"
-              />
-              <circle cx="20" cy="20" r="4.5" fill="rgba(163,63,47,0.6)" />
-              <circle cx="80" cy="70" r="4.5" fill="rgba(163,63,47,0.6)" />
-              <circle cx="150" cy="120" r="4.5" fill="rgba(163,63,47,0.6)" />
-              <text x="30" y="16" className="font-mono" fontSize="9" letterSpacing="0.5" fill="rgba(94,111,104,0.85)">
-                INPUT
-              </text>
-              <text x="90" y="66" className="font-mono" fontSize="9" letterSpacing="0.5" fill="rgba(94,111,104,0.85)">
-                DECISION
-              </text>
-              <text x="100" y="134" className="font-mono" fontSize="9" letterSpacing="0.5" fill="rgba(94,111,104,0.85)">
-                FALLBACK
-              </text>
-            </svg>
+            {/* Systems sketch — directly mirrors the three steps: Observe, Map, Build */}
+            <div className="relative hidden h-full items-center justify-center lg:flex">
+              <svg
+                aria-hidden="true"
+                width="80%"
+                height="80%"
+                viewBox="0 0 160 160"
+                fill="none"
+              >
+                <path
+                  d="M22 22 C 75 22, 38 80, 88 80 C 138 80, 102 138, 152 138"
+                  stroke="rgba(163,63,47,0.18)"
+                  strokeWidth="1"
+                  strokeDasharray="3 3"
+                />
+                <circle cx="22" cy="22" r="4.5" fill="rgba(163,63,47,0.55)" />
+                <circle cx="88" cy="80" r="4.5" fill="rgba(163,63,47,0.55)" />
+                <circle cx="152" cy="138" r="4.5" fill="rgba(163,63,47,0.55)" />
+                <text x="31" y="18" className="font-mono font-semibold" fontSize="9" letterSpacing="0.3" fill="rgba(163,63,47,0.85)">
+                  OBSERVE
+                </text>
+                <text x="97" y="76" className="font-mono font-semibold" fontSize="9" letterSpacing="0.3" fill="rgba(163,63,47,0.85)">
+                  MAP
+                </text>
+                <text x="105" y="134" className="font-mono font-semibold" fontSize="9" letterSpacing="0.3" fill="rgba(163,63,47,0.85)">
+                  BUILD
+                </text>
+              </svg>
+            </div>
           </div>
         </div>
 
         {/* Toolkit */}
-        <div className="fade-in border-t border-border/40 pt-6">
-          <p className="text-sm text-muted mb-2">What I build with</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <div className="fade-in border-t border-border/60 pt-6">
+          <p className="text-lg font-semibold text-text mb-3">What I build with</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {TOOLKIT_GROUPS.map(({ label, items }) => (
               <div key={label}>
-                <p className="font-mono text-[10px] font-medium uppercase tracking-wide text-muted mb-1.5">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-wide text-text/85 mb-2">
                   {label}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  {items.map(item => (
+                  {items.map(name => (
                     <span
-                      key={item}
-                      className="rounded-md border border-border/80 bg-bg px-2 py-0.5 font-mono text-xs text-muted transition-colors duration-200 hover:border-accent/40 hover:bg-accent/[0.06]"
+                      key={name}
+                      className="rounded-md border border-border bg-bg px-2.5 py-1 text-xs font-medium text-text/80 transition-colors duration-200 hover:border-accent/50 hover:bg-accent/[0.06]"
                     >
-                      {item}
+                      {name}
                     </span>
                   ))}
                 </div>

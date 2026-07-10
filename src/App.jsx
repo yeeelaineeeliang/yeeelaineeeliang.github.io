@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -7,6 +7,7 @@ import Experience from './components/Experience'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ProjectDetail from './components/ProjectDetail'
+import { projects } from './data/projects'
 
 const NAV_LINKS = [
   { id: 'home', label: 'About' },
@@ -31,6 +32,7 @@ export default function App() {
   const [activePage, setActivePage] = useState('home')
   const [selectedProject, setSelectedProject] = useState(null)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const galleryScrollRef = useRef(0)
 
   // Chapter progress bar (0–1)
   useEffect(() => {
@@ -61,22 +63,51 @@ export default function App() {
     return () => window.removeEventListener('scroll', updateActive)
   }, [selectedProject])
 
-  // Sync URL hash with active section
+  // Sync URL hash with active section — leaves project/case-study anchors alone
+  // while still inside the projects section, so it doesn't fight the jump nav
+  // or the case-study deep link hash.
   useEffect(() => {
     if (selectedProject) return
+    const currentHash = window.location.hash
+    if (activePage === 'projects' && /^#(project|case)-/.test(currentHash)) return
     const hash = activePage === 'home' ? '' : `#${activePage}`
     window.history.replaceState(null, '', `/AboutMe${hash}`)
   }, [activePage, selectedProject])
 
-  // Restore scroll position from URL hash on initial load
+  // Restore scroll position (or open a case study directly) from URL hash on initial load
   useEffect(() => {
     const hash = window.location.hash.replace('#', '')
+    if (hash.startsWith('case-')) {
+      const project = projects.find(p => p.id === hash.slice('case-'.length))
+      if (project) {
+        setSelectedProject(project)
+        return
+      }
+    }
     if (hash && ALL_SECTIONS.includes(hash) && hash !== 'home') {
       const timer = setTimeout(() => {
         document.getElementById(hash)?.scrollIntoView()
       }, 120)
       return () => clearTimeout(timer)
     }
+  }, [])
+
+  // Browser back/forward: re-derive selected project from the hash
+  useEffect(() => {
+    function onPopState() {
+      const hash = window.location.hash.replace('#', '')
+      if (hash.startsWith('case-')) {
+        const project = projects.find(p => p.id === hash.slice('case-'.length))
+        if (project) {
+          setSelectedProject(project)
+          window.scrollTo({ top: 0 })
+          return
+        }
+      }
+      setSelectedProject(null)
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
   }, [])
 
   // Fade-in on scroll — re-observe whenever project detail closes
@@ -101,13 +132,16 @@ export default function App() {
   }
 
   function handleViewDetail(project) {
+    galleryScrollRef.current = window.scrollY
     setSelectedProject(project)
+    window.history.pushState(null, '', `/AboutMe#case-${project.id}`)
     window.scrollTo({ top: 0 })
   }
 
   function handleBack() {
     setSelectedProject(null)
-    setTimeout(() => document.getElementById('projects')?.scrollIntoView(), 60)
+    window.history.pushState(null, '', '/AboutMe#projects')
+    setTimeout(() => window.scrollTo({ top: galleryScrollRef.current }), 60)
   }
 
   if (selectedProject) {

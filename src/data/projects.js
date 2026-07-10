@@ -1,88 +1,149 @@
 export const projects = [
   {
-    id: 'cityliving-sim',
-    title: 'CityLiving Sim: Chicago Neighborhood Simulator',
-    icon: '🏙️',
-    gradient: ['#315C6B', '#A33F2F'],
-    featured: true,
-    status: 'Latest Project',
-    maturity: 'In Progress',
-    role: 'Solo full-stack builder',
-    focus: 'Civic data, grounded AI, map UX',
-    category: ['Current Work', 'AI Systems', 'Full-Stack', 'Agents', 'Data Engineering'],
-    summary:
-      'Choosing where to live is more than rent math. I built this to answer the question with real data: transit reliability, crime patterns, 311 response times, and Street View across 77 Chicago neighborhoods, with an AI advisor that has to check actual civic datasets before it tells you anything.',
-    oneliner:
-      'A neighborhood tool that pulls real Chicago data together so you can figure out where to live without just guessing.',
-    technicalContribution:
-      'Built a PySpark ELT pipeline over 8 civic datasets, a PyTorch Temporal Convolutional Network for crime forecasting, and a grounded AI advisor wired to structured civic tools across a full Next.js + Supabase stack.',
-    problem:
-      'Choosing where to live is not just a rent calculation. People need to understand commute friction, street safety, city-service responsiveness, transit reliability, and the feel of everyday routines before they sign a lease.',
-    solution:
-      'The data foundation is a PySpark ELT pipeline across 8 heterogeneous Chicago civic datasets, normalizing 22M+ raw records into 10 Parquet serving marts for all 77 community areas. A PyTorch Temporal Convolutional Network trained on 25 years of Chicago crime records forecasts monthly crime trends by type with confidence scores, served via a FastAPI inference endpoint. Users enter budget, workplace, commute preference, and lifestyle priorities, then compare neighborhood fit, explore a map, and ask grounded follow-up questions. The advisor queries structured civic tools before generating any response, and sparse data is surfaced explicitly rather than hidden.',
-    pipeline: `8 Chicago civic datasets (ELT)
-     │
-[PySpark] → 22M+ raw records → 10 Parquet marts (77 community areas)
-     │
-[PyTorch TCN] → 25yr crime history → monthly forecasts + confidence scores
-     │
-[FastAPI endpoint] → crime trend inference
-     │
-User profile + neighborhood selection
-     │
-[Matching engine] → budget, commute, lifestyle fit
-     │
-[Question router] → structured civic tools
-     │
-  ├─ crime + safety        ├─ housing affordability
-  ├─ CTA transit + commute ├─ 311 service responsiveness
-  └─ entertainment + neighborhood profile
-     │
-[Grounded narrator] → practical neighborhood advice
-     │
-[Next.js + Supabase + Clerk] → full-stack frontend`,
-    stack: [
-      'Next.js',
-      'TypeScript',
-      'React',
-      'Tailwind CSS',
-      'Supabase Postgres',
-      'Clerk',
-      'React Leaflet',
-      'FastAPI',
-      'PyTorch',
-      'PySpark',
-    ],
-    stackGroups: [
-      { label: 'Frontend', items: ['Next.js', 'React', 'TypeScript', 'Tailwind'] },
-      { label: 'Data/ML', items: ['PySpark', 'PyTorch TCN', 'Parquet'] },
-      { label: 'Backend/AI', items: ['FastAPI', 'Supabase', 'Clerk'] },
-    ],
-    highlights: [
-      'Built a PySpark ELT pipeline over 8 heterogeneous Chicago civic datasets, normalizing 22M+ raw records into 10 Parquet serving marts across 77 community areas',
-      'Trained a PyTorch Temporal Convolutional Network on 25 years of Chicago crime records to forecast monthly crime trends by type with confidence scores',
-      'Built grounded AI advisor wired to structured civic tools — queries real data before generating any response, surfaces sparse data explicitly',
-      'Designed a map-first interface for exploring daily-life factors across neighborhoods',
-      'Deployed full-stack app with Next.js, Supabase, Clerk, and a FastAPI inference endpoint',
-    ],
-    decisions: [
-      'Made the advisor tool-first: the model routes to structured crime, transit, commute, housing, 311, entertainment, and profile tools before generating any response',
-      'Separated neighborhood transit access from exact door-to-door routing so the product does not overclaim commute precision',
-      'Added deterministic fallbacks and validation rules so the app stays useful when LLM or civic API calls are unavailable',
-      'Modeled sparse data explicitly in the UI and responses instead of letting the AI fill gaps with confident-sounding fiction',
-      'Used maps and Street View alongside text because neighborhood choice is spatial and experiential, not just tabular',
-    ],
-    metrics: ['22M+ records processed', '77 community areas', 'PyTorch TCN forecasting', 'Live demo'],
-    nextImprovements: [
-      'Add real usage analytics around neighborhood questions and comparison patterns',
-      'Expand the ingestion pipeline so the simulator can generalize beyond Chicago',
-      'Add saved comparison boards for users choosing between multiple neighborhoods',
-    ],
-    links: {
-      github: 'https://github.com/yeeelaineeeliang/citysim.git',
-      demo: 'https://citysim-gamma.vercel.app/',
-    },
+  id: 'cityliving-sim',
+  title: 'LiveThere',
+  icon: '🏙️',
+  gradient: ['#315C6B', '#A33F2F'],
+  featured: true,
+
+  status: 'Latest Project',
+  maturity: 'In Progress',
+  role: 'Solo full-stack builder',
+  focus: 'Neighborhood simulation',
+  category: ['Current Work', 'AI Systems', 'Full-Stack', 'Agents', 'Data Engineering'],
+
+  summary:
+    'LiveThere helps people compare Chicago neighborhoods through the routines that actually shape daily life: commute, budget, safety, transit access, city services, nearby places, and street-level context.',
+
+  domainTags: ['Civic Data', 'Simulation', 'Grounded AI'],
+
+  oneliner:
+    'Try living there before you move there.',
+
+  technicalContribution:
+    'Built a full-stack neighborhood simulation platform powered by a PySpark civic-data pipeline, PyTorch crime forecasting, structured tool-calling, and a grounded AI advisor across a Next.js, Supabase, and FastAPI stack.',
+
+  problem:
+    'Most housing tools help people filter listings. They do not help people understand what daily life would feel like after moving in: the commute, the errands, the safety tradeoffs, the transit gaps, and the street-level context behind a neighborhood.',
+
+  editorialCallout: {
+    lead: 'A neighborhood is not one score.',
+    body: 'It is a set of daily tradeoffs: what feels convenient, what feels safe, what feels far, and what the data can actually support.',
   },
+
+  solution:
+    'LiveThere turns neighborhood search into a daily-life simulation. Users enter their budget, workplace, commute preferences, and lifestyle priorities, then compare how different Chicago neighborhoods fit their routine. The product combines map exploration, Street View context, neighborhood scoring, crime trend forecasting, transit and commute signals, 311 responsiveness, housing affordability, and local amenities. A grounded AI advisor answers follow-up questions by checking structured civic tools before generating a response, so recommendations are tied to data instead of generic neighborhood stereotypes.',
+
+  story:
+    'I built LiveThere around a simple question: what if choosing a neighborhood felt less like browsing listings and more like trying on a version of your life? The technical challenge was not only collecting city data. It was turning messy civic records into practical advice someone could use before signing a lease.',
+
+  howItWorks: ['Describe your routine', 'Compare neighborhoods', 'Ask grounded questions', 'Review tradeoffs'],
+
+  technicalSystem: [
+    {
+      layer: 'Data foundation',
+      description:
+        'Built a PySpark ELT pipeline over 8 Chicago civic datasets, processing 22M+ records into 10 Parquet serving marts across 77 community areas.',
+    },
+    {
+      layer: 'Forecasting',
+      description:
+        'Trained a PyTorch Temporal Convolutional Network on 25 years of Chicago crime records to forecast monthly crime trends by type with confidence scores.',
+    },
+    {
+      layer: 'Grounded AI',
+      description:
+        'Built a tool-first advisor that checks structured crime, transit, commute, housing, 311, entertainment, and neighborhood-profile data before generating responses.',
+    },
+    {
+      layer: 'Product experience',
+      description:
+        'Built the interactive product with Next.js, Supabase, Clerk, React Leaflet, and FastAPI for map exploration, user profiles, neighborhood comparison, and inference.',
+    },
+  ],
+
+  stack: [
+    'Next.js',
+    'TypeScript',
+    'React',
+    'Tailwind CSS',
+    'Supabase Postgres',
+    'Clerk',
+    'React Leaflet',
+    'FastAPI',
+    'PyTorch',
+    'PySpark',
+    'Parquet',
+    'Groq',
+  ],
+
+  stackGroups: [
+    {
+      label: 'Frontend',
+      items: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'React Leaflet'],
+    },
+    {
+      label: 'Data/ML',
+      items: ['PySpark', 'PyTorch TCN', 'Parquet'],
+    },
+    {
+      label: 'Backend/AI',
+      items: ['FastAPI', 'Supabase', 'Clerk', 'Groq'],
+    },
+  ],
+
+  pills: ['Civic Data', 'Grounded AI', 'Full-Stack Product'],
+
+  reliabilityNote:
+    'The advisor checks structured civic data before generating neighborhood recommendations.',
+
+  productPillars: [
+    {
+      title: 'Daily-life comparison',
+      description:
+        'Budget, commute, safety, transit, amenities, and street-level context — the factors that actually shape daily routines, not just rent price.',
+    },
+    {
+      title: 'Civic data foundation',
+      description:
+        '22M+ records from 8 Chicago civic datasets across 77 community areas, normalized into a queryable foundation for every recommendation.',
+    },
+    {
+      title: 'Grounded AI advisor',
+      description:
+        'Tool-first responses that check structured civic data before generating advice, so recommendations are traceable back to real numbers.',
+    },
+  ],
+
+  decisions: [
+    'Framed the product around daily routines, not generic neighborhood rankings.',
+    'Made the AI advisor tool-first so it checks civic data before answering.',
+    'Separated neighborhood-level transit access from exact door-to-door routing to avoid overclaiming commute precision.',
+    'Surfaced sparse data explicitly instead of letting AI fill gaps with unsupported assumptions.',
+  ],
+
+  metrics: [
+    '22M+ records processed',
+    '8 civic datasets',
+    '77 Chicago community areas',
+    '25 years of crime history',
+    '10 Parquet serving marts',
+  ],
+
+  metricNote:
+    'Every recommendation is grounded in structured neighborhood data, not open-ended AI guessing.',
+
+  nextImprovements: [
+    'Add saved comparison boards for users choosing between neighborhoods.',
+    'Improve commute simulation with time-of-day and route-level modeling.',
+    'Expand the data pipeline so LiveThere can support cities beyond Chicago.',
+  ],
+
+  links: {
+    github: 'https://github.com/yeeelaineeeliang/citysim.git',
+    demo: 'https://citysim-gamma.vercel.app/',
+  },
+},
   {
     id: 'career-coach',
     title: 'CareerCoach: Multi-Agent Career Coach',
@@ -94,13 +155,14 @@ User profile + neighborhood selection
     role: 'Solo AI systems builder',
     focus: 'Agent routing, career workflows, persistent context',
     summary:
-      'Job searching is fragmented across a dozen tools that do not talk to each other. This routes your question to the right specialist — resume rewriter, mock interviewer, gap analyzer, outreach drafter — and each one knows what the others figured out, so you are not starting from scratch every time.',
+      'Job searching is fragmented across a dozen tools that do not talk to each other. This routes your question to the right specialist: resume rewriter, mock interviewer, gap analyzer, or outreach drafter. Each one knows what the others figured out, so you are not starting from scratch every time.',
+    domainTags: ['Multi-Agent', 'LLM Orchestration'],
     oneliner:
-      'A multi-agent career coach where each specialist shares what it learned, so downstream agents build on upstream findings instead of starting over.',
+      'A career coach that routes questions through specialist agents before giving one plan.',
     technicalContribution:
       'Designed a routed multi-agent workflow where specialized career agents share state, persist progress, and synthesize one coherent answer.',
     problem:
-      'Job seekers juggle disconnected tools for resume help, interview prep, and networking. There is no single system that understands your profile, target roles, and projects holistically and coaches you across all dimensions.',
+      'Job seekers juggle disconnected tools for resume help, interview prep, and networking. There is no single system that understands your profile, target roles, and projects together and coaches you across all dimensions.',
     solution:
       'Built a LangGraph StateGraph with 9 nodes: an orchestrator classifies intent via Claude Haiku 4.5, then conditionally routes to specialized Claude Sonnet 4.5 agents for gap analysis, resume rewriting, mock interviews, study planning, and outreach. Agents share state through a typed schema so downstream nodes build on upstream findings. SQLite checkpointing enables cross-session persistence.',
     pipeline: `User message (Streamlit)
@@ -124,6 +186,8 @@ User profile + neighborhood selection
       { label: 'Interface', items: ['Streamlit', 'Google Calendar OAuth'] },
       { label: 'Persistence', items: ['SQLite checkpointer', 'typed graph state'] },
     ],
+    pills: ['Agents', 'LLM Orchestration', 'Cost Optimization'],
+    reliabilityNote: 'Routes simple requests before using heavier reasoning.',
     highlights: [
       'Designed conditional routing across 9 specialized career agents using Claude Haiku 4.5 for classification and Claude Sonnet 4.5 for reasoning',
       'Built persistent memory for multi-session job-search workflows via SQLite checkpointing',
@@ -133,9 +197,10 @@ User profile + neighborhood selection
     decisions: [
       'Used Claude Haiku 4.5 for routing and classification, Claude Sonnet 4.5 for deep reasoning: fast and cheap classification where it matters, heavier inference only where needed',
       'Regex-based weak area extraction from interview output avoids an extra LLM call while keeping the pipeline reliable',
-      'Project matching uses a keyword scoring fallback chain; LLM ranking only triggers for large libraries (>8 projects)',
+      'Project matching uses a keyword scoring fallback chain. LLM ranking only triggers for large libraries (>8 projects).',
       'Zero Streamlit imports inside graph/ keeps the workflow portable across future interfaces',
       'Synthesis node strips raw sub-agent messages to force coherent narrative instead of verbatim pasting',
+      'Reduced unnecessary LLM calls with intent bypass, cached resume bullets, and conditional synthesis.',
     ],
     metrics: ['9 specialized agents', '6 intent-routed paths', 'Cross-session memory', 'Shipped app'],
     nextImprovements: [
@@ -159,14 +224,16 @@ User profile + neighborhood selection
     focus: 'Explainable ML, retrieval, analyst reports',
     summary:
       'Fraud models flag transactions. Then what? This takes a flagged transaction and automatically builds out the full picture: what the model scored and why, what similar past cases looked like, and what an analyst should probably do next. The analyst still decides. The copilot does the legwork.',
+    domainTags: ['XGBoost', 'SHAP', 'RAG', 'Claude API'],
     oneliner:
-      'Takes a flagged transaction and builds the full picture automatically: model score, explanation, and historical precedents, while keeping the analyst in charge.',
+      'Explains flagged transactions, retrieves similar fraud patterns, and generates analyst-ready investigation summaries.',
+    cardBadge: 'Human-in-the-loop AI',
     technicalContribution:
       'Combined fraud scoring, SHAP explanations, FAISS vector retrieval, and LLM-generated reports into one analyst-in-the-loop investigation flow.',
     problem:
       'Fraud detection models flag suspicious transactions but give analysts nothing to work with: no explanation, no context, no suggested action. That turns every flagged case into a slow, inconsistent manual investigation.',
     solution:
-      'The detection model is XGBoost with SMOTE oversampling (applied to training data only) on 550,000 transactions from a public Kaggle dataset, using a temporal train/test split and StandardScaler fit on training data only. It achieves 90% recall at a 0.6% false-positive rate. Built on top of that, the copilot takes a flagged transaction, generates a plain-English explanation using SHAP TreeExplainer, retrieves similar historical fraud patterns via FAISS vector search (384-dim sentence-transformer embeddings), and produces a structured investigation summary and recommended action via Claude Sonnet API. The analyst stays in control; the copilot advises, never decides.',
+      'The detection model is XGBoost with SMOTE oversampling (applied to training data only) on 550,000 transactions from a public Kaggle dataset, using a temporal train/test split and StandardScaler fit on training data only. It achieves 90% recall at a 0.6% false-positive rate. Built on top of that, the copilot takes a flagged transaction, generates a plain-English explanation using SHAP TreeExplainer, retrieves similar historical fraud patterns via FAISS vector search (384-dim sentence-transformer embeddings), and produces a structured investigation summary and recommended action via Claude Sonnet API. The analyst stays in control. The copilot advises. It never decides.',
     pipeline: `550,000 transactions (Kaggle credit card dataset)
      │
 [XGBoost + SMOTE (train only)] → fraud probability score
@@ -184,6 +251,8 @@ User profile + neighborhood selection
       { label: 'Retrieval', items: ['FAISS', 'Sentence Transformers', '384-dim embeddings'] },
       { label: 'Reports/UI', items: ['Claude Sonnet API', 'Streamlit'] },
     ],
+    pills: ['Machine Learning', 'RAG', 'Analyst Tooling'],
+    reliabilityNote: 'Recommends to analysts, never acts autonomously.',
     highlights: [
       'Built XGBoost detection model on 550,000 transactions with SMOTE (training only), achieving 90% recall at 0.6% false-positive rate',
       'Used SHAP TreeExplainer to generate per-transaction feature explanations for analyst review',
@@ -219,8 +288,9 @@ User profile + neighborhood selection
     focus: 'Robot memory, constrained generation, rapport',
     summary:
       'Gives a social robot memory so it can pick up where it left off and build interactions that feel more continuous over time.',
+    domainTags: ['Robotics', 'HRI Research'],
     oneliner:
-      'Gives a social robot memory so it can pick up where it left off and build interactions that feel more continuous over time.',
+      'Memory for social robots, built around interaction continuity.',
     technicalContribution:
       'Built a Temi robot rapport engine that retrieves prior-session context using keyword extraction and Jaccard similarity, then constrains LLM responses for a human-robot interaction study.',
     problem:
@@ -242,6 +312,8 @@ User profile + neighborhood selection
       { label: 'Memory', items: ['Python', 'keyword extraction', 'Jaccard similarity', 'synonym expansion'] },
       { label: 'LLM', items: ['prompt constraints', 'self-disclosure generation', 'post-generation validation'] },
     ],
+    pills: ['HRI Research', 'On Device Retrieval', 'Social Robots'],
+    reliabilityNote: 'Uses Jaccard matching for on-device latency constraints.',
     highlights: [
       'Retrieved user-specific prior-session context during live robot dialogue using keyword extraction and Jaccard similarity',
       'Constrained LLM self-disclosures for research validity and reduced hallucinated responses via post-generation validation',
@@ -249,10 +321,10 @@ User profile + neighborhood selection
     ],
     decisions: [
       'Used keyword extraction with Jaccard similarity and synonym expansion rather than embedding-based retrieval: this is an on-device system with strict latency constraints, and the simpler approach is more auditable under research conditions',
-      'Research validity constrained engineering more tightly than a product context would; free-form A/B testing was not appropriate',
+      'Research validity constrained engineering more tightly than a product context would. Free-form A/B testing was not appropriate.',
       'Reduced hallucinated self-disclosures by tightening prompt constraints and adding post-generation validation before the robot speaks',
     ],
-    metrics: ['UChicago HRI Lab', '2×2 factorial study', 'CCR + ROSAS measures'],
+    metrics: ['2×2 factorial study', 'UChicago HRI Lab', 'CCR + ROSAS measures'],
     nextImprovements: [
       'Complete mixed-methods thematic analysis of participant interviews',
       'Compare rapport outcomes across memory and no-memory study conditions',
@@ -271,14 +343,15 @@ User profile + neighborhood selection
     focus: 'Campus support, location matching, safety guardrails',
     summary:
       'A mobile app that connects students who need help with nearby peers who can give it, built for the moment when campus resources feel out of reach.',
+    domainTags: ['Community', 'Mobile'],
     oneliner:
-      'A mobile app that connects students who need help with nearby peers who can give it, built for the moment when campus resources feel out of reach.',
+      'Nearby peer support, with safety checks built into the flow.',
     technicalContribution:
       'Built a location-aware iOS app and Node.js/Express backend with 15+ REST endpoints, Berkeley email authentication, distance-based matching, and Claude Sonnet API content moderation.',
     problem:
       'Students in distress often do not know who around them can help, and existing campus resources are not always accessible in the moment. CalPin was built to close that gap.',
     solution:
-      'Full-stack mobile application with Google OAuth restricted to Berkeley email domain, real-time location-based request matching, an interactive map UI with draggable request cards, and Claude Sonnet API for content moderation across 9 categories. The backend exposes 15+ REST endpoints. Not published to the App Store; built and evaluated as a prototype.',
+      'Full-stack mobile application with Google OAuth restricted to Berkeley email domain, real-time location-based request matching, an interactive map UI with draggable request cards, and Claude Sonnet API for content moderation across 9 categories. The backend exposes 15+ REST endpoints. Not published to the App Store. Built and evaluated as a prototype.',
     pipeline: `iOS (SwiftUI + MapKit)
      │
 [Google Sign-In SDK] → Berkeley email domain verification
@@ -298,13 +371,15 @@ User profile + neighborhood selection
       { label: 'Backend', items: ['Node.js', 'Express', 'PostgreSQL', 'Railway'] },
       { label: 'Auth/Safety', items: ['Google OAuth', 'Claude Sonnet API', 'content moderation'] },
     ],
+    pills: ['SwiftUI', 'Moderation', 'Campus Product'],
+    reliabilityNote: 'Enforces moderation at the API layer.',
     highlights: [
       'Built map-based request browsing with location-aware distance sorting across 15+ REST endpoints',
       'Enforced Berkeley OAuth and self-help guardrails at the API layer',
       'Integrated Claude Sonnet API for content moderation across 9 categories',
     ],
     decisions: [
-      'Enforced "cannot help your own request" at the API layer, not just the UI, so the rule holds under any client',
+      'Enforced "cannot help your own request" at the API layer so the rule holds under any client.',
       'Used a notification-based auto-refresh pattern instead of polling to keep map state consistent across views',
       'Made urgency and distance the primary filters to reduce cognitive load for helpers acting quickly',
     ],
@@ -331,8 +406,9 @@ User profile + neighborhood selection
     focus: 'Feature selection, held-out evaluation, directional prediction',
     summary:
       'A principled ML pipeline for crypto direction prediction, built around the insight that collinearity kills models before they ever reach production.',
+    domainTags: ['Fintech', 'Forecasting'],
     oneliner:
-      'A principled ML pipeline for crypto direction prediction, built around the insight that collinearity kills models before they ever reach production.',
+      'Rolling crypto prediction with live logs and held-out evaluation.',
     technicalContribution:
       'Built a Binance data pipeline with technical indicators, VIF-based feature selection, OLS regression, and held-out directional evaluation on 50,000+ hourly records. Extended into a live deployed system on Railway.',
     problem:
@@ -352,12 +428,14 @@ User profile + neighborhood selection
 [Railway worker] → APScheduler + 30-second rolling refit (live system)
      │
 [Supabase Realtime + Next.js] → live frontend`,
-    stack: ['Python', 'Scikit-learn', 'Binance API', 'Pandas', 'Railway', 'APScheduler', 'Supabase Realtime', 'Next.js'],
+    stack: ['Python', 'Scikit-learn', 'Binance API', 'Pandas', 'Railway', 'APScheduler', 'Supabase Realtime', 'Next.js', 'Clerk'],
     stackGroups: [
       { label: 'Data/Features', items: ['Binance API', 'Pandas', 'technical indicators'] },
       { label: 'Modeling', items: ['Scikit-learn', 'OLS regression', 'VIF'] },
-      { label: 'Live System', items: ['Railway', 'APScheduler', 'Supabase Realtime', 'Next.js'] },
+      { label: 'Live System', items: ['Railway', 'APScheduler', 'Supabase Realtime', 'Next.js', 'Clerk'] },
     ],
+    pills: ['Forecasting', 'Live Pipeline', 'Time Series'],
+    reliabilityNote: 'Uses rolling refit and live prediction logging.',
     highlights: [
       'Engineered lagged crypto features and technical indicators from 50,000+ hourly Binance records',
       'Used VIF to iteratively remove multicollinear features (threshold ~10) before modeling',

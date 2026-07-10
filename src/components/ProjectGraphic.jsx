@@ -27,56 +27,146 @@ const illustrations = {
   ),
   'career-coach': (
     <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M80 26 L39 54 M80 26 L78 56 M80 26 L121 54 M39 69 L78 84 M121 69 L78 84" stroke="white" strokeWidth="2.2" strokeOpacity="0.4" />
-      <path d="M39 54 C58 45 70 46 80 58" stroke="white" strokeWidth="1.2" strokeOpacity="0.25" strokeDasharray="4 4" />
-      <path d="M121 54 C105 46 92 47 80 58" stroke="white" strokeWidth="1.2" strokeOpacity="0.25" strokeDasharray="4 4" />
+      <circle cx="141" cy="18" r="5" fill="white" fillOpacity="0.22" />
+      <circle cx="17" cy="94" r="4" fill="white" fillOpacity="0.18" />
 
-      <rect x="48" y="9" width="64" height="26" rx="8" fill="white" fillOpacity="0.2" />
-      <rect x="48" y="9" width="64" height="26" rx="8" stroke="white" strokeWidth="1.8" strokeOpacity="0.82" />
-      <text x="80" y="26" textAnchor="middle" fill="white" fontSize="10" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">ORCH</text>
+      {/* Question bubble */}
+      <rect x="30" y="8" width="100" height="26" rx="12" fill="white" fillOpacity="0.2" />
+      <rect x="30" y="8" width="100" height="26" rx="12" stroke="white" strokeWidth="1.6" strokeOpacity="0.78" />
+      <path d="M62 34 L56 42 L68 34 Z" fill="white" fillOpacity="0.2" />
+      <text x="80" y="25" textAnchor="middle" fill="white" fillOpacity="0.92" fontSize="7.5" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">WHAT&apos;S NEXT?</text>
 
-      <rect x="8" y="51" width="62" height="25" rx="7" fill="white" fillOpacity="0.16" />
-      <rect x="8" y="51" width="62" height="25" rx="7" stroke="white" strokeWidth="1.4" strokeOpacity="0.72" />
-      <text x="39" y="67" textAnchor="middle" fill="white" fontSize="9" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">GAP</text>
+      {/* Routing lines */}
+      <path d="M80 34 L29 48 M80 34 L82 48 M80 34 L133 48" stroke="white" strokeWidth="1.2" strokeOpacity="0.32" strokeDasharray="3 3" />
 
-      <rect x="85" y="51" width="70" height="25" rx="7" fill="white" fillOpacity="0.14" />
-      <rect x="85" y="51" width="70" height="25" rx="7" stroke="white" strokeWidth="1.4" strokeOpacity="0.72" />
-      <text x="120" y="67" textAnchor="middle" fill="white" fontSize="9" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">RESUME</text>
+      {/* Routed specialist chips */}
+      <rect x="10" y="48" width="38" height="17" rx="6" fill="white" fillOpacity="0.16" />
+      <rect x="10" y="48" width="38" height="17" rx="6" stroke="white" strokeWidth="1.2" strokeOpacity="0.62" />
+      <text x="29" y="60" textAnchor="middle" fill="white" fontSize="6.3" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">RESUME</text>
 
-      <rect x="41" y="80" width="76" height="23" rx="7" fill="white" fillOpacity="0.24" />
-      <rect x="41" y="80" width="76" height="23" rx="7" stroke="white" strokeWidth="1.8" strokeOpacity="0.88" />
-      <text x="79" y="95" textAnchor="middle" fill="white" fontSize="9" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">SYNTH</text>
+      <rect x="54" y="48" width="56" height="17" rx="6" fill="white" fillOpacity="0.16" />
+      <rect x="54" y="48" width="56" height="17" rx="6" stroke="white" strokeWidth="1.2" strokeOpacity="0.62" />
+      <text x="82" y="60" textAnchor="middle" fill="white" fontSize="6.3" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">INTERVIEW</text>
 
-      <circle cx="122" cy="43" r="5" fill="white" fillOpacity="0.32" />
-      <circle cx="39" cy="43" r="4" fill="white" fillOpacity="0.24" />
-      <text x="128" y="47" fill="white" fillOpacity="0.75" fontSize="6.5" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">INT</text>
+      <rect x="118" y="48" width="30" height="17" rx="6" fill="white" fillOpacity="0.16" />
+      <rect x="118" y="48" width="30" height="17" rx="6" stroke="white" strokeWidth="1.2" strokeOpacity="0.62" />
+      <text x="133" y="60" textAnchor="middle" fill="white" fontSize="6.3" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">GAP</text>
+
+      {/* Converging into one plan */}
+      <path d="M29 65 L80 78 M82 65 L80 78 M133 65 L80 78" stroke="white" strokeWidth="1.2" strokeOpacity="0.28" strokeDasharray="3 3" />
+      <rect x="35" y="78" width="90" height="24" rx="9" fill="white" fillOpacity="0.26" />
+      <rect x="35" y="78" width="90" height="24" rx="9" stroke="white" strokeWidth="1.8" strokeOpacity="0.9" />
+      <text x="80" y="94" textAnchor="middle" fill="white" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">PLAN</text>
     </svg>
   ),
   'fraud-copilot': (
-    <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 16 V88 H148" stroke="white" strokeWidth="1.6" strokeOpacity="0.52" />
-      <path d="M18 72 H148 M18 55 H148 M18 38 H148 M43 16 V88 M68 16 V88 M93 16 V88 M118 16 V88" stroke="white" strokeWidth="0.8" strokeOpacity="0.12" />
+    <svg viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fraudCopilotTitle">
+      <title id="fraudCopilotTitle">A flagged transaction connects to related historical patterns, with the factors behind the flag surfaced in a small panel</title>
+      <defs>
+        <linearGradient id="fcBgGrad" x1="0" y1="0" x2="1600" y2="700" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#1E2D4A" />
+          <stop offset="100%" stopColor="#2D4A6B" />
+        </linearGradient>
+        <radialGradient id="fcRustGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#C9583F" stopOpacity="0.55" />
+          <stop offset="55%" stopColor="#A33F2F" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#A33F2F" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="fcTealGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#4CB1A3" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#2F8F83" stopOpacity="0" />
+        </radialGradient>
+        <filter id="fcSoftGrain" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.025 0" />
+        </filter>
+      </defs>
 
-      <circle cx="39" cy="67" r="2.6" fill="white" fillOpacity="0.5" />
-      <circle cx="48" cy="55" r="2.1" fill="white" fillOpacity="0.42" />
-      <circle cx="58" cy="70" r="2.4" fill="white" fillOpacity="0.48" />
-      <circle cx="63" cy="47" r="2" fill="white" fillOpacity="0.38" />
-      <circle cx="75" cy="62" r="2.5" fill="white" fillOpacity="0.54" />
-      <circle cx="83" cy="43" r="2.2" fill="white" fillOpacity="0.42" />
-      <circle cx="91" cy="58" r="2" fill="white" fillOpacity="0.36" />
-      <circle cx="101" cy="35" r="2.5" fill="white" fillOpacity="0.48" />
-      <circle cx="112" cy="49" r="2.1" fill="white" fillOpacity="0.38" />
+      <rect x="0" y="0" width="1600" height="700" fill="url(#fcBgGrad)" />
+      <circle cx="1540" cy="10" r="250" fill="none" stroke="#F7F8F5" strokeOpacity="0.045" strokeWidth="1.5" />
+      <path d="M -40,660 C 420,540 900,410 1660,120" fill="none" stroke="#F7F8F5" strokeOpacity="0.08" strokeWidth="1.6" />
 
-      <path d="M32 73 C53 51 84 43 125 34" stroke="white" strokeWidth="2.2" strokeOpacity="0.28" strokeLinecap="round" />
-      <ellipse cx="124" cy="29" rx="24" ry="16" fill="#FF6B6B" fillOpacity="0.11" />
-      <ellipse cx="124" cy="29" rx="24" ry="16" stroke="#FF8A8A" strokeWidth="1.6" strokeOpacity="0.72" strokeDasharray="4 4" />
-      <circle cx="116" cy="28" r="4.2" fill="#FF8A8A" />
-      <circle cx="128" cy="21" r="3.7" fill="#FF8A8A" fillOpacity="0.9" />
-      <circle cx="136" cy="35" r="4.8" fill="#FF8A8A" fillOpacity="0.95" />
+      <g fill="#F7F8F5">
+        <circle cx="95" cy="120" r="3" opacity="0.18" />
+        <circle cx="180" cy="340" r="4" opacity="0.14" />
+        <circle cx="140" cy="530" r="2.5" opacity="0.22" />
+        <circle cx="260" cy="90" r="3.5" opacity="0.12" />
+        <circle cx="300" cy="420" r="2.5" opacity="0.2" />
+        <circle cx="360" cy="560" r="3" opacity="0.15" />
+        <circle cx="520" cy="80" r="2.5" opacity="0.18" />
+        <circle cx="560" cy="600" r="3.5" opacity="0.13" />
+        <circle cx="800" cy="560" r="2.5" opacity="0.17" />
+        <circle cx="820" cy="70" r="3" opacity="0.15" />
+        <circle cx="620" cy="230" r="2.5" opacity="0.16" />
+        <circle cx="960" cy="110" r="2.5" opacity="0.2" />
+        <circle cx="1150" cy="90" r="2.5" opacity="0.18" />
+        <circle cx="1360" cy="120" r="2.5" opacity="0.14" />
+        <circle cx="1480" cy="600" r="3" opacity="0.13" />
+        <circle cx="1050" cy="620" r="2.5" opacity="0.11" />
+        <circle cx="230" cy="640" r="2.5" opacity="0.13" />
+        <circle cx="1240" cy="600" r="2.5" opacity="0.12" />
+      </g>
+      <g fill="#4CB1A3">
+        <circle cx="480" cy="500" r="2.5" opacity="0.12" />
+        <circle cx="900" cy="600" r="2.5" opacity="0.1" />
+      </g>
 
-      <rect x="25" y="18" width="37" height="14" rx="4" fill="white" fillOpacity="0.14" />
-      <text x="43.5" y="28" textAnchor="middle" fill="white" fillOpacity="0.86" fontSize="7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">SHAP</text>
-      <text x="110" y="88" fill="white" fillOpacity="0.78" fontSize="7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">FLAGGED</text>
+      {/* Explanation link: the flagged point's reasoning surfaces in the panel (distinct from retrieval threads) */}
+      <path d="M420,240 C 700,470 1010,540 1300,326" fill="none" stroke="#F7F8F5" strokeOpacity="0.14" strokeWidth="1" />
+
+      {/* Connecting threads: the flagged point reaching toward related past cases */}
+      <path d="M420,240 Q 560,155 700,150" fill="none" stroke="#4CB1A3" strokeOpacity="0.45" strokeWidth="1.4" />
+      <path d="M420,240 Q 660,260 930,320" fill="none" stroke="#4CB1A3" strokeOpacity="0.35" strokeWidth="1.2" />
+      <path d="M420,240 Q 760,340 1120,460" fill="none" stroke="#4CB1A3" strokeOpacity="0.26" strokeWidth="1.1" />
+      <path d="M420,240 Q 500,370 636,462" fill="none" stroke="#F7F8F5" strokeOpacity="0.22" strokeWidth="1" strokeDasharray="3 7" />
+
+      {/* Focal node: the flagged transaction */}
+      <circle cx="420" cy="240" r="132" fill="url(#fcRustGlow)" />
+      <circle cx="420" cy="240" r="40" fill="none" stroke="#F7F8F5" strokeOpacity="0.32" strokeWidth="1.3" />
+      <circle cx="420" cy="240" r="72" fill="none" stroke="#F7F8F5" strokeOpacity="0.2" strokeWidth="1.1" />
+      <circle cx="420" cy="240" r="106" fill="none" stroke="#F7F8F5" strokeOpacity="0.1" strokeWidth="1" />
+      <circle cx="420" cy="240" r="10" fill="#A33F2F" stroke="#F7F8F5" strokeOpacity="0.85" strokeWidth="1.5" />
+      <circle cx="417" cy="237" r="2.6" fill="#F7F8F5" opacity="0.75" />
+
+      {/* Related historical cases surfaced by retrieval */}
+      <g>
+        <circle cx="700" cy="150" r="42" fill="url(#fcTealGlow)" />
+        <circle cx="700" cy="150" r="13" fill="none" stroke="#F7F8F5" strokeOpacity="0.3" strokeWidth="1" />
+        <circle cx="700" cy="150" r="6.5" fill="#2F8F83" />
+      </g>
+      <g>
+        <circle cx="930" cy="320" r="44" fill="url(#fcTealGlow)" />
+        <circle cx="930" cy="320" r="13" fill="none" stroke="#F7F8F5" strokeOpacity="0.3" strokeWidth="1" />
+        <circle cx="930" cy="320" r="6.5" fill="#2F8F83" />
+      </g>
+      <g>
+        <circle cx="1120" cy="460" r="38" fill="url(#fcTealGlow)" />
+        <circle cx="1120" cy="460" r="11" fill="none" stroke="#F7F8F5" strokeOpacity="0.26" strokeWidth="1" />
+        <circle cx="1120" cy="460" r="5.5" fill="#2F8F83" />
+      </g>
+
+      {/* A case still being weighed */}
+      <circle cx="636" cy="462" r="12" fill="none" stroke="#F7F8F5" strokeOpacity="0.22" strokeWidth="1" />
+      <circle cx="636" cy="462" r="5.5" fill="#F7F8F5" opacity="0.5" />
+
+      {/* Concrete artifact: schematic factor panel (SHAP-style). Bar lengths are relative/illustrative only — no numbers. */}
+      <g>
+        <rect x="1300" y="200" width="260" height="250" rx="20" fill="#F7F8F5" fillOpacity="0.07" />
+        <rect x="1300" y="200" width="260" height="250" rx="20" fill="none" stroke="#F7F8F5" strokeOpacity="0.22" strokeWidth="1.2" />
+        <line x1="1316" y1="201" x2="1544" y2="201" stroke="#F7F8F5" strokeOpacity="0.28" strokeWidth="1" />
+
+        <text x="1324" y="238" fontFamily="'DM Sans', Inter, system-ui, sans-serif" fontSize="16" fontWeight="500" fill="#F7F8F5" fillOpacity="0.55">what stood out</text>
+
+        <rect x="1324" y="256" width="190" height="9" rx="4.5" fill="#C9583F" fillOpacity="0.85" />
+        <rect x="1324" y="288" width="148" height="9" rx="4.5" fill="#4CB1A3" fillOpacity="0.6" />
+        <rect x="1324" y="320" width="112" height="9" rx="4.5" fill="#F7F8F5" fillOpacity="0.32" />
+        <rect x="1324" y="352" width="80" height="9" rx="4.5" fill="#F7F8F5" fillOpacity="0.22" />
+        <rect x="1324" y="384" width="52" height="9" rx="4.5" fill="#F7F8F5" fillOpacity="0.15" />
+
+        <text x="1324" y="428" fontFamily="'DM Sans', Inter, system-ui, sans-serif" fontSize="13" fontWeight="400" fill="#F7F8F5" fillOpacity="0.4">weighted by relevance, not certainty</text>
+      </g>
+
+      <rect x="0" y="0" width="1600" height="700" filter="url(#fcSoftGrain)" />
     </svg>
   ),
   'hri-memory': (
@@ -113,6 +203,13 @@ const illustrations = {
       <path d="M13 74 C43 62 72 70 101 55 C123 43 140 47 151 58" stroke="white" strokeWidth="1.2" strokeOpacity="0.22" />
       <path d="M48 10 C56 36 50 60 62 98 M111 10 C99 36 107 69 96 99" stroke="white" strokeWidth="1.2" strokeOpacity="0.18" />
 
+      {/* Moderation badge — shield + check */}
+      <rect x="9" y="8" width="58" height="18" rx="6" fill="white" fillOpacity="0.14" />
+      <rect x="9" y="8" width="58" height="18" rx="6" stroke="#9AD0C2" strokeWidth="1.3" strokeOpacity="0.65" />
+      <path d="M19 10.5 L23.5 12.3 V16.5 C23.5 19.3 21.6 21 19 22 C16.4 21 14.5 19.3 14.5 16.5 V12.3 Z" fill="none" stroke="#9AD0C2" strokeWidth="1.3" strokeLinejoin="round" strokeLinecap="round" />
+      <path d="M16.6 16.8 L18.3 18.5 L21.5 14.8" stroke="#9AD0C2" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="46" y="20.3" textAnchor="middle" fill="white" fillOpacity="0.86" fontSize="6" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">MODERATED</text>
+
       <circle cx="78" cy="55" r="36" fill="white" fillOpacity="0.08" />
       <circle cx="78" cy="55" r="36" stroke="white" strokeWidth="1.4" strokeOpacity="0.32" />
       <circle cx="78" cy="55" r="21" stroke="white" strokeWidth="1.1" strokeOpacity="0.24" strokeDasharray="3 4" />
@@ -132,40 +229,40 @@ const illustrations = {
   ),
   'crypto-pipeline': (
     <svg viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17 19 V86 H147" stroke="white" strokeWidth="1.5" strokeOpacity="0.45" />
-      <path d="M17 70 H147 M17 52 H147 M17 34 H147" stroke="white" strokeWidth="0.8" strokeOpacity="0.12" />
-      <rect x="30" y="72" width="6" height="14" rx="2" fill="white" fillOpacity="0.16" />
-      <rect x="45" y="62" width="6" height="24" rx="2" fill="white" fillOpacity="0.18" />
-      <rect x="60" y="67" width="6" height="19" rx="2" fill="white" fillOpacity="0.15" />
-      <rect x="75" y="51" width="6" height="35" rx="2" fill="white" fillOpacity="0.2" />
-      <rect x="90" y="57" width="6" height="29" rx="2" fill="white" fillOpacity="0.16" />
-      <rect x="105" y="39" width="6" height="47" rx="2" fill="white" fillOpacity="0.22" />
-      <rect x="120" y="48" width="6" height="38" rx="2" fill="white" fillOpacity="0.17" />
+      {/* Prediction card */}
+      <rect x="14" y="14" width="58" height="32" rx="9" fill="white" fillOpacity="0.18" />
+      <rect x="14" y="14" width="58" height="32" rx="9" stroke="#A7F3D0" strokeWidth="1.6" strokeOpacity="0.75" />
+      <path d="M24 36 L30 26 L36 36 Z" fill="#A7F3D0" fillOpacity="0.9" />
+      <text x="55" y="34" textAnchor="middle" fill="#A7F3D0" fontSize="14" fontWeight="800" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">UP</text>
+      <text x="55" y="43" textAnchor="middle" fill="white" fillOpacity="0.7" fontSize="5.8" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">DIRECTION</text>
 
-      <path d="M23 65 C37 54 45 62 55 49 C66 35 75 48 86 39 C98 29 109 37 122 24 C132 14 139 18 145 12" stroke="white" strokeWidth="2.8" strokeOpacity="0.92" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M23 65 C37 54 45 62 55 49 C66 35 75 48 86 39 C98 29 109 37 122 24 C132 14 139 18 145 12" stroke="white" strokeWidth="7" strokeOpacity="0.12" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M25 46 H145" stroke="#A7F3D0" strokeWidth="1.5" strokeOpacity="0.58" strokeDasharray="5 5" />
+      {/* Sparkline */}
+      <path d="M90 50 L102 42 L112 46 L124 30 L134 34 L146 20" stroke="white" strokeWidth="7" strokeOpacity="0.1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M90 50 L102 42 L112 46 L124 30 L134 34 L146 20" stroke="white" strokeWidth="2.4" strokeOpacity="0.9" strokeLinecap="round" strokeLinejoin="round" />
 
-      <circle cx="86" cy="39" r="4.5" fill="#A7F3D0" fillOpacity="0.9" />
-      <circle cx="122" cy="24" r="4.5" fill="#FBBF24" fillOpacity="0.9" />
-      <rect x="32" y="17" width="41" height="15" rx="5" fill="white" fillOpacity="0.14" />
-      <text x="52.5" y="27" textAnchor="middle" fill="white" fillOpacity="0.86" fontSize="7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">VIF OK</text>
-      <text x="103" y="101" fill="white" fillOpacity="0.72" fontSize="7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">P(UP)=.68</text>
+      {/* Live pulse indicator */}
+      <circle cx="26" cy="90" r="9" stroke="#A7F3D0" strokeWidth="1.2" strokeOpacity="0.32" />
+      <circle cx="26" cy="90" r="4" fill="#A7F3D0" fillOpacity="0.92" />
+      <text x="38" y="93" fill="white" fillOpacity="0.82" fontSize="7" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">LIVE</text>
     </svg>
   ),
 }
 
 const projectImages = {
   'cityliving-sim': '/project-images/cityliving-sim.png',
-  'career-coach': '/project-images/career-coach.png',
-  'fraud-copilot': '/project-images/fraud-copilot.png',
-  'hri-memory': '/project-images/hri-memory.png',
   'calpin': '/project-images/calpin.png',
-  'crypto-pipeline': '/project-images/crypto-pipeline.png',
 }
+
+// Illustrations composed as full-bleed art (their own baked-in background + texture) rather
+// than a small icon centered over the generic gradient — add an id here as each one is redesigned.
+const fullBleedIllustrations = new Set(['fraud-copilot'])
 
 const detailProjectImages = {
   'calpin': '/project-images/calpin-architecture.png',
+  'hri-memory': '/project-images/hri-memory.png',
+  'career-coach': '/project-images/career-coach.png',
+  'fraud-copilot': '/project-images/fraud-copilot.png',
+  'crypto-pipeline': '/project-images/crypto-pipeline.png',
 }
 
 export default function ProjectGraphic({ id, gradient, title, className = '', variant = 'card' }) {
@@ -176,10 +273,17 @@ export default function ProjectGraphic({ id, gradient, title, className = '', va
     ? detailProjectImages[id] ?? projectImages[id]
     : projectImages[id]
 
+  // Callers that need this to sit as a full-bleed background layer pass their own
+  // `absolute` utility via `className`. Tailwind resolves conflicting position
+  // utilities by stylesheet order, not class-string order, so a hardcoded
+  // `relative` here would silently win over a caller's `absolute` and break the
+  // overlay. Only fall back to `relative` when the caller hasn't set a position.
+  const positionClass = /\babsolute\b/.test(className) ? '' : 'relative'
+
   if (imageSrc) {
     return (
       <div
-        className={`relative overflow-hidden bg-bg-alt ${className}`}
+        className={`${positionClass} overflow-hidden bg-bg-alt ${className}`}
         style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
       >
         <img
@@ -192,9 +296,19 @@ export default function ProjectGraphic({ id, gradient, title, className = '', va
     )
   }
 
+  if (fullBleedIllustrations.has(id)) {
+    return (
+      <div className={`${positionClass} overflow-hidden ${className}`}>
+        <span className="absolute inset-0 select-none [&_svg]:h-full [&_svg]:w-full">
+          {illustrations[id] ?? null}
+        </span>
+      </div>
+    )
+  }
+
   return (
     <div
-      className={`relative overflow-hidden flex items-center justify-center ${className}`}
+      className={`${positionClass} overflow-hidden flex items-center justify-center ${className}`}
       style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}
     >
       {/* Subtle geometric texture */}

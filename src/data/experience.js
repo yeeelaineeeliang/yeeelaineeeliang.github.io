@@ -1,18 +1,27 @@
 export const experience = [
   {
+    role: 'AI Research and Design Intern',
+    org: 'Studio Bahia',
+    dates: 'Jun 2026 – Present',
+    thread: 'Applied AI',
+    tags: ['Dialogue Design', 'VR', 'Safety Testing'],
+    description:
+      'At Studio Bahia, I own dialogue design and safety testing for Rubi, a VR EMDR therapy project. I run iterative testing rounds to check the safety and usability of the experience before it reaches users.',
+    // shaped copy pending — Elaine to provide
+    shaped: '',
+  },
+  {
     role: 'Research Assistant',
     org: 'University of Chicago',
     team: 'HRI Research Lab',
-    teamUrl: 'https://hri.cs.uchicago.edu',
     dates: 'Jan 2026 – Present',
     location: 'Chicago, IL',
+    thread: 'AI in research',
     tags: ['LLM Prompting', 'Jaccard Retrieval', 'Android / Kotlin', 'Human-Robot Interaction'],
     description:
-      'Built the memory and conversation layer for a Temi social robot, connecting LLM prompt design, Jaccard-based retrieval, and Android/Kotlin deployment within a 2×2 factorial study design where every engineering decision had to be traceable and research-valid.',
-    achievements: [
-      'Reduced hallucinated self-disclosures by tightening prompt constraints and adding a pre-response validation step before any output reached the robot.',
-      'Shipped the full system to support a 2-week longitudinal HRI study at UChicago.',
-    ],
+      'At the HRI Lab, I built the memory and conversation layer for a Temi social robot inside a formal research study. I combined LLM prompt design with Jaccard-based retrieval for on-device memory, deployed through an Android and Kotlin app, and added a validation step to catch hallucinated responses before they reached the robot.',
+    // shaped copy pending — Elaine to provide
+    shaped: '',
   },
   {
     role: 'Analyst Intern',
@@ -20,26 +29,23 @@ export const experience = [
     team: 'CSBB Marketing Sciences',
     dates: 'Jun 2024 – Aug 2024',
     location: 'Charlotte, NC',
+    thread: 'Data at scale',
     tags: ['Python', 'SQL', 'Teradata', 'KMeans', 'PCA'],
     description:
-      'Built data and ML workflows on Teradata to understand campaign performance and customer behavior across five acquisition channels.',
-    achievements: [
-      'Clustered 40k+ customer records into five behavioral groups using KMeans (K=5, chosen via elbow method and silhouette score), with PCA applied after clustering for 2D visualization. One cluster was consistently underserved across every channel, which shifted how the team thought about budget allocation.',
-      'Cut mobile transaction completion time by 57% by mapping a legacy flow with four cross-functional teams and removing steps that existed only because they always had.',
-    ],
+      'At Wells Fargo, I worked with customer and mobile engagement data to understand behavior patterns and support marketing and product decisions. I clustered 40,000+ customer records into five behavioral groups with KMeans, visualized them with PCA, and worked with four cross-functional teams to map a mobile transaction flow that cut completion time by 57%.',
+    // shaped copy pending — Elaine to provide
+    shaped: '',
   },
   {
     role: 'Data Analyst Intern',
     org: 'Dawnrise Inc.',
-    orgUrl: 'https://www.dawnrise.com',
     dates: 'May 2023 – Aug 2023',
     location: 'Diamond Bar, CA',
-    tags: ['Python', 'Selenium', 'Async Scraping', 'PostgreSQL', 'GPT Parsing'],
+    thread: 'Automation',
+    tags: ['Python', 'Selenium', 'Automation', 'PostgreSQL', 'GPT Parsing'],
     description:
-      'Built an automated competitive intelligence pipeline using Python, Selenium, async scraping, and GPT-based parsing to replace a manual research process.',
-    achievements: [
-      'Reduced data collection from 40 hours to 2 per cycle, covering 10k+ SKU specs from e-commerce sources.',
-      'Designed the database schema and prompt templates that structured GPT output into consistent, queryable fields. Built and handed off the full system in two weeks.',
-    ],
+      'At Dawnrise, I worked on a manual research workflow and built automation with Python and Selenium around publicly available competitor product information, cutting research time by about 80%. I integrated GPT for data parsing to keep the output consistent and queryable.',
+    // shaped copy pending — Elaine to provide
+    shaped: '',
   },
 ]
