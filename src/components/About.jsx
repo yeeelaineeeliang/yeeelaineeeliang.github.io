@@ -32,7 +32,7 @@ const APPROACH_STEPS = [
   {
     n: '03',
     verb: 'Build',
-    label: 'Build the fallback path',
+    label: 'Build for when it doesn\'t know',
     question: 'What should the system show when the answer is uncertain?',
   },
 ]
@@ -90,18 +90,41 @@ export default function About() {
       className="section relative pt-14 bg-bg-alt"
       style={{
         background: `
-          radial-gradient(circle at 85% 15%, rgba(190, 75, 52, 0.04), transparent 32%),
-          radial-gradient(circle at 10% 85%, rgba(47, 143, 131, 0.06), transparent 36%),
-          #EDF4F1
+          radial-gradient(circle at 84% 16%, rgba(222, 152, 118, 0.16), transparent 30%),
+          radial-gradient(circle at 8% 86%, rgba(98, 142, 133, 0.1), transparent 34%),
+          linear-gradient(180deg, #eff5f0 0%, #f4f2eb 100%)
         `,
       }}
     >
+      <div aria-hidden="true" className="ambient-layer">
+        <div
+          className="ambient-orb ambient-orb-slow h-[14rem] w-[14rem] md:h-[18rem] md:w-[18rem]"
+          style={{
+            right: '6%',
+            top: '4%',
+            background: 'radial-gradient(circle, rgba(210, 139, 108, 0.16), rgba(210, 139, 108, 0.02) 68%, transparent 74%)',
+          }}
+        />
+        <div className="ambient-contour opacity-80" />
+        <div
+          className="ambient-grid"
+          style={{
+            inset: '0 0 0 auto',
+            width: '58%',
+            maskImage: 'linear-gradient(to left, black 56%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to left, black 56%, transparent 100%)',
+            opacity: 0.55,
+          }}
+        />
+      </div>
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(94, 111, 104, 0.02) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
+          backgroundImage:
+            'linear-gradient(125deg, rgba(163, 63, 47, 0.05), transparent 34%), radial-gradient(circle, rgba(94, 111, 104, 0.02) 1px, transparent 1px)',
+          backgroundSize: '100% 100%, 28px 28px',
           zIndex: 0,
         }}
       />
@@ -217,6 +240,16 @@ export default function About() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Industry context — bridge to Experience */}
+        <div className="fade-in border-t border-border/60 pt-6">
+          <p className="max-w-3xl text-base leading-relaxed text-muted">
+            My work has taken me across marketing science, automation, robotics, and AI research,
+            with applications in healthcare, finance, and retail. Each setting was different, but
+            the gap was the same: manual effort that should have been automated, decisions made on
+            thin evidence, and output people had no way to check.
+          </p>
         </div>
 
       </div>

@@ -4,20 +4,22 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
+import OutsideWork from './components/OutsideWork'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ProjectDetail from './components/ProjectDetail'
 import { projects } from './data/projects'
 
 const NAV_LINKS = [
-  { id: 'home', label: 'About' },
+  { id: 'home', label: 'Home' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
+  { id: 'outside-work', label: 'Beyond Work' },
   { id: 'contact', label: 'Contact' },
 ]
 
 // All scrollable section IDs in order
-const ALL_SECTIONS = ['home', 'about', 'projects', 'experience', 'contact']
+const ALL_SECTIONS = ['home', 'about', 'projects', 'experience', 'outside-work', 'contact']
 
 // 'about' lives visually inside the 'home' nav entry
 const SECTION_TO_NAV = {
@@ -25,6 +27,7 @@ const SECTION_TO_NAV = {
   about: 'home',
   projects: 'projects',
   experience: 'experience',
+  'outside-work': 'outside-work',
   contact: 'contact',
 }
 
@@ -173,6 +176,7 @@ export default function App() {
         <About />
         <Projects onViewDetail={handleViewDetail} />
         <Experience />
+        <OutsideWork />
         <Contact />
         <Footer />
       </main>

@@ -5,6 +5,7 @@ export default function FeaturedProject({ project, onViewDetail, id }) {
   const hasDemo = Boolean(project.links?.demo && project.links.demo !== '#')
   const hasGithub = Boolean(project.links?.github && project.links.github !== '#')
   const keyMetric = project.metrics?.[0]
+  const topMeta = [project.role, project.maturity, project.focus].filter(Boolean)
 
   return (
     <article id={id} className="fade-in relative scroll-mt-32 overflow-hidden rounded-xl border border-border/60 shadow-md aspect-[4/5] sm:aspect-[16/10] lg:aspect-[21/9]">
@@ -21,6 +22,16 @@ export default function FeaturedProject({ project, onViewDetail, id }) {
 
       {/* Floating text panel — asymmetric, offset rather than a centered brochure split */}
       <div className="relative flex h-full max-w-lg flex-col justify-end p-6 sm:justify-center sm:p-8 lg:p-12">
+        {topMeta.length > 0 && (
+          <div className="mb-3 flex flex-wrap gap-2">
+            {topMeta.map(item => (
+              <span key={item} className="chip-glass border-white/15 bg-white/8 text-white/92">
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
+
         {project.domainTags?.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-3">
             {project.domainTags.map(tag => (
@@ -35,6 +46,10 @@ export default function FeaturedProject({ project, onViewDetail, id }) {
 
         <p className="text-base text-white/85 leading-relaxed mb-4 max-w-md">
           {project.oneliner}
+        </p>
+
+        <p className="mb-4 max-w-lg text-sm leading-relaxed text-white/74">
+          {project.technicalContribution}
         </p>
 
         {keyMetric && (

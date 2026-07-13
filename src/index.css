@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-paper: #f7f4ee;
+  --bg-mist: rgba(248, 222, 205, 0.38);
+  --bg-clay: rgba(190, 108, 81, 0.16);
+  --bg-maroon: rgba(163, 63, 47, 0.12);
+  --bg-teal-wash: rgba(98, 142, 133, 0.12);
+  --bg-line: rgba(129, 90, 73, 0.12);
+  --bg-dot: rgba(94, 111, 104, 0.05);
+}
+
 /* Grain texture overlay */
 body::before {
   content: '';
@@ -34,6 +44,23 @@ body::before {
   100%    { box-shadow: 0 0 0 3px rgba(163, 63, 47, 0); }
 }
 
+@keyframes ambientDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(24px, -18px, 0) scale(1.03); }
+  100% { transform: translate3d(-18px, 12px, 0) scale(0.98); }
+}
+
+@keyframes ambientRotate {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(5deg) scale(1.04); }
+  to   { transform: rotate(10deg) scale(1); }
+}
+
+@keyframes ambientGlow {
+  0%, 100% { opacity: 0.42; }
+  50%      { opacity: 0.74; }
+}
+
 /* Jump-nav landing cue — highlights whichever project card a pill link scrolled to */
 [id^="project-"]:target {
   animation: targetGlow 2.2s ease-out;
@@ -56,6 +83,9 @@ details[open] summary ~ * {
 
   body {
     @apply bg-bg text-text font-sans antialiased;
+    background:
+      radial-gradient(circle at top, rgba(248, 222, 205, 0.16), transparent 28%),
+      linear-gradient(180deg, #faf7f2 0%, #f6f7f2 40%, #f8f6f1 100%);
   }
 
   h1, h2, h3 {
@@ -153,6 +183,69 @@ details[open] summary ~ * {
   .card-warm:hover {
     @apply border-accent/30;
   }
+
+  .ambient-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .ambient-layer > * {
+    position: absolute;
+  }
+
+  .ambient-orb {
+    border-radius: 9999px;
+    filter: blur(0);
+    animation: ambientDrift 18s ease-in-out infinite alternate;
+  }
+
+  .ambient-orb-slow {
+    animation-duration: 26s;
+  }
+
+  .ambient-orb-rotate {
+    animation: ambientRotate 24s ease-in-out infinite alternate;
+  }
+
+  .ambient-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--bg-dot) 1px, transparent 1px);
+    background-size: 26px 26px;
+    opacity: 0.8;
+  }
+
+  .ambient-contour {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at center, transparent 55%, rgba(129, 90, 73, 0.12) 56%, transparent 57%),
+      radial-gradient(ellipse at center, transparent 64%, rgba(129, 90, 73, 0.09) 65%, transparent 66%);
+    background-size: 380px 240px, 520px 320px;
+    background-position: 12% 24%, 76% 68%;
+    background-repeat: no-repeat;
+  }
+
+  .ambient-threads {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(115deg, transparent 0 46%, rgba(163, 63, 47, 0.08) 49%, transparent 52%),
+      linear-gradient(65deg, transparent 0 58%, rgba(98, 142, 133, 0.08) 61%, transparent 64%);
+    background-size: 260px 260px, 320px 320px;
+    opacity: 0.65;
+  }
+
+  .ambient-waves {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(70% 50% at 10% 15%, rgba(255,255,255,0.34), transparent 62%),
+      radial-gradient(90% 58% at 90% 70%, rgba(163, 63, 47, 0.08), transparent 60%);
+    animation: ambientGlow 16s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
@@ -169,7 +262,8 @@ details[open] summary ~ * {
     animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  /* Timeline line draw-down */
+  /* Timeline line draw-down — same proven top/bottom box model as the original
+     straight bar, just with a repeating wavy background instead of a solid fill */
   .timeline-draw {
     transform-origin: top;
     animation: drawDown 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
@@ -251,6 +345,12 @@ details[open] summary ~ * {
   .hero-dot-grid {
     transform: none !important;
     transition: none !important;
+  }
+  .ambient-orb,
+  .ambient-orb-slow,
+  .ambient-orb-rotate,
+  .ambient-waves {
+    animation: none !important;
   }
   [id^="project-"]:target {
     animation: none !important;

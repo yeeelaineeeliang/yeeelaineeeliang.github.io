@@ -1,3 +1,5 @@
+import ProjectGraphic from './ProjectGraphic'
+
 const ProblemIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
@@ -66,8 +68,6 @@ function StoryKicker({ children, accent = false }) {
   )
 }
 
-import ProjectGraphic from './ProjectGraphic'
-
 function getMetricsGridClass(count) {
   if (count >= 3) return 'sm:grid-cols-3'
   if (count === 2) return 'sm:grid-cols-2'
@@ -79,6 +79,10 @@ function getStackGroups(project) {
   return [{ label: 'Stack', items: project.stack ?? [] }]
 }
 
+function getPrimaryMetrics(project) {
+  return (project.metrics ?? []).slice(0, 4)
+}
+
 function getMeta(project) {
   return [
     ['Role', project.role],
@@ -87,24 +91,33 @@ function getMeta(project) {
   ].filter(([, value]) => Boolean(value))
 }
 
-// Compact "reference info" rendering of the Role/Status/Focus + Stack block,
-// used for the Project Snapshot placement on product-story pages.
-function ProjectSnapshot({ meta, stackGroups }) {
+function ProjectOverview({ meta, stackGroups, metrics = [], note }) {
   return (
-    <div>
-      <StoryKicker>Project Snapshot</StoryKicker>
-      <div className="grid gap-4 sm:grid-cols-2">
+    <section className="grid gap-4 lg:grid-cols-[1.05fr_1fr]">
+      <div className="rounded-xl border border-border/80 bg-surface/90 p-5 shadow-sm">
+        <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-2">
+          Project Snapshot
+        </p>
         {meta.length > 0 && (
-          <div className="flex flex-wrap gap-x-5 gap-y-1.5">
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             {meta.map(([label, value]) => (
-              <p key={label} className="text-sm text-muted-2">
-                <span className="font-medium text-muted">{label}:</span> {value}
+              <p key={label}>
+                <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-2">
+                  {label}
+                </span>
+                <span className="text-sm font-medium leading-relaxed text-text">{value}</span>
               </p>
             ))}
           </div>
         )}
+      </div>
+
+      <div className="rounded-xl border border-accent/15 bg-accent/[0.04] p-5 shadow-sm">
+        <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
+          Stack And Proof
+        </p>
         {stackGroups.length > 0 && (
-          <div className="grid gap-1">
+          <div className="grid gap-2">
             {stackGroups.map(group => (
               <p key={group.label} className="text-sm text-muted-2">
                 <span className="font-medium text-muted">{group.label}:</span>{' '}
@@ -113,8 +126,22 @@ function ProjectSnapshot({ meta, stackGroups }) {
             ))}
           </div>
         )}
+        {metrics.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            {metrics.map(metric => (
+              <span key={metric} className="chip-metric">
+                {metric}
+              </span>
+            ))}
+          </div>
+        )}
+        {note && (
+          <p className="mt-4 text-sm leading-relaxed text-muted">
+            {note}
+          </p>
+        )}
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -124,6 +151,7 @@ export default function ProjectDetail({ project, onBack }) {
   const stackGroups = getStackGroups(project)
   const meta = getMeta(project)
   const isProductStory = Boolean(project.productPillars?.length)
+  const primaryMetrics = getPrimaryMetrics(project)
 
   return (
     <div className="min-h-screen bg-bg text-text">
@@ -150,77 +178,49 @@ export default function ProjectDetail({ project, onBack }) {
           <h1 className="text-3xl md:text-4xl font-bold leading-tight">{project.title}</h1>
         </div>
 
-        {isProductStory && (
-          <p className="text-xl md:text-2xl font-semibold text-accent leading-snug mb-3">
-            {project.oneliner}
-          </p>
-        )}
+        <p className="text-xl md:text-2xl font-semibold text-accent leading-snug mb-3">
+          {project.oneliner}
+        </p>
 
-        <p className="text-lg text-muted leading-relaxed mb-6">{project.summary ?? project.oneliner}</p>
+        <p className="text-lg text-muted leading-relaxed mb-8 max-w-3xl">
+          {project.summary ?? project.oneliner}
+        </p>
 
-        {isProductStory && (hasDemo || hasGithub) && (
-          <div className="flex flex-wrap items-center gap-5 mb-10">
-            {hasDemo && (
-              <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Try Demo →
-              </a>
-            )}
-            {hasGithub && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={hasDemo ? 'text-sm font-semibold text-muted hover:text-text transition-colors duration-200' : 'btn-primary'}
-              >
-                View on GitHub →
-              </a>
-            )}
-          </div>
-        )}
+        <ProjectOverview
+          meta={meta}
+          stackGroups={stackGroups}
+          metrics={primaryMetrics}
+          note={project.reliabilityNote}
+        />
 
-        {!isProductStory && (
-          <div className="grid gap-4 mb-10 lg:grid-cols-[0.85fr_1.15fr]">
-            {meta.length > 0 && (
-              <div className="grid gap-3 rounded-lg border border-border bg-surface p-4 sm:grid-cols-3 lg:grid-cols-1">
-                {meta.map(([label, value]) => (
-                  <p key={label}>
-                    <span className="block font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-2">
-                      {label}
-                    </span>
-                    <span className="text-sm font-medium leading-relaxed text-text">{value}</span>
-                  </p>
-                ))}
-              </div>
-            )}
-
-            {stackGroups.length > 0 && (
-              <div className="grid gap-2 rounded-lg border border-accent/15 bg-accent/[0.04] p-4">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-accent">
-                  Stack
-                </p>
-                {stackGroups.map(group => (
-                  <p key={group.label} className="text-sm leading-relaxed">
-                    <span className="font-semibold text-text">{group.label}: </span>
-                    <span className="font-mono text-muted">{group.items.join(', ')}</span>
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        <div className="flex flex-wrap items-center gap-5 mb-10 mt-8">
+          {hasDemo && (
+            <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn-primary">
+              Try Demo →
+            </a>
+          )}
+          {hasGithub && (
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={hasDemo ? 'text-sm font-semibold text-muted hover:text-text transition-colors duration-200' : 'btn-primary'}
+            >
+              View on GitHub →
+            </a>
+          )}
+        </div>
 
         {isProductStory ? (
           <div className="space-y-12">
 
-            {/* PROBLEM */}
             <div>
               <StoryKicker>The Problem</StoryKicker>
               <p className="text-lg text-muted leading-relaxed max-w-2xl">{project.problem}</p>
             </div>
 
-            {/* EDITORIAL CALLOUT */}
             {project.editorialCallout && (
-              <div className="px-6 sm:px-10">
+              <div className="rounded-2xl border border-teal/18 bg-teal/[0.05] px-6 py-7 sm:px-10">
                 <p className="text-2xl md:text-3xl font-semibold text-teal leading-snug mb-2">
                   {project.editorialCallout.lead}
                 </p>
@@ -230,15 +230,14 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             )}
 
-            {/* WHAT I BUILT */}
             <div>
               <StoryKicker>What I Built</StoryKicker>
-              <p className="text-lg text-muted leading-relaxed max-w-2xl mb-8">
+              <p className="text-lg text-muted leading-relaxed max-w-3xl mb-8">
                 {project.technicalContribution ?? project.solution}
               </p>
               <div className="grid gap-6 md:grid-cols-3 mb-8">
                 {project.productPillars.map((pillar, i) => (
-                  <div key={pillar.title}>
+                  <div key={pillar.title} className="rounded-xl border border-border/70 bg-surface/75 p-5">
                     <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-teal/10 font-mono text-xs font-bold text-teal">
                       {String(i + 1).padStart(2, '0')}
                     </span>
@@ -247,8 +246,7 @@ export default function ProjectDetail({ project, onBack }) {
                   </div>
                 ))}
               </div>
-              {/* In-context product visual — a smaller inline figure, not a second hero */}
-              <div className="max-w-2xl overflow-hidden rounded-lg border border-teal/20 shadow-sm">
+              <div className="max-w-3xl overflow-hidden rounded-lg border border-teal/20 shadow-sm">
                 <ProjectGraphic
                   id={project.id}
                   gradient={project.gradient}
@@ -259,7 +257,22 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             </div>
 
-            {/* HOW IT WORKS — the journey, marked as a narrative landmark */}
+            {project.technicalSystem?.length > 0 && (
+              <div>
+                <StoryKicker accent>System Design</StoryKicker>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {project.technicalSystem.map(({ layer, description }) => (
+                    <div key={layer} className="rounded-xl border border-border/75 bg-surface/80 p-5">
+                      <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                        {layer}
+                      </p>
+                      <p className="text-sm leading-relaxed text-muted">{description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div>
               <StoryKicker accent>How It Works</StoryKicker>
               <ol className="relative space-y-6 pl-9 sm:pl-11">
@@ -278,10 +291,6 @@ export default function ProjectDetail({ project, onBack }) {
               </ol>
             </div>
 
-            {/* PROJECT SNAPSHOT */}
-            <ProjectSnapshot meta={meta} stackGroups={stackGroups} />
-
-            {/* KEY DECISIONS */}
             <div>
               <StoryKicker>Key Decisions</StoryKicker>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -293,12 +302,11 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             </div>
 
-            {/* RESULTS — the payoff, marked as a narrative landmark, leads into the close */}
             {project.metrics && project.metrics.length > 0 && (
               <div>
                 <StoryKicker accent>Results</StoryKicker>
-                {project.reliabilityNote && (
-                  <p className="mb-4 text-sm text-muted-2 leading-relaxed">{project.reliabilityNote}</p>
+                {project.metricNote && (
+                  <p className="mb-4 max-w-3xl text-sm leading-relaxed text-muted-2">{project.metricNote}</p>
                 )}
                 <div className={`grid grid-cols-1 ${getMetricsGridClass(project.metrics.length)} gap-4`}>
                   {project.metrics.map(m => (
@@ -310,7 +318,6 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             )}
 
-            {/* NEXT IMPROVEMENTS — compressed to a single closing line, exact original wording */}
             {project.nextImprovements && project.nextImprovements.length > 0 && (
               <p className="text-sm text-muted-2 leading-relaxed">
                 <span className="font-medium text-muted">Still ahead: </span>
@@ -322,13 +329,11 @@ export default function ProjectDetail({ project, onBack }) {
         ) : (
           <div className="space-y-6">
 
-            {/* PROBLEM */}
             <div className="rounded-lg border border-warning/25 bg-warning/[0.05] p-6 shadow-sm">
               <SectionHeader icon={<ProblemIcon />} label="The Problem" color="orange" />
               <p className="text-base text-muted leading-relaxed">{project.problem}</p>
             </div>
 
-            {/* WHAT I BUILT */}
             <div className="rounded-lg border border-accent/25 bg-accent/[0.04] p-6 shadow-sm">
               <SectionHeader icon={<SolutionIcon />} label="What I Built" color="violet" />
               <div className="space-y-4">
@@ -348,7 +353,6 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             </div>
 
-            {/* ARCHITECTURE / HOW IT WORKS */}
             <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
               <SectionHeader icon={<ArchIcon />} label="How It Works" color="code" />
               <pre className="font-mono text-sm text-muted bg-bg-alt rounded-lg p-5 overflow-x-auto leading-relaxed border border-border">
@@ -356,7 +360,6 @@ export default function ProjectDetail({ project, onBack }) {
               </pre>
             </div>
 
-            {/* KEY DECISIONS */}
             <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
               <SectionHeader icon={<DecisionIcon />} label="Key Decisions" color="blue" />
               <ol className="space-y-4">
@@ -371,12 +374,11 @@ export default function ProjectDetail({ project, onBack }) {
               </ol>
             </div>
 
-            {/* RESULTS */}
             {project.metrics && project.metrics.length > 0 && (
               <div className="rounded-lg border border-success/25 bg-success/[0.04] p-6 shadow-sm">
                 <SectionHeader icon={<ResultsIcon />} label="Results" color="green" />
-                {project.reliabilityNote && (
-                  <p className="mb-4 text-sm text-muted-2 leading-relaxed">{project.reliabilityNote}</p>
+                {project.metricNote && (
+                  <p className="mb-4 text-sm text-muted-2 leading-relaxed">{project.metricNote}</p>
                 )}
                 <div className={`grid grid-cols-1 ${getMetricsGridClass(project.metrics.length)} gap-4`}>
                   {project.metrics.map(m => (
@@ -388,7 +390,6 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             )}
 
-            {/* NEXT IMPROVEMENTS */}
             {project.nextImprovements && project.nextImprovements.length > 0 && (
               <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
                 <SectionHeader icon={<DecisionIcon />} label="Next Improvements" color="blue" />

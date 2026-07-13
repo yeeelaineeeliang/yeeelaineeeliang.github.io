@@ -41,10 +41,25 @@ export default function Contact() {
   const mailtoHref = `mailto:${EMAIL}${topic ? `?subject=${encodeURIComponent(topic.subject)}` : ''}`
 
   return (
-    <section id="contact" className="section relative overflow-hidden bg-bg">
+    <section
+      id="contact"
+      className="section relative overflow-hidden bg-bg"
+      style={{
+        background:
+          'linear-gradient(180deg, rgba(249,245,239,0.98) 0%, rgba(247,248,245,0.98) 100%)',
+      }}
+    >
       {/* Ambient blob */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute -top-20 left-1/4 h-96 w-96 rounded-full bg-accent/[0.04] blur-3xl" />
+        <div className="absolute -top-20 left-1/4 h-96 w-96 rounded-full bg-accent/[0.06] blur-3xl" />
+        <div className="absolute bottom-0 right-[-6rem] h-80 w-80 rounded-full bg-[#e9b391]/[0.16] blur-3xl" />
+        <div
+          className="ambient-grid opacity-40"
+          style={{
+            maskImage: 'linear-gradient(to top, black 42%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to top, black 42%, transparent 100%)',
+          }}
+        />
       </div>
 
       <div className="container-content">

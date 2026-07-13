@@ -36,9 +36,9 @@ export default function Hero({ onNavigate }) {
       onMouseLeave={handlePointerLeave}
       style={{
         background: `
-          radial-gradient(circle at 72% 42%, rgba(180, 201, 188, 0.18), transparent 34%),
-          radial-gradient(circle at 22% 48%, rgba(190, 75, 52, 0.06), transparent 30%),
-          #F7F8F5
+          radial-gradient(circle at 72% 40%, rgba(246, 214, 196, 0.42), transparent 32%),
+          radial-gradient(circle at 18% 24%, rgba(163, 63, 47, 0.08), transparent 26%),
+          linear-gradient(135deg, #fbf7f1 0%, #f6f7f1 42%, #f6f1ea 100%)
         `,
         '--mx': '30%',
         '--my': '50%',
@@ -46,13 +46,45 @@ export default function Hero({ onNavigate }) {
         '--parallax-y': '0px',
       }}
     >
+      <div aria-hidden="true" className="ambient-layer">
+        <div
+          className="ambient-orb h-[18rem] w-[18rem] md:h-[24rem] md:w-[24rem]"
+          style={{
+            top: '8%',
+            right: '-4%',
+            background: 'radial-gradient(circle, rgba(226, 153, 120, 0.22), rgba(226, 153, 120, 0.02) 68%, transparent 74%)',
+          }}
+        />
+        <div
+          className="ambient-orb ambient-orb-slow h-[16rem] w-[16rem] md:h-[22rem] md:w-[22rem]"
+          style={{
+            bottom: '4%',
+            left: '-6%',
+            background: 'radial-gradient(circle, rgba(98, 142, 133, 0.12), rgba(98, 142, 133, 0.02) 70%, transparent 78%)',
+          }}
+        />
+        <div
+          className="ambient-orb-rotate hidden md:block"
+          style={{
+            right: '8%',
+            top: '18%',
+            width: '21rem',
+            height: '21rem',
+            borderRadius: '42% 58% 61% 39% / 38% 43% 57% 62%',
+            border: '1px solid rgba(163, 63, 47, 0.12)',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.02))',
+          }}
+        />
+      </div>
+
       {/* Soft cursor-responsive glow — desktop only, disabled under reduced motion */}
       <div
         aria-hidden="true"
         className="hero-cursor-glow pointer-events-none absolute inset-0 hidden md:block"
         style={{
-          backgroundImage: 'radial-gradient(circle, rgba(163, 63, 47, 0.06), transparent 60%)',
-          backgroundSize: '620px 620px',
+          backgroundImage:
+            'radial-gradient(circle, rgba(163, 63, 47, 0.09), rgba(236, 177, 148, 0.04) 28%, transparent 62%)',
+          backgroundSize: '680px 680px',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'var(--mx) var(--my)',
           transition: 'background-position 0.6s ease-out',
@@ -66,8 +98,9 @@ export default function Hero({ onNavigate }) {
         className="hero-dot-grid pointer-events-none absolute inset-y-0 left-0"
         style={{
           width: '60%',
-          backgroundImage: 'radial-gradient(circle, rgba(94, 111, 104, 0.035) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
+          backgroundImage:
+            'radial-gradient(circle, rgba(98, 142, 133, 0.05) 1px, transparent 1px), linear-gradient(120deg, rgba(163, 63, 47, 0.06), transparent 56%)',
+          backgroundSize: '28px 28px, 100% 100%',
           maskImage: 'linear-gradient(to right, black 55%, transparent 100%)',
           WebkitMaskImage: 'linear-gradient(to right, black 55%, transparent 100%)',
           transform: 'translate(var(--parallax-x), var(--parallax-y))',
@@ -145,6 +178,13 @@ export default function Hero({ onNavigate }) {
                   Get in touch
                 </button>
               </MagneticButton>
+            </div>
+
+            {/* Local connection — low-key aside, not a contact block */}
+            <div className="animate-in mt-5" style={{ animationDelay: '900ms' }}>
+              <p className="text-sm leading-relaxed text-muted-2">
+                Based in Chicago. If you&apos;re here too, I&apos;d be up for coffee, a city walk, or just talking about what you&apos;re building.
+              </p>
             </div>
           </div>
 

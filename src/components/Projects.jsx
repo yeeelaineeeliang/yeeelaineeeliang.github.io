@@ -14,25 +14,13 @@ const GALLERY_CARDS = [
   { id: 'crypto-pipeline', size: 'archive', span: 'lg:col-span-2' },
 ]
 
-// Tech-domain labels for the jump nav — lets recruiters scan for relevant background
-// (multi-agent, RAG, robotics, etc.) rather than needing to recognize project names.
-// A project can carry more than one label when it genuinely spans domains.
 const JUMP_ITEMS = [
-  { target: 'cityliving-sim', label: 'LLM' },
-  { target: 'cityliving-sim', label: 'Machine Learning' },
-  { target: 'cityliving-sim', label: 'Data Engineering' },
-  { target: 'career-coach', label: 'Multi-Agent' },
-  { target: 'career-coach', label: 'LLM Orchestration' },
-  { target: 'fraud-copilot', label: 'XGBoost' },
-  { target: 'fraud-copilot', label: 'SHAP' },
-  { target: 'fraud-copilot', label: 'RAG' },
-  { target: 'fraud-copilot', label: 'Claude API' },
-  { target: 'hri-memory', label: 'Robotics' },
-  { target: 'hri-memory', label: 'HRI Research' },
-  { target: 'calpin', label: 'Community' },
-  { target: 'calpin', label: 'Mobile' },
-  { target: 'crypto-pipeline', label: 'Fintech' },
-  { target: 'crypto-pipeline', label: 'Forecasting' },
+  { target: 'cityliving-sim', label: 'LiveThere', meta: 'Civic AI product' },
+  { target: 'career-coach', label: 'CareerCoach', meta: 'Multi-agent workflow' },
+  { target: 'fraud-copilot', label: 'Fraud Copilot', meta: 'Explainable ML' },
+  { target: 'hri-memory', label: 'HRI Memory', meta: 'Robot rapport research' },
+  { target: 'calpin', label: 'CalPin', meta: 'Peer support app' },
+  { target: 'crypto-pipeline', label: 'Crypto Pipeline', meta: 'Forecasting system' },
 ]
 
 function byId(id) {
@@ -46,27 +34,66 @@ const galleryItems = GALLERY_CARDS
 
 export default function Projects({ onViewDetail }) {
   return (
-    <section id="projects" className="section">
-      <div className="container-content">
+    <section
+      id="projects"
+      className="section relative overflow-hidden"
+      style={{
+        background:
+          'linear-gradient(180deg, rgba(251,248,243,0.98) 0%, rgba(246,247,242,0.98) 100%)',
+      }}
+    >
+      <div aria-hidden="true" className="ambient-layer">
+        <div
+          className="ambient-orb ambient-orb-slow h-[12rem] w-[12rem] md:h-[18rem] md:w-[18rem]"
+          style={{
+            left: '-4%',
+            top: '10%',
+            background: 'radial-gradient(circle, rgba(163, 63, 47, 0.09), rgba(163, 63, 47, 0.01) 70%, transparent 76%)',
+          }}
+        />
+        <div
+          className="ambient-orb h-[12rem] w-[12rem] md:h-[16rem] md:w-[16rem]"
+          style={{
+            right: '-3%',
+            bottom: '12%',
+            background: 'radial-gradient(circle, rgba(98, 142, 133, 0.08), rgba(98, 142, 133, 0.01) 70%, transparent 76%)',
+          }}
+        />
+        <div className="ambient-threads opacity-35" />
+      </div>
+
+      <div className="container-content relative z-10">
 
         {/* Section header */}
-        <div className="fade-in mb-8">
+        <div className="fade-in mb-8 max-w-3xl">
+          <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+            Selected Work
+          </p>
           <h2 className="text-3xl sm:text-4xl font-bold leading-tight">Projects</h2>
+          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+            This is the core of my site. Some of these are polished product builds, some are
+            research-driven systems, and some are just fun problems I cared enough to make real.
+            I care most about the decisions behind them: what the product needed to do, what the
+            system had to prove, and what I chose to optimize for.
+          </p>
         </div>
 
-        {/* Jump nav — sticks below the main nav so visitors can pick a project without scrolling past everything */}
+        {/* Jump nav — project-first rather than tag-first so visitors can orient quickly */}
         <nav
           aria-label="Jump to project"
-          className="fade-in sticky top-16 z-40 mb-10 w-fit max-w-full rounded-full border border-border bg-bg/90 px-2 py-2 shadow-sm backdrop-blur-md"
+          className="fade-in sticky top-16 z-40 mb-10 max-w-full rounded-2xl border border-border/80 bg-bg/92 p-2 shadow-sm backdrop-blur-md"
         >
           <div className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {JUMP_ITEMS.map(({ target, label }) => (
+            {JUMP_ITEMS.map(({ target, label, meta }) => (
               <a
                 key={label}
                 href={`#project-${target}`}
-                className="shrink-0 whitespace-nowrap rounded-full border border-border px-4 py-1.5 text-sm font-medium text-muted transition-all duration-200 hover:border-accent/40 hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="shrink-0 rounded-xl border border-border/90 px-3 py-2 text-left transition-all duration-200 hover:border-accent/40 hover:bg-accent/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
-                {label}
+                <span className="block text-sm font-semibold text-text">{label}</span>
+                <span className="block font-mono text-[10px] uppercase tracking-wide text-muted-2">
+                  {meta}
+                </span>
               </a>
             ))}
           </div>

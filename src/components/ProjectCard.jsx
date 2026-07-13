@@ -24,6 +24,7 @@ export default function ProjectCard({ project, onViewDetail, variant = 'overlay'
   const keyMetric = project.cardBadge ?? project.metrics?.[0]
   const isLarge = size === 'lg'
   const demoIsPrimary = isLarge && hasDemo
+  const quickMeta = [project.role, project.maturity].filter(Boolean)
 
   let secondary = null
   if (hasDemo) {
@@ -46,6 +47,11 @@ export default function ProjectCard({ project, onViewDetail, variant = 'overlay'
 
         <div className="flex flex-1 flex-wrap items-center gap-x-5 gap-y-2 p-4 sm:p-5">
           <div className="min-w-[160px] flex-1">
+            {quickMeta.length > 0 && (
+              <span className="mb-1 block font-mono text-[10px] uppercase tracking-wide text-muted-2">
+                {quickMeta.join(' · ')}
+              </span>
+            )}
             {project.domainTags?.length > 0 && (
               <span className="block font-mono text-[11px] uppercase tracking-wide text-muted-2 mb-1">
                 {project.domainTags.join(' · ')}
@@ -92,6 +98,12 @@ export default function ProjectCard({ project, onViewDetail, variant = 'overlay'
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
 
       <div className={`relative flex h-full flex-col justify-end ${padding}`}>
+        {quickMeta.length > 0 && (
+          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/62">
+            {quickMeta.join(' · ')}
+          </p>
+        )}
+
         {project.domainTags?.length > 0 && (
           <p className="font-mono text-[11.5px] tracking-wide text-white/60 mb-2.5">
             {project.domainTags.join(' · ')}
@@ -111,6 +123,12 @@ export default function ProjectCard({ project, onViewDetail, variant = 'overlay'
         <p className="text-sm text-white/85 leading-relaxed mb-3 max-w-md line-clamp-2">
           {project.oneliner ?? project.summary}
         </p>
+
+        {project.technicalContribution && (
+          <p className="mb-4 max-w-md text-[13px] leading-relaxed text-white/68 line-clamp-3">
+            {project.technicalContribution}
+          </p>
+        )}
 
         <div className="flex flex-wrap items-center gap-3">
           {keyMetric && (
