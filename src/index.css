@@ -61,6 +61,7 @@ body::before {
   50%      { opacity: 0.74; }
 }
 
+
 /* Jump-nav landing cue — highlights whichever project card a pill link scrolled to */
 [id^="project-"]:target {
   animation: targetGlow 2.2s ease-out;
@@ -89,7 +90,8 @@ details[open] summary ~ * {
   }
 
   h1, h2, h3 {
-    font-family: 'DM Sans', Inter, system-ui, sans-serif;
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
   }
 
   ::selection {
@@ -103,7 +105,7 @@ details[open] summary ~ * {
   }
 
   .section {
-    @apply py-20 scroll-mt-20;
+    @apply py-24 scroll-mt-20;
   }
 
   .section-title {
@@ -246,6 +248,7 @@ details[open] summary ~ * {
       radial-gradient(90% 58% at 90% 70%, rgba(163, 63, 47, 0.08), transparent 60%);
     animation: ambientGlow 16s ease-in-out infinite;
   }
+
 }
 
 @layer utilities {
@@ -352,6 +355,7 @@ details[open] summary ~ * {
   .ambient-waves {
     animation: none !important;
   }
+
   [id^="project-"]:target {
     animation: none !important;
   }

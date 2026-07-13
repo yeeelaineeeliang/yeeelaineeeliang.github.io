@@ -1,41 +1,25 @@
 import ProjectGraphic from './ProjectGraphic'
 
-const SIZE_CONFIG = {
-  lg: {
-    aspect: 'aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]',
-    title: 'text-xl sm:text-2xl',
-    padding: 'p-5 sm:p-6',
-  },
-  md: {
-    aspect: 'aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/8]',
-    title: 'text-lg sm:text-xl',
-    padding: 'p-5 sm:p-6',
-  },
-  tall: {
-    aspect: 'aspect-[3/4]',
-    title: 'text-lg',
-    padding: 'p-5',
-  },
+function maturityChip(maturity) {
+  if (maturity === 'Shipped') {
+    return 'rounded-full border border-teal/30 bg-teal/[0.06] px-2 py-0.5 font-mono text-[10px] font-medium text-teal'
+  }
+  if (maturity === 'In Progress') {
+    return 'rounded-full border border-accent/25 bg-accent/[0.06] px-2 py-0.5 font-mono text-[10px] font-medium text-accent'
+  }
+  return 'rounded-full border border-border/80 bg-bg px-2 py-0.5 font-mono text-[10px] font-medium text-muted-2'
 }
 
-export default function ProjectCard({ project, onViewDetail, variant = 'overlay', size = 'lg', id }) {
+export default function ProjectCard({ project, onViewDetail, variant = 'overlay', size = 'gallery', id }) {
   const hasDemo = Boolean(project.links?.demo && project.links.demo !== '#')
   const hasGithub = Boolean(project.links?.github && project.links.github !== '#')
   const keyMetric = project.cardBadge ?? project.metrics?.[0]
-  const isLarge = size === 'lg'
-  const demoIsPrimary = isLarge && hasDemo
-  const quickMeta = [project.role, project.maturity].filter(Boolean)
-
-  let secondary = null
-  if (hasDemo) {
-    secondary = { label: 'Try Demo →', href: project.links.demo }
-  } else if (hasGithub) {
-    secondary = { label: 'GitHub →', href: project.links.github }
-  }
+  const isWide = size === 'wide'
 
   if (variant === 'archive') {
+    const quickMeta = [project.role, project.maturity].filter(Boolean)
     return (
-      <article id={id} className="group flex scroll-mt-32 overflow-hidden rounded-xl border border-border/60 bg-surface shadow-sm transition-all duration-300 hover:shadow-md">
+      <article id={id} className="group flex scroll-mt-32 overflow-hidden rounded-xl border border-border/60 bg-surface shadow-[0_2px_12px_rgba(38,27,25,0.06)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(38,27,25,0.11)]">
         <div className="relative w-28 shrink-0 overflow-hidden sm:w-40">
           <ProjectGraphic
             id={project.id}
@@ -85,95 +69,102 @@ export default function ProjectCard({ project, onViewDetail, variant = 'overlay'
     )
   }
 
-  const { aspect, title, padding } = SIZE_CONFIG[size]
-
-  return (
-    <article id={id} className={`group fade-in relative scroll-mt-32 overflow-hidden rounded-xl border border-border/60 shadow-sm transition-all duration-300 hover:shadow-md ${aspect}`}>
-      <ProjectGraphic
-        id={project.id}
-        gradient={project.gradient}
-        title={project.title}
-        className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
-      />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
-
-      <div className={`relative flex h-full flex-col justify-end ${padding}`}>
-        {quickMeta.length > 0 && (
-          <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-white/62">
-            {quickMeta.join(' · ')}
-          </p>
+  const textPanel = (
+    <div className={`flex flex-col justify-center bg-surface p-4 sm:p-5 ${isWide ? 'lg:p-6 lg:flex-1' : ''}`}>
+      <div className="mb-2 flex flex-wrap items-center gap-1.5">
+        {project.domainTags?.map(tag => (
+          <span
+            key={tag}
+            className="rounded-full border border-accent/25 bg-accent/[0.06] px-2 py-0.5 font-mono text-[10px] font-medium text-accent"
+          >
+            {tag}
+          </span>
+        ))}
+        {project.maturity && (
+          <span className={maturityChip(project.maturity)}>{project.maturity}</span>
         )}
+      </div>
 
-        {project.domainTags?.length > 0 && (
-          <p className="font-mono text-[11.5px] tracking-wide text-white/60 mb-2.5">
-            {project.domainTags.join(' · ')}
-          </p>
+      <h3 className="mb-1 font-bold text-base leading-snug text-text">
+        <button
+          type="button"
+          onClick={() => onViewDetail(project)}
+          className="text-left hover:text-accent transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          {project.title}
+        </button>
+      </h3>
+
+      <p className="mb-3 text-sm text-muted leading-relaxed line-clamp-2">
+        {project.oneliner ?? project.summary}
+      </p>
+
+      <div className="flex items-center gap-3">
+        {keyMetric && (
+          <span className="inline-flex items-center rounded-md border border-teal/30 bg-teal/[0.06] px-2 py-0.5 font-mono text-xs font-semibold text-teal shrink-0">
+            {keyMetric}
+          </span>
         )}
-
-        <h3 className={`font-bold leading-snug text-white mb-1 ${title}`}>
+        <div className="ml-auto flex items-center gap-3">
+          {hasDemo && (
+            <a
+              href={project.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-accent hover:text-accent-hover transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Try Demo →
+            </a>
+          )}
+          {!hasDemo && hasGithub && (
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-muted hover:text-text transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              GitHub →
+            </a>
+          )}
           <button
             type="button"
             onClick={() => onViewDetail(project)}
-            className="text-left hover:text-white/80 transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="text-sm font-semibold text-text/70 hover:text-accent transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            {project.title}
+            View →
           </button>
-        </h3>
-
-        <p className="text-sm text-white/85 leading-relaxed mb-3 max-w-md line-clamp-2">
-          {project.oneliner ?? project.summary}
-        </p>
-
-        {project.technicalContribution && (
-          <p className="mb-4 max-w-md text-[13px] leading-relaxed text-white/68 line-clamp-3">
-            {project.technicalContribution}
-          </p>
-        )}
-
-        <div className="flex flex-wrap items-center gap-3">
-          {keyMetric && (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/5 px-3 py-1 text-xs font-medium text-white/90">
-              <span className="h-1.5 w-1.5 rounded-full bg-teal shadow-[0_0_0_2px_rgba(47,143,131,0.25)]" />
-              {keyMetric}
-            </span>
-          )}
-
-          {demoIsPrimary ? (
-            <>
-              <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                Try Demo →
-              </a>
-              <button
-                type="button"
-                onClick={() => onViewDetail(project)}
-                className="text-sm font-semibold text-white/85 hover:text-white transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                View Case Study →
-              </button>
-            </>
-          ) : (
-            <>
-              <button
-                type="button"
-                onClick={() => onViewDetail(project)}
-                className="btn-primary"
-              >
-                View Case Study →
-              </button>
-              {secondary && (
-                <a
-                  href={secondary.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-semibold text-white/85 hover:text-white transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  {secondary.label}
-                </a>
-              )}
-            </>
-          )}
         </div>
       </div>
+    </div>
+  )
+
+  if (isWide) {
+    return (
+      <article id={id} className="group scroll-mt-32 overflow-hidden rounded-xl border border-border/60 shadow-[0_2px_12px_rgba(38,27,25,0.06)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(38,27,25,0.11)] lg:flex">
+        <div className="relative h-[200px] overflow-hidden lg:h-auto lg:w-[45%] lg:shrink-0">
+          <ProjectGraphic
+            id={project.id}
+            gradient={project.gradient}
+            title={project.title}
+            className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
+          />
+        </div>
+        {textPanel}
+      </article>
+    )
+  }
+
+  return (
+    <article id={id} className="group scroll-mt-32 overflow-hidden rounded-xl border border-border/60 shadow-[0_2px_12px_rgba(38,27,25,0.06)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(38,27,25,0.11)]">
+      <div className="relative h-[200px] overflow-hidden">
+        <ProjectGraphic
+          id={project.id}
+          gradient={project.gradient}
+          title={project.title}
+          className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
+        />
+      </div>
+      {textPanel}
     </article>
   )
 }

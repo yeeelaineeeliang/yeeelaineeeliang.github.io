@@ -70,7 +70,8 @@ export default function Experience() {
       <div className="container-content relative z-10">
 
         <div className="fade-in mb-5 max-w-4xl sm:mb-6">
-          <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">Experience</h2>
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-accent mb-3">Background</p>
+          <h2 className="text-3xl font-bold leading-tight sm:text-4xl">Experience</h2>
         </div>
 
         <div className="relative">
@@ -138,7 +139,7 @@ export default function Experience() {
                             {e.tags.map(tag => (
                               <span
                                 key={tag}
-                                className="rounded-full border border-border bg-bg/70 px-3 py-1 text-[11px] font-medium text-muted shadow-[0_1px_0_rgba(255,255,255,0.35)] transition-colors duration-200 group-hover:border-accent/20"
+                                className="rounded-full border border-border/70 bg-bg/70 px-2.5 py-0.5 font-mono text-xs font-medium text-muted transition-colors duration-200 group-hover:border-accent/30"
                               >
                                 {tag}
                               </span>

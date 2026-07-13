@@ -114,10 +114,7 @@ export default function Contact() {
 
             {/* Primary CTA — not full-width */}
             <MagneticButton>
-              <a
-                href={mailtoHref}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-accent-hover hover:shadow-md hover:-translate-y-0.5"
-              >
+              <a href={mailtoHref} className="btn-primary">
                 {topic ? `Talk about ${topic.label} →` : 'Say hello →'}
               </a>
             </MagneticButton>
@@ -129,7 +126,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub profile"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface text-muted shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:text-accent hover:shadow-md"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-muted shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:text-accent hover:shadow-md"
               >
                 <GitHubIcon />
               </a>
@@ -138,7 +135,7 @@ export default function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn profile"
-                className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface text-muted shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:text-accent hover:shadow-md"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-muted shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:text-accent hover:shadow-md"
               >
                 <LinkedInIcon />
               </a>

@@ -7,11 +7,11 @@ const FEATURED_ID = 'cityliving-sim'
 // Editorial gallery order + sizing — an asymmetric rhythm, not a repeated grid.
 // Category labels live inside each card now, so no section headers are needed here.
 const GALLERY_CARDS = [
-  { id: 'career-coach', size: 'lg', span: 'lg:col-span-2' },
-  { id: 'fraud-copilot', size: 'md', span: 'lg:col-span-2' },
-  { id: 'hri-memory', size: 'tall', span: 'lg:col-span-1' },
-  { id: 'calpin', size: 'tall', span: 'lg:col-span-1' },
-  { id: 'crypto-pipeline', size: 'archive', span: 'lg:col-span-2' },
+  { id: 'career-coach',    size: 'gallery', span: 'lg:col-span-1' },
+  { id: 'fraud-copilot',   size: 'gallery', span: 'lg:col-span-1' },
+  { id: 'hri-memory',      size: 'gallery', span: 'lg:col-span-1' },
+  { id: 'calpin',          size: 'gallery', span: 'lg:col-span-1' },
+  { id: 'crypto-pipeline', size: 'wide',    span: 'lg:col-span-2' },
 ]
 
 const JUMP_ITEMS = [
@@ -65,30 +65,21 @@ export default function Projects({ onViewDetail }) {
       <div className="container-content relative z-10">
 
         {/* Section header */}
-        <div className="fade-in mb-8 max-w-3xl">
-          <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.24em] text-accent">
-            Selected Work
-          </p>
+        <div className="fade-in mb-8">
           <h2 className="text-3xl sm:text-4xl font-bold leading-tight">Projects</h2>
-          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-            This is the core of my site. Some of these are polished product builds, some are
-            research-driven systems, and some are just fun problems I cared enough to make real.
-            I care most about the decisions behind them: what the product needed to do, what the
-            system had to prove, and what I chose to optimize for.
-          </p>
         </div>
 
-        {/* Jump nav — project-first rather than tag-first so visitors can orient quickly */}
+        {/* Jump nav */}
         <nav
           aria-label="Jump to project"
-          className="fade-in sticky top-16 z-40 mb-10 max-w-full rounded-2xl border border-border/80 bg-bg/92 p-2 shadow-sm backdrop-blur-md"
+          className="fade-in sticky top-16 z-40 -mx-6 mb-8 border-y border-border/60 bg-surface/70 px-6 backdrop-blur-md"
         >
-          <div className="flex gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-1.5 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {JUMP_ITEMS.map(({ target, label, meta }) => (
               <a
                 key={label}
                 href={`#project-${target}`}
-                className="shrink-0 rounded-xl border border-border/90 px-3 py-2 text-left transition-all duration-200 hover:border-accent/40 hover:bg-accent/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="shrink-0 rounded-lg border border-border/60 bg-bg/70 px-3 py-2 text-left transition-all duration-200 hover:border-accent/40 hover:bg-accent/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 <span className="block text-sm font-semibold text-text">{label}</span>
                 <span className="block font-mono text-[10px] uppercase tracking-wide text-muted-2">

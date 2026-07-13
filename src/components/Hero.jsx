@@ -1,12 +1,36 @@
+import { useState, useEffect } from 'react'
 import MagneticButton from './MagneticButton'
 
 const H1_WORDS = ['Hi,', "I'm", 'Elaine!']
 const TECH_META = 'Applied ML · LLMs · Data Pipelines · Agents · Reasoning Systems'
 
+const CYCLE_ITEMS = [
+  'Building neighborhood simulations',
+  'Studying robot rapport with social robots',
+  'Designing therapeutic AI dialogue',
+  'Researching data security for AI agents',
+]
+
+
 const prefersReducedMotion =
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default function Hero({ onNavigate }) {
+  const [cycleIndex, setCycleIndex] = useState(0)
+  const [faded, setFaded] = useState(false)
+
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    const id = setInterval(() => {
+      setFaded(true)
+      setTimeout(() => {
+        setCycleIndex(i => (i + 1) % CYCLE_ITEMS.length)
+        setFaded(false)
+      }, 350)
+    }, 3200)
+    return () => clearInterval(id)
+  }, [])
+
   function handlePointerMove(e) {
     if (prefersReducedMotion) return
     const rect = e.currentTarget.getBoundingClientRect()
@@ -147,22 +171,27 @@ export default function Hero({ onNavigate }) {
               </span>
             </div>
 
-            {/* Positioning statement */}
-            <div className="animate-in mb-5" style={{ animationDelay: '520ms' }}>
-              <p className="text-2xl sm:text-3xl font-bold leading-snug text-text">
-                I build AI and data systems people can actually rely on.
+            {/* Cycling current focus */}
+            <div className="animate-in mb-5" style={{ animationDelay: '490ms' }}>
+              <p className="font-mono text-[13px] text-muted-2">
+                <span className="mr-2 text-accent/50">›</span>
+                <span style={{ opacity: faded ? 0 : 1, transition: 'opacity 0.35s ease' }}>
+                  {CYCLE_ITEMS[cycleIndex]}
+                </span>
+                <span className="ml-0.5 text-accent/60 animate-pulse">_</span>
               </p>
             </div>
 
-            {/* Supporting paragraph */}
-            <div className="animate-in mb-5" style={{ animationDelay: '640ms' }}>
-              <p className="text-pretty text-[17px] leading-[1.65] text-muted">
-                Most of my projects start from a gap I ran into: messy data, manual work, or AI output without enough structure to trust. I work across machine learning, LLMs, data pipelines, and applied AI systems. Right now, my focus is on reducing reasoning cost in LLM systems.
-              </p>
+            {/* Unified intro paragraph */}
+            <div className="animate-in mb-5" style={{ animationDelay: '570ms' }}>
+              <div className="space-y-3 text-pretty text-[17px] leading-[1.65] text-muted">
+                <p>I&apos;m an M.S. Computer Science student at UChicago. I have worked across marketing science, automation, robotics, and AI research, with projects in healthcare, finance, and retail. The problems have looked different in each setting, but I have often found myself asking the same questions. Can people understand how a system works? Can they verify its results? Can they trust it enough to use it?</p>
+                <p>I am especially interested in AI agents and how they can help solve practical problems. Right now, I am working on two challenges that keep coming up in agent systems: protecting sensitive data and reducing the cost of LLM reasoning.</p>
+              </div>
             </div>
 
             {/* Compact tech metadata row */}
-            <div className="animate-in mb-8" style={{ animationDelay: '720ms' }}>
+            <div className="animate-in mb-8" style={{ animationDelay: '670ms' }}>
               <p className="font-mono text-xs font-medium tracking-wide text-muted">{TECH_META}</p>
             </div>
 
@@ -180,11 +209,12 @@ export default function Hero({ onNavigate }) {
               </MagneticButton>
             </div>
 
-            {/* Local connection — low-key aside, not a contact block */}
+            {/* Local connection — location chip */}
             <div className="animate-in mt-5" style={{ animationDelay: '900ms' }}>
-              <p className="text-sm leading-relaxed text-muted-2">
-                Based in Chicago. If you&apos;re here too, I&apos;d be up for coffee, a city walk, or just talking about what you&apos;re building.
-              </p>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-bg/40 px-3 py-1 font-mono text-[11px] text-muted-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent/50" />
+                Based in Chicago
+              </span>
             </div>
           </div>
 

@@ -14,12 +14,12 @@ export default function Nav({
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/90 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg/90 shadow-[0_1px_6px_rgba(38,27,25,0.07)] backdrop-blur-md">
       <nav className="container-content h-16 flex items-center justify-between">
         <button
           type="button"
           onClick={() => go('home')}
-          className={`font-display text-lg font-bold tracking-wide transition-colors duration-200 ${
+          className={`font-display text-xl font-bold transition-colors duration-200 ${
             activePage === 'home' ? 'text-accent' : 'text-text hover:text-accent'
           }`}
           aria-current={activePage === 'home' ? 'page' : undefined}
