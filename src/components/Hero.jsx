@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const H1_WORDS = ['Hi,', "I'm", 'Elaine!']
+const H1_WORDS = ['Hi,', "I'm"]
 const TECH_META = 'Applied ML · LLMs · Data Pipelines · Agents · Reasoning Systems'
 
 const CYCLE_ITEMS = [
@@ -148,16 +148,32 @@ export default function Hero({ onNavigate }) {
               />
             </div>
 
+            <p className="animate-in mb-4 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Applied AI Engineer · Chicago
+            </p>
+
             <h1 className="text-balance text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.08] mb-5">
               {H1_WORDS.map((word, i) => (
                 <span
                   key={word}
-                  className="word-up mr-[0.22em] last:mr-0"
+                  className="word-up mr-[0.22em]"
                   style={{ animationDelay: `${i * 130}ms` }}
                 >
                   {word}
                 </span>
               ))}
+              <span
+                className="word-up font-display italic text-accent"
+                style={{ animationDelay: `${H1_WORDS.length * 130}ms` }}
+              >
+                Elaine
+              </span>
+              <span
+                className="word-up"
+                style={{ animationDelay: `${H1_WORDS.length * 130}ms` }}
+              >
+                .
+              </span>
             </h1>
 
             <div className="animate-in mb-5 flex flex-wrap gap-2" style={{ animationDelay: '420ms' }}>
@@ -184,8 +200,8 @@ export default function Hero({ onNavigate }) {
             {/* Unified intro paragraph */}
             <div className="animate-in mb-5" style={{ animationDelay: '570ms' }}>
               <div className="space-y-3 text-pretty text-[17px] leading-[1.65] text-muted">
-                <p>I&apos;m an M.S. Computer Science student at UChicago. I have worked across marketing science, automation, robotics, and AI research, with projects in healthcare, finance, and retail. The problems have looked different in each setting, but I have often found myself asking the same questions. Can people understand how a system works? Can they verify its results? Can they trust it enough to use it?</p>
-                <p>I am especially interested in AI agents and how they can help solve practical problems. Right now, I am working on two challenges that keep coming up in agent systems: ensuring data security and reducing the cost of LLM reasoning.</p>
+                <p>I&apos;m an M.S. Computer Science student at the University of Chicago. I have worked across marketing science, automation, robotics, and AI research, with projects in healthcare, finance, and retail. The problems looked different each time, but I kept asking the same questions: can people understand how a system works, can they verify its results, can they trust it enough to use it?</p>
+                <p>Right now I&apos;m focused on two challenges that keep showing up in agent systems: keeping data secure and reducing the cost of LLM reasoning.</p>
               </div>
             </div>
 
@@ -223,22 +239,24 @@ export default function Hero({ onNavigate }) {
                 style={{ inset: '-10px' }}
               />
 
-              <div className="-rotate-1 rounded-2xl overflow-hidden shadow-[0_24px_64px_rgba(31,42,36,0.16)] transition-all duration-500 hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_32px_80px_rgba(163,63,47,0.12)]">
-                <img
-                  src="/profile.jpg"
-                  alt="Elaine Liang"
-                  className="w-full object-cover"
-                  style={{ height: '460px', objectPosition: 'center 80%' }}
-                />
+              <div className="-rotate-1 rounded-2xl bg-white p-3 shadow-[0_24px_64px_rgba(31,42,36,0.16)] transition-all duration-500 hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_32px_80px_rgba(163,63,47,0.12)]">
+                <div className="overflow-hidden rounded-xl">
+                  <img
+                    src="/profile.jpg"
+                    alt="Elaine Liang"
+                    className="w-full object-cover"
+                    style={{ height: '460px', objectPosition: 'center 80%' }}
+                  />
+                </div>
               </div>
             </div>
             <div className="mt-5 space-y-1.5 pl-1">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-xs text-muted-2 whitespace-nowrap shrink-0">2025 to 2027</span>
+                <span className="font-mono text-xs text-muted-2 whitespace-nowrap shrink-0">2025–2027</span>
                 <span className="text-sm text-muted">M.S. Computer Science, University of Chicago</span>
               </div>
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-xs text-muted-2 whitespace-nowrap shrink-0">2021 to 2025</span>
+                <span className="font-mono text-xs text-muted-2 whitespace-nowrap shrink-0">2021–2025</span>
                 <span className="text-sm text-muted">B.A. Data Science, B.A. Statistics, UC Berkeley</span>
               </div>
             </div>

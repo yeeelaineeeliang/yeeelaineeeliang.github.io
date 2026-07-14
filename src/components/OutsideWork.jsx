@@ -93,8 +93,8 @@ export default function OutsideWork() {
             <div className="border border-border rounded-[6px] bg-surface shadow-[0_14px_34px_rgba(36,28,26,0.06)] p-5">
               {/* Image */}
               <div
-                className="rounded border border-border overflow-hidden"
-                style={{ height: '360px', background: 'var(--tw-bg-alt, #F1E8E2)' }}
+                className="rounded border border-border overflow-hidden bg-bg-alt"
+                style={{ height: '360px' }}
               >
                 <div
                   role="img"
