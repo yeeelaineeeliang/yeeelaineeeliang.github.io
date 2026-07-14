@@ -16,15 +16,18 @@ const GALLERY_ITEMS = [
     title: 'Community',
     subtitle: 'IMU board',
     description:
-      'I spend time supporting IMU through operations and outreach because community-building work matters to me.',
-    placeholder: 'IMU / community photo',
+      'Having experienced what it means to enter a new community, I notice the small gestures that help people feel welcome. I support IMU\'s operations so immigrant youth can build confidence, develop leadership skills, and form meaningful connections across cultures.',
+    imageSrc: '/imu.png',
+    imageAlt: 'Elaine at IMU Peace Club, UC Berkeley',
+    objectPosition: 'top',
+    subtitleLink: 'https://www.imuproject.org',
   },
   {
     id: 'curiosity',
     title: 'Curiosity',
     subtitle: 'City walks',
     description:
-      'City walks and architecture keep me observant. They make me notice patterns, structure, and atmosphere.',
+      'City walks slow me down. Buildings hold history and I am grateful to catch it.',
     imageSrc: '/citywalk.jpeg',
     imageAlt: 'City walk photo',
     objectFit: 'contain',
@@ -166,7 +169,16 @@ export default function OutsideWork() {
 
               <div className="pt-5 text-center">
                 <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-2">
-                  {activeItem.subtitle}
+                  {activeItem.subtitleLink ? (
+                    <a
+                      href={activeItem.subtitleLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 decoration-accent/40 decoration-[1.5px] transition-all duration-200 hover:text-accent hover:decoration-accent"
+                    >
+                      {activeItem.subtitle}
+                    </a>
+                  ) : activeItem.subtitle}
                 </p>
                 <h3 className="mt-2 text-2xl font-bold text-text">{activeItem.title}</h3>
                 <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">

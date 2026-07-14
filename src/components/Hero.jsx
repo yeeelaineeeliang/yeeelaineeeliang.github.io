@@ -186,7 +186,7 @@ export default function Hero({ onNavigate }) {
             <div className="animate-in mb-5" style={{ animationDelay: '570ms' }}>
               <div className="space-y-3 text-pretty text-[17px] leading-[1.65] text-muted">
                 <p>I&apos;m an M.S. Computer Science student at UChicago. I have worked across marketing science, automation, robotics, and AI research, with projects in healthcare, finance, and retail. The problems have looked different in each setting, but I have often found myself asking the same questions. Can people understand how a system works? Can they verify its results? Can they trust it enough to use it?</p>
-                <p>I am especially interested in AI agents and how they can help solve practical problems. Right now, I am working on two challenges that keep coming up in agent systems: protecting sensitive data and reducing the cost of LLM reasoning.</p>
+                <p>I am especially interested in AI agents and how they can help solve practical problems. Right now, I am working on two challenges that keep coming up in agent systems: ensuring data security and reducing the cost of LLM reasoning.</p>
               </div>
             </div>
 

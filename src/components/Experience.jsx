@@ -24,7 +24,7 @@ export default function Experience() {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="transition-colors duration-200 hover:text-accent"
+        className="underline underline-offset-2 decoration-accent/40 decoration-[1.5px] transition-all duration-200 hover:text-accent hover:decoration-accent"
       >
         {children}
       </a>

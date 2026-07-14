@@ -22,15 +22,19 @@ const APPROACH_STEPS = [
 const TOOLKIT_GROUPS = [
   {
     label: 'Data & ML',
-    items: ['Python', 'SQL', 'PyTorch', 'PySpark', 'NumPy', 'FAISS'],
+    items: ['Python', 'SQL', 'MySQL', 'PyTorch', 'scikit-learn', 'XGBoost', 'SHAP', 'PySpark', 'NumPy', 'FAISS'],
   },
   {
     label: 'Agents & APIs',
-    items: ['LangGraph', 'Claude API', 'FastAPI'],
+    items: ['LangGraph', 'Claude API', 'FastAPI', 'Streamlit'],
   },
   {
     label: 'Product',
-    items: ['TypeScript', 'Next.js', 'Supabase'],
+    items: ['TypeScript', 'Next.js', 'Supabase', 'Clerk'],
+  },
+  {
+    label: 'Infra & MLOps',
+    items: ['Docker', 'Kubernetes', 'Terraform', 'CI/CD'],
   },
 ]
 
@@ -119,7 +123,7 @@ export default function About() {
         <div className="fade-in border-t border-border/60 pt-6">
           <p className="text-lg font-semibold text-text mb-3">What I build with</p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {TOOLKIT_GROUPS.map(({ label, items }) => (
               <div key={label}>
                 <p className="font-mono text-[10px] font-bold uppercase tracking-wide text-text/85 mb-2">

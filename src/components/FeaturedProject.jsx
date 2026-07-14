@@ -1,14 +1,43 @@
 import ProjectGraphic from './ProjectGraphic'
 import MagneticButton from './MagneticButton'
 
-export default function FeaturedProject({ project, onViewDetail, id }) {
+const prefersReducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const SPRING = 'transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.4s cubic-bezier(0.22,1,0.36,1), filter 0.4s cubic-bezier(0.22,1,0.36,1)'
+
+export default function FeaturedProject({ project, onViewDetail, id, isActive = false, isDimmed = false }) {
   const hasDemo = Boolean(project.links?.demo && project.links.demo !== '#')
   const hasGithub = Boolean(project.links?.github && project.links.github !== '#')
   const keyMetric = project.metrics?.[0]
   const metaLine = [project.role, project.maturity].filter(Boolean).join(' · ')
 
+  const featuredStyle = prefersReducedMotion
+    ? {}
+    : isActive
+    ? {
+        transform: 'translateY(-10px) scale(1.015)',
+        boxShadow: '0 0 60px -10px rgba(163,63,47,0.22), 0 24px 48px -8px rgba(163,63,47,0.16), 0 0 0 1.5px rgba(163,63,47,0.18)',
+        opacity: 1,
+        filter: 'none',
+        transition: SPRING,
+      }
+    : isDimmed
+    ? {
+        transform: 'none',
+        opacity: 0.6,
+        filter: 'grayscale(0.3)',
+        transition: SPRING,
+      }
+    : {
+        transform: 'none',
+        opacity: 1,
+        filter: 'none',
+        transition: SPRING,
+      }
+
   return (
-    <article id={id} className="fade-in scroll-mt-32 overflow-hidden rounded-xl border border-border/60 shadow-[0_4px_24px_rgba(38,27,25,0.10)] transition-shadow duration-300 hover:shadow-[0_8px_32px_rgba(38,27,25,0.14)]">
+    <article id={id} style={featuredStyle} className="fade-in scroll-mt-32 overflow-hidden rounded-xl border border-border/60 shadow-[0_4px_24px_rgba(38,27,25,0.10)]">
       <div className="grid grid-cols-1 md:grid-cols-2">
 
         {/* Left — project graphic */}

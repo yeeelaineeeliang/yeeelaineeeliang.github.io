@@ -11,7 +11,7 @@ export const experience = [
     tags: ['Small Language Model', 'VR', 'Responsible AI'],
     headline: 'Designed safer dialogue behavior for therapeutic AI',
     summary:
-      'Worked on Rubi, a VR EMDR therapy project, with a focus on dialogue behavior, emotional pacing, and interaction safety.',
+      'Work on Rubi, a VR EMDR therapy project, with a focus on dialogue behavior, emotional pacing, and interaction safety.',
   },
   {
     role: 'Research Assistant',
@@ -26,7 +26,7 @@ export const experience = [
     tags: ['LLM Prompting', 'Jaccard Retrieval', 'Android / Kotlin', 'Human-Robot Interaction', 'Thematic Analysis'],
     headline: 'Coded the dialogue algorithm behind a robot rapport study',
     summary:
-      'Studied how dialogue design builds long-term rapport between robots and people in social interactions.',
+      'Study how dialogue design builds long-term rapport between robots and people in social interactions.',
   },
   {
     role: 'Analyst Intern',
@@ -43,8 +43,10 @@ export const experience = [
       'Segmented customers across 5 acquisition channels using KMeans, then worked with marketing, analytics, and product teams to redesign a mobile transaction flow.',
   },
   {
-    role: 'R&D Technical Project Intern',
+    role: 'Technical Project Intern',
     org: 'Dawnrise Inc.',
+    orgLink: 'https://dawnrise.com',
+    team: 'Research and Development',
     dates: 'May 2023 – Aug 2023',
     location: 'Diamond Bar, CA',
     thread: 'Automation',
@@ -53,6 +55,6 @@ export const experience = [
     tags: ['Python', 'Selenium', 'Automation', 'PostgreSQL', 'GPT Parsing'],
     headline: 'Automated competitor research time by about 80%',
     summary:
-      'Built and handed off a Python scraping pipeline with GPT-based parsing that cut a 40-hour research cycle down to 2 hours, covering 10,000+ SKU specs from e-commerce sources.',
+      'Built and delivered a Python scraping pipeline with GPT-based parsing that cut a 40-hour research cycle down to 2 hours, covering 10,000+ SKU specs from e-commerce sources.',
   },
 ]

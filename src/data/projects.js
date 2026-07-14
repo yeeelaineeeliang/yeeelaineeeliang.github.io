@@ -324,7 +324,7 @@ export const projects = [
       'Research validity constrained engineering more tightly than a product context would. Free-form A/B testing was not appropriate.',
       'Reduced hallucinated self-disclosures by tightening prompt constraints and adding post-generation validation before the robot speaks',
     ],
-    metrics: ['2×2 factorial study', 'UChicago HRI Lab', 'CCR + ROSAS measures'],
+    metrics: [ 'UChicago HRI Lab', '2×2 factorial study', 'CCR + ROSAS measures'],
     nextImprovements: [
       'Complete mixed-methods thematic analysis of participant interviews',
       'Compare rapport outcomes across memory and no-memory study conditions',
@@ -383,7 +383,7 @@ export const projects = [
       'Used a notification-based auto-refresh pattern instead of polling to keep map state consistent across views',
       'Made urgency and distance the primary filters to reduce cognitive load for helpers acting quickly',
     ],
-    metrics: ['15+ REST endpoints', 'Berkeley OAuth', 'Claude Sonnet moderation'],
+    metrics: ['Mobile App', 'Berkeley OAuth', 'Claude Sonnet moderation'],
     nextImprovements: [
       'Add clearer safety escalation paths for high-urgency requests',
       'Build moderation and reporting workflows before broader campus rollout',

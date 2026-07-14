@@ -39,10 +39,6 @@ body::before {
   to   { transform: scaleY(1); }
 }
 
-@keyframes targetGlow {
-  0%, 65% { box-shadow: 0 0 0 3px rgba(163, 63, 47, 0.45); }
-  100%    { box-shadow: 0 0 0 3px rgba(163, 63, 47, 0); }
-}
 
 @keyframes ambientDrift {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
@@ -62,10 +58,6 @@ body::before {
 }
 
 
-/* Jump-nav landing cue — highlights whichever project card a pill link scrolled to */
-[id^="project-"]:target {
-  animation: targetGlow 2.2s ease-out;
-}
 
 /* Suppress native details marker globally */
 details summary::-webkit-details-marker { display: none; }
@@ -356,7 +348,4 @@ details[open] summary ~ * {
     animation: none !important;
   }
 
-  [id^="project-"]:target {
-    animation: none !important;
-  }
 }
