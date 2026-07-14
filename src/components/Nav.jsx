@@ -1,52 +1,76 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function Nav({
   activePage = 'home',
   links = [],
   onNavigate = () => {},
-  scrollProgress = 0,
 }) {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 40)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   function go(pageId) {
     onNavigate(pageId)
     setOpen(false)
   }
 
+  const sectionLinks = links.filter(l => l.id !== 'home' && l.id !== 'contact')
+  const contactLink = links.find(l => l.id === 'contact')
+
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-bg/90 shadow-[0_1px_6px_rgba(38,27,25,0.07)] backdrop-blur-md">
-      <nav className="container-content h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg/90 backdrop-blur-md transition-shadow duration-300">
+      <nav
+        className="container-content flex items-center justify-between transition-[height] duration-250 ease-out"
+        style={{ height: scrolled ? '46px' : '78px' }}
+      >
         <button
           type="button"
           onClick={() => go('home')}
-          className={`font-display text-xl font-bold transition-colors duration-200 ${
-            activePage === 'home' ? 'text-accent' : 'text-text hover:text-accent'
-          }`}
-          aria-current={activePage === 'home' ? 'page' : undefined}
+          className="font-display italic font-semibold text-text transition-all duration-250 ease-out hover:text-accent"
+          style={{ fontSize: scrolled ? '17px' : '26px' }}
+          aria-label="Go to top"
         >
-          EL
+          Elaine&nbsp;Liang
         </button>
 
-        {/* Desktop nav links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {links.map(l => (
+        {/* Desktop nav */}
+        <ul className="hidden md:flex items-center gap-9">
+          {sectionLinks.map(l => (
             <li key={l.id}>
               <button
                 type="button"
                 onClick={() => go(l.id)}
-                className={`relative pb-1 text-sm font-medium transition-colors duration-200 ${
-                  activePage === l.id ? 'text-accent' : 'text-muted hover:text-accent'
-                }`}
+                className="font-mono font-semibold uppercase tracking-[0.06em] transition-all duration-200 hover:text-accent"
+                style={{
+                  fontSize: scrolled ? '11.5px' : '13px',
+                  color: activePage === l.id ? '#A33F2F' : '#6F5A52',
+                }}
                 aria-current={activePage === l.id ? 'page' : undefined}
               >
                 {l.label}
-                <span
-                  className="absolute -bottom-0.5 left-0 h-0.5 rounded-full bg-accent transition-all duration-300"
-                  style={{ width: activePage === l.id ? '100%' : '0%' }}
-                />
               </button>
             </li>
           ))}
+          {contactLink && (
+            <li>
+              <button
+                type="button"
+                onClick={() => go(contactLink.id)}
+                className="font-mono font-bold uppercase tracking-[0.05em] bg-accent text-white rounded-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                style={{ fontSize: scrolled ? '11.5px' : '13px', padding: scrolled ? '6px 15px' : '9px 20px' }}
+              >
+                Contact
+              </button>
+            </li>
+          )}
         </ul>
 
         {/* Hamburger (mobile) */}
@@ -86,14 +110,6 @@ export default function Nav({
             </li>
           ))}
         </ul>
-      </div>
-
-      {/* Scroll progress bar */}
-      <div className="h-0.5 bg-border/30" aria-hidden="true">
-        <div
-          className="h-full bg-accent/70 transition-[width] duration-150 ease-out"
-          style={{ width: `${Math.round(scrollProgress * 100)}%` }}
-        />
       </div>
     </header>
   )

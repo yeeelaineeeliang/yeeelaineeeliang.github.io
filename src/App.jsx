@@ -34,18 +34,7 @@ const SECTION_TO_NAV = {
 export default function App() {
   const [activePage, setActivePage] = useState('home')
   const [selectedProject, setSelectedProject] = useState(null)
-  const [scrollProgress, setScrollProgress] = useState(0)
   const galleryScrollRef = useRef(0)
-
-  // Chapter progress bar (0–1)
-  useEffect(() => {
-    function onScroll() {
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      setScrollProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   // Active section: last section whose top is within 64px (nav) + 100px buffer
   useEffect(() => {
@@ -154,7 +143,6 @@ export default function App() {
           activePage="projects"
           links={NAV_LINKS}
           onNavigate={handleNavigate}
-          scrollProgress={1}
         />
         <main>
           <ProjectDetail project={selectedProject} onBack={handleBack} />
@@ -169,7 +157,6 @@ export default function App() {
         activePage={activePage}
         links={NAV_LINKS}
         onNavigate={handleNavigate}
-        scrollProgress={scrollProgress}
       />
       <main>
         <Hero onNavigate={handleNavigate} />

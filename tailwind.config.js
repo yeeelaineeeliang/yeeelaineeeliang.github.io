@@ -14,6 +14,7 @@ export default {
         accent: '#A33F2F',
         'accent-hover': '#8B3426',
         'accent-light': 'rgba(163,63,47,0.08)',
+        gold: '#AD8A57',
         teal: '#A88A7A',
         success: '#967566',
         warning: '#AA7A5F',

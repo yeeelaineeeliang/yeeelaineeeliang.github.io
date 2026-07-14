@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import MagneticButton from './MagneticButton'
 
 const H1_WORDS = ['Hi,', "I'm", 'Elaine!']
 const TECH_META = 'Applied ML · LLMs · Data Pipelines · Agents · Reasoning Systems'
@@ -167,7 +166,7 @@ export default function Hero({ onNavigate }) {
                 Applied AI Engineer
               </span>
               <span className="inline-flex items-center rounded-full border border-accent/25 bg-accent/[0.07] px-4 py-1.5 font-mono text-sm font-medium text-accent transition-colors duration-200 hover:bg-accent/[0.12]">
-                Data Scientist
+                Data Systems
               </span>
             </div>
 
@@ -197,16 +196,12 @@ export default function Hero({ onNavigate }) {
 
             {/* CTAs */}
             <div className="animate-in flex flex-wrap gap-3" style={{ animationDelay: '800ms' }}>
-              <MagneticButton>
-                <button type="button" onClick={() => onNavigate('projects')} className="btn-primary">
-                  Explore my work
-                </button>
-              </MagneticButton>
-              <MagneticButton>
-                <button type="button" onClick={() => onNavigate('contact')} className="btn-outline">
-                  Get in touch
-                </button>
-              </MagneticButton>
+              <button type="button" onClick={() => onNavigate('projects')} className="btn-primary">
+                Explore my work
+              </button>
+              <button type="button" onClick={() => onNavigate('contact')} className="btn-outline">
+                Get in touch
+              </button>
             </div>
 
             {/* Local connection — location chip */}
