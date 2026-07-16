@@ -17,7 +17,7 @@ export const experience = [
     role: 'Research Assistant',
     org: 'University of Chicago',
     team: 'HRI Research Lab',
-    teamLink: 'https://hri.cs.uchicago.edu',
+    teamLink: 'https://sebo-hri-lab.github.io',
     dates: 'Jan 2026 – Present',
     location: 'Chicago, IL',
     thread: 'AI in research',
