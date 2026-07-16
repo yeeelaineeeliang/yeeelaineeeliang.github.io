@@ -90,7 +90,7 @@ export default function OutsideWork() {
             </div>
 
             {/* Card */}
-            <div className="border border-border rounded-[6px] bg-surface shadow-[0_14px_34px_rgba(36,28,26,0.06)] p-5">
+            <div className="rounded-[4px] border border-border bg-surface p-5 shadow-[0_14px_34px_rgba(36,28,26,0.06)]">
               {/* Image */}
               <div
                 className="rounded border border-border overflow-hidden bg-bg-alt"
@@ -173,7 +173,7 @@ export default function OutsideWork() {
                 onClick={() => setActiveIndex(index)}
                 aria-label={`Show ${item.title}`}
                 className="w-[9px] h-[9px] rounded-full border-none p-0 transition-colors duration-200"
-                style={{ background: index === activeIndex ? '#A33F2F' : 'rgba(36,28,26,0.18)' }}
+                style={{ background: index === activeIndex ? '#9A3324' : 'rgba(36,28,26,0.18)' }}
               />
             ))}
           </div>

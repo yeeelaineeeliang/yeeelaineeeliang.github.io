@@ -40,7 +40,7 @@ export default function Contact() {
   const mailtoHref = `mailto:${EMAIL}${topic ? `?subject=${encodeURIComponent(topic.subject)}` : ''}`
 
   return (
-    <section id="contact" className="section bg-bg-alt relative overflow-hidden">
+    <section id="contact" className="section py-[120px] bg-bg-alt relative overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -96,7 +96,7 @@ export default function Contact() {
           <div className="mb-12">
             <a
               href={mailtoHref}
-              className="inline-block text-[15px] font-bold text-white bg-accent px-9 py-4 rounded-sm shadow-[0_12px_26px_rgba(154,51,36,0.22)] transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(154,51,36,0.3)]"
+              className="inline-block rounded-[2px] bg-accent px-9 py-4 text-[15px] font-bold text-white shadow-[0_12px_26px_rgba(154,51,36,0.22)] transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_rgba(154,51,36,0.3)]"
             >
               {topic ? `Talk about ${topic.label} →` : 'Say hello →'}
             </a>

@@ -28,7 +28,7 @@ export default function Projects({ onViewDetail }) {
 
         <div className="fade-in mb-14">
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-5">Selected Work</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold leading-tight">Projects</h2>
+          <h2 className="text-[clamp(30px,3.4vw,42px)] font-semibold leading-tight">Projects</h2>
         </div>
 
         {featuredProject && (

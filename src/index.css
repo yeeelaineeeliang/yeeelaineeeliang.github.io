@@ -6,7 +6,7 @@
   --bg-paper: #f7f4ee;
   --bg-mist: rgba(248, 222, 205, 0.38);
   --bg-clay: rgba(190, 108, 81, 0.16);
-  --bg-maroon: rgba(163, 63, 47, 0.12);
+  --bg-maroon: rgba(154,51,36,0.12);
   --bg-teal-wash: rgba(98, 142, 133, 0.12);
   --bg-line: rgba(129, 90, 73, 0.12);
   --bg-dot: rgba(94, 111, 104, 0.05);
@@ -59,6 +59,32 @@ body::before {
 
 
 
+/* Hero portrait — removes polaroid frame, adds grain overlay + rotation */
+.hero-portrait {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(36, 28, 26, 0.20);
+  transform: rotate(-1.2deg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+}
+
+.hero-portrait:hover {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: 0 34px 80px rgba(154, 51, 36, 0.24);
+}
+
+.hero-portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.11;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
 /* Suppress native details marker globally */
 details summary::-webkit-details-marker { display: none; }
 details summary::marker { display: none; }
@@ -70,20 +96,16 @@ details[open] summary ~ * {
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 68px; /* 64px nav + 2px progress bar + 2px buffer */
+    scroll-behavior: auto;
+    scroll-padding-top: 5px;
   }
 
   body {
-    @apply bg-bg text-text font-sans antialiased;
-    background:
-      radial-gradient(circle at top, rgba(248, 222, 205, 0.16), transparent 28%),
-      linear-gradient(180deg, #faf7f2 0%, #f6f7f2 40%, #f8f6f1 100%);
+    @apply bg-bg text-text font-sans font-medium antialiased;
   }
 
   h1, h2, h3 {
     font-family: 'Fraunces', Georgia, serif;
-    font-optical-sizing: auto;
   }
 
   ::selection {
@@ -93,15 +115,15 @@ details[open] summary ~ * {
 
 @layer components {
   .container-content {
-    @apply w-full max-w-content mx-auto px-6;
+    @apply w-full max-w-content mx-auto px-8;
   }
 
   .section {
-    @apply py-24 scroll-mt-20;
+    @apply py-[104px];
   }
 
   .section-title {
-    @apply text-3xl font-bold mb-10 relative inline-block;
+    @apply text-3xl font-bold mb-6 relative inline-block;
   }
 
   .section-title::after {
@@ -109,7 +131,7 @@ details[open] summary ~ * {
     display: block;
     width: 0;
     height: 2px;
-    background: #A33F2F;
+    background: #9A3324;
     margin-top: 10px;
     border-radius: 2px;
     transition: width 0.5s ease 0.2s;
@@ -122,23 +144,26 @@ details[open] summary ~ * {
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent hover:bg-accent-hover text-white font-semibold text-sm rounded-lg transition-all duration-200 hover:-translate-y-px hover:shadow-md;
+    @apply inline-flex items-center gap-2 px-7 py-[14px] bg-accent hover:bg-accent-hover text-white font-bold text-[15px] rounded-[2px] transition-all duration-200 hover:-translate-y-[3px];
+    box-shadow: 0 10px 24px rgba(154, 51, 36, 0.22);
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-border text-text font-semibold text-sm rounded-lg transition-all duration-200 hover:-translate-y-px;
+    @apply inline-flex items-center gap-2 px-7 py-[14px] border border-border text-text font-bold text-[15px] rounded-[2px] transition-all duration-200 hover:-translate-y-[3px];
   }
 
   .btn-outline:hover {
-    background-color: rgba(163,63,47,0.06);
+    background-color: rgba(154,51,36,0.06);
+    border-color: rgba(154,51,36,0.3);
+    color: #9A3324;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 bg-accent/[0.06] text-accent font-semibold text-sm rounded-lg transition-colors duration-200;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-accent/30 bg-accent/[0.06] text-accent font-semibold text-sm rounded-[2px] transition-colors duration-200;
   }
 
   .btn-secondary:hover {
-    background-color: rgba(163,63,47,0.10);
+    background-color: rgba(154,51,36,0.10);
   }
 
   .btn-ghost {
@@ -171,7 +196,7 @@ details[open] summary ~ * {
   }
 
   .card-warm {
-    @apply bg-surface border border-border rounded-xl transition-all duration-300;
+    @apply bg-surface border border-border rounded-[4px] transition-all duration-300;
   }
 
   .card-warm:hover {
@@ -226,7 +251,7 @@ details[open] summary ~ * {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(115deg, transparent 0 46%, rgba(163, 63, 47, 0.08) 49%, transparent 52%),
+      linear-gradient(115deg, transparent 0 46%, rgba(154,51,36,0.08) 49%, transparent 52%),
       linear-gradient(65deg, transparent 0 58%, rgba(98, 142, 133, 0.08) 61%, transparent 64%);
     background-size: 260px 260px, 320px 320px;
     opacity: 0.65;
@@ -237,7 +262,7 @@ details[open] summary ~ * {
     inset: 0;
     background-image:
       radial-gradient(70% 50% at 10% 15%, rgba(255,255,255,0.34), transparent 62%),
-      radial-gradient(90% 58% at 90% 70%, rgba(163, 63, 47, 0.08), transparent 60%);
+      radial-gradient(90% 58% at 90% 70%, rgba(154,51,36,0.08), transparent 60%);
     animation: ambientGlow 16s ease-in-out infinite;
   }
 
@@ -346,6 +371,11 @@ details[open] summary ~ * {
   .ambient-orb-rotate,
   .ambient-waves {
     animation: none !important;
+  }
+  .hero-portrait,
+  .hero-portrait:hover {
+    transform: rotate(-1.2deg) !important;
+    transition: none !important;
   }
 
 }

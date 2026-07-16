@@ -120,7 +120,7 @@ export default function App() {
 
   // Navigate scrolls to a section or nav page ID
   function handleNavigate(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(id)?.scrollIntoView({ behavior: 'instant' })
   }
 
   function handleViewDetail(project) {
@@ -164,9 +164,9 @@ export default function App() {
           aria-hidden="true"
           className="flex items-center justify-center gap-3.5 px-8"
         >
-          <span className="h-px flex-1 max-w-[220px] bg-gold/40" />
-          <span className="h-1.5 w-1.5 rotate-45 bg-gold/70" />
-          <span className="h-px flex-1 max-w-[220px] bg-gold/40" />
+          <span className="h-px w-16 bg-border" />
+          <span className="h-1.5 w-1.5 rotate-45 bg-gold" />
+          <span className="h-px w-16 bg-border" />
         </div>
         <About />
         <Projects onViewDetail={handleViewDetail} />

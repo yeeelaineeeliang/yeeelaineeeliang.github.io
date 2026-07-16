@@ -3,7 +3,7 @@ export const projects = [
   id: 'cityliving-sim',
   title: 'LiveThere',
   icon: '🏙️',
-  gradient: ['#315C6B', '#A33F2F'],
+  gradient: ['#315C6B', '#9A3324'],
   featured: true,
 
   status: 'Latest Project',
@@ -13,8 +13,7 @@ export const projects = [
   category: ['Current Work', 'AI Systems', 'Full-Stack', 'Agents', 'Data Engineering'],
 
   summary:
-    'LiveThere helps people compare Chicago neighborhoods through the routines that actually shape daily life: commute, budget, safety, transit access, city services, nearby places, and street-level context.',
-
+    'A neighborhood is not one score. LiveThere helps you understand what it means for your life by comparing the commute, cost, safety, transit, and everyday places based on what matters to you.', 
   domainTags: ['Civic Data', 'Simulation', 'Grounded AI'],
 
   oneliner:
@@ -155,7 +154,7 @@ export const projects = [
     role: 'Solo AI systems builder',
     focus: 'Agent routing, career workflows, persistent context',
     summary:
-      'Job searching is fragmented across a dozen tools that do not talk to each other. This routes your question to the right specialist: resume rewriter, mock interviewer, gap analyzer, or outreach drafter. Each one knows what the others figured out, so you are not starting from scratch every time.',
+      'What if one AI career team understood your goals, tailored every application, tracked your progress, closed skill gaps, and coached you through the entire job search?',
     domainTags: ['Multi-Agent', 'LLM Orchestration'],
     oneliner:
       'A career coach that routes questions through specialist agents before giving one plan.',
@@ -223,8 +222,8 @@ export const projects = [
     role: 'Solo ML pipeline builder',
     focus: 'Explainable ML, retrieval, analyst reports',
     summary:
-      'Fraud models flag transactions. Then what? This takes a flagged transaction and automatically builds out the full picture: what the model scored and why, what similar past cases looked like, and what an analyst should probably do next. The analyst still decides. The copilot does the legwork.',
-    domainTags: ['XGBoost', 'SHAP', 'RAG', 'Claude API'],
+     'A transaction gets flagged. Within seconds, the analyst receives the model’s reasoning, similar fraud patterns, and a structured investigation brief.' ,
+      domainTags: ['XGBoost', 'SHAP', 'RAG', 'Claude API'],
     oneliner:
       'Explains flagged transactions, retrieves similar fraud patterns, and generates analyst-ready investigation summaries.',
     cardBadge: 'Human-in-the-loop AI',
@@ -278,16 +277,16 @@ export const projects = [
   },
   {
     id: 'hri-memory',
-    title: 'Memory-Aware Rapport Engine (HRI Research)',
+    title: 'Temi (HRI Research)',
     icon: '🤖',
     gradient: ['#2D6B5E', '#4A8B7A'],
     featured: false,
     category: ['Research', 'AI Systems'],
     maturity: 'In Progress',
     role: 'HRI research engineer',
-    focus: 'Robot memory, constrained generation, rapport',
+    focus: 'social interaction, constrained generation, rapport',
     summary:
-      'Gives a social robot memory so it can pick up where it left off and build interactions that feel more continuous over time.',
+    'Rapport with a robot may depend less on what it knows and more on how it responds to you.',
     domainTags: ['Robotics', 'HRI Research'],
     oneliner:
       'Memory for social robots, built around interaction continuity.',
@@ -342,7 +341,7 @@ export const projects = [
     role: 'Full-stack mobile builder',
     focus: 'Campus support, location matching, safety guardrails',
     summary:
-      'A mobile app that connects students who need help with nearby peers who can give it, built for the moment when campus resources feel out of reach.',
+    'Small acts of help can turn nearby strangers into a stronger, more supportive community.',
     domainTags: ['Community', 'Mobile'],
     oneliner:
       'Nearby peer support, with safety checks built into the flow.',

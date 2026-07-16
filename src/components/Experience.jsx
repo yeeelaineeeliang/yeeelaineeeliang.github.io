@@ -21,7 +21,7 @@ export default function Experience() {
 
         <div className="fade-in mb-10 max-w-4xl">
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-3">Background</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold leading-tight">Experience</h2>
+          <h2 className="text-[clamp(30px,3.4vw,42px)] font-semibold leading-tight">Experience</h2>
         </div>
 
         <div className="relative">
@@ -49,7 +49,7 @@ export default function Experience() {
                       }}
                     />
                   ) : (
-                    <span className="font-mono text-sm font-bold text-muted">{e.initials}</span>
+                    <span className="font-display text-sm font-bold italic text-muted">{e.initials}</span>
                   )}
                 </div>
 

@@ -48,10 +48,10 @@ export default function Nav({
               <button
                 type="button"
                 onClick={() => go(l.id)}
-                className="font-mono font-semibold uppercase tracking-[0.06em] transition-all duration-200 hover:text-accent"
+                className="font-sans font-semibold uppercase tracking-[0.06em] transition-all duration-200 hover:text-accent"
                 style={{
                   fontSize: scrolled ? '11.5px' : '13px',
-                  color: activePage === l.id ? '#A33F2F' : '#6F5A52',
+                  color: activePage === l.id ? '#9A3324' : '#6B5850',
                 }}
                 aria-current={activePage === l.id ? 'page' : undefined}
               >
@@ -64,7 +64,7 @@ export default function Nav({
               <button
                 type="button"
                 onClick={() => go(contactLink.id)}
-                className="font-mono font-bold uppercase tracking-[0.05em] bg-accent text-white rounded-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                className="font-sans font-bold uppercase tracking-[0.05em] bg-accent text-white rounded-[2px] transition-all duration-200 hover:-translate-y-0.5"
                 style={{ fontSize: scrolled ? '11.5px' : '13px', padding: scrolled ? '6px 15px' : '9px 20px' }}
               >
                 Contact
