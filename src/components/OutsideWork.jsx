@@ -6,7 +6,7 @@ const GALLERY_ITEMS = [
     title: 'Health',
     subtitle: 'Running',
     description:
-      'My pleasure to introduce my lovely running buddies by Lake Michigan at 8am every day.',
+      'My very consistent running buddies by Lake Michigan. They show up every morning at 8am.',
     imageSrc: '/running-buddies.jpg',
     imageAlt: 'Running buddies by Lake Michigan in Chicago',
     bgPosition: 'center bottom',
@@ -17,7 +17,7 @@ const GALLERY_ITEMS = [
     title: 'Community',
     subtitle: 'IMU board',
     description:
-      "Having experienced what it means to enter a new community, I notice the small gestures that help people feel welcome. I support IMU's operations so immigrant youth can build confidence and form connections across cultures.",
+      "This is my third year serving on IMU’s advisory board. Having experienced what it means to enter a new community, I notice the small gestures that help people feel welcome. I support the organization through fundraising, financial recordkeeping, and its online presence, helping create more space for immigrant youth to connect and grow.",
     imageSrc: '/imu.png',
     imageAlt: 'Elaine at IMU Peace Club, UC Berkeley',
     bgPosition: 'center top',
@@ -29,7 +29,7 @@ const GALLERY_ITEMS = [
     title: 'Curiosity',
     subtitle: 'City walks',
     description:
-      'City walks slow me down. Buildings hold history and I am grateful to catch it.',
+      '“what she loved was this, here, now, in front of her;” — Virginia Woolf, Mrs. Dalloway',
     imageSrc: '/citywalk.jpeg',
     imageAlt: 'City walk photo',
     bgPosition: 'center',
