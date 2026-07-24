@@ -1,7 +1,7 @@
 import ProjectGraphic from './ProjectGraphic'
 
 const ProblemIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" />
     <line x1="12" y1="8" x2="12" y2="12" />
     <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -9,7 +9,7 @@ const ProblemIcon = () => (
 )
 
 const SolutionIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="5" />
     <line x1="12" y1="1" x2="12" y2="3" />
     <line x1="12" y1="21" x2="12" y2="23" />
@@ -23,46 +23,33 @@ const SolutionIcon = () => (
 )
 
 const ArchIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="16 18 22 12 16 6" />
     <polyline points="8 6 2 12 8 18" />
   </svg>
 )
 
-const DecisionIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-  </svg>
-)
-
 const ResultsIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
     <polyline points="16 7 22 7 22 13" />
   </svg>
 )
 
-function SectionHeader({ icon, label, color }) {
-  const colorMap = {
-    orange: 'text-warning',
-    violet: 'text-accent',
-    code: 'text-teal',
-    blue: 'text-accent',
-    green: 'text-success',
+// Small mono kicker used above every section — carries an optional inline icon
+// and a color tone instead of the old per-section bordered-card treatment, so
+// sections can vary in weight without every one of them being its own box.
+function SectionKicker({ icon, children, tone = 'muted' }) {
+  const toneMap = {
+    muted: 'text-muted-2',
+    accent: 'text-accent',
+    teal: 'text-teal',
+    warning: 'text-warning',
+    success: 'text-success',
   }
   return (
-    <div className={`flex items-center gap-2.5 mb-5 ${colorMap[color]}`}>
-      <span className="shrink-0">{icon}</span>
-      <span className="font-mono text-sm font-bold uppercase tracking-widest">{label}</span>
-    </div>
-  )
-}
-
-// Plain section label for product-story pages — no icon, no per-section color.
-// `accent` marks the two narrative landmarks (the journey and the payoff).
-function StoryKicker({ children, accent = false }) {
-  return (
-    <p className={`mb-3 font-mono text-xs font-semibold uppercase tracking-widest ${accent ? 'text-teal' : 'text-muted-2'}`}>
+    <p className={`mb-3 flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest ${toneMap[tone]}`}>
+      {icon}
       {children}
     </p>
   )
@@ -79,10 +66,6 @@ function getStackGroups(project) {
   return [{ label: 'Stack', items: project.stack ?? [] }]
 }
 
-function getPrimaryMetrics(project) {
-  return (project.metrics ?? []).slice(0, 4)
-}
-
 function getMeta(project) {
   return [
     ['Role', project.role],
@@ -91,57 +74,189 @@ function getMeta(project) {
   ].filter(([, value]) => Boolean(value))
 }
 
-function ProjectOverview({ meta, stackGroups, metrics = [], note }) {
-  return (
-    <section className="grid gap-4 lg:grid-cols-[1.05fr_1fr]">
-      <div className="rounded-xl border border-border/80 bg-surface/90 p-5 shadow-sm">
-        <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-2">
-          Project Snapshot
-        </p>
-        {meta.length > 0 && (
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            {meta.map(([label, value]) => (
-              <p key={label}>
-                <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-2">
-                  {label}
-                </span>
-                <span className="text-sm font-medium leading-relaxed text-text">{value}</span>
-              </p>
-            ))}
-          </div>
-        )}
-      </div>
+// The single most compelling quantitative fact, used as the hero hook.
+// `heroMetric` is an optional data override for projects whose strongest
+// proof point is really two adjacent metrics read together (see Fraud
+// Copilot's "90% recall at 0.6% false-positive rate" in projects.js).
+function getHeroMetric(project) {
+  return project.heroMetric ?? project.metrics?.[0] ?? null
+}
 
-      <div className="rounded-xl border border-accent/15 bg-accent/[0.04] p-5 shadow-sm">
-        <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-accent">
-          Stack And Proof
+// Fallback hook for projects with no numeric metrics field (e.g. Temi, still
+// an in-progress research project) — reuses existing copy verbatim rather
+// than fabricating a stat.
+function getHeroLine(project) {
+  if (project.metrics?.length) return null
+  return project.highlights?.[0] ?? project.reliabilityNote ?? null
+}
+
+// Highlights to render in "What I Built" — excludes whichever highlight was
+// already spent as the hero line above, so a reader never sees the same
+// sentence twice within a few inches of scroll (same dedupe principle as
+// getRemainingMetrics below).
+function getDisplayHighlights(project, heroLine) {
+  const highlights = project.highlights ?? []
+  if (!heroLine) return highlights
+  return highlights.filter(item => item !== heroLine)
+}
+
+// Whatever metrics aren't already spent on the hero hook, shown later in
+// "By The Numbers" so the same fact isn't repeated twice.
+function getRemainingMetrics(project) {
+  if (!project.metrics?.length) return []
+  if (!project.heroMetric) return project.metrics.slice(1)
+  // heroMetric may fold two+ individual metrics into one combined stat
+  // (e.g. Fraud Copilot's "90% recall at 0.6% false-positive rate") — drop
+  // any metric already fully represented in that combined string so it
+  // isn't repeated verbatim below.
+  return project.metrics.filter(m => !project.heroMetric.includes(m))
+}
+
+// The large, unmissable hook directly under the title/oneliner. Metric-driven
+// projects get a big standalone number; the one project without metrics
+// (Temi, in-progress research) gets a short pull-quote instead.
+function HeroHighlight({ metric, line, accent = 'accent' }) {
+  if (metric) {
+    const border = accent === 'teal' ? 'border-teal' : 'border-accent'
+    const color = accent === 'teal' ? 'text-teal' : 'text-accent'
+    return (
+      <div className={`mb-9 border-l-4 py-1 pl-6 ${border}`}>
+        <p className="mb-1.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted-2">
+          The headline result
         </p>
-        {stackGroups.length > 0 && (
-          <div className="grid gap-2">
-            {stackGroups.map(group => (
-              <p key={group.label} className="text-sm text-muted-2">
-                <span className="font-medium text-muted">{group.label}:</span>{' '}
-                <span className="font-mono">{group.items.join(', ')}</span>
-              </p>
-            ))}
-          </div>
-        )}
-        {metrics.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2.5">
-            {metrics.map(metric => (
-              <span key={metric} className="chip-metric">
-                {metric}
+        <p className={`font-display text-4xl md:text-6xl font-bold leading-[1.05] ${color}`}>
+          {metric}
+        </p>
+      </div>
+    )
+  }
+  if (line) {
+    return (
+      <div className="mb-9 border-l-4 border-teal py-1 pl-6">
+        <p className="mb-1.5 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-muted-2">
+          Research focus
+        </p>
+        <p className="max-w-2xl font-display text-2xl md:text-3xl font-semibold leading-snug text-teal">
+          {line}
+        </p>
+      </div>
+    )
+  }
+  return null
+}
+
+// Reference info (role/status/focus, topic pills, stack, reliability note) —
+// deliberately kept as one slim strip instead of two equal-weight cards, so
+// it reads as secondary to the hero hook above it.
+function ProjectMetaBar({ meta, stackGroups, pills = [], note }) {
+  return (
+    <div className="mb-10 space-y-3 border-y border-border/70 py-5">
+      {(meta.length > 0 || pills.length > 0) && (
+        <div className="flex flex-wrap items-center gap-x-7 gap-y-2.5">
+          {meta.map(([label, value]) => (
+            <p key={label} className="flex items-baseline gap-1.5 text-sm">
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-2">
+                {label}
               </span>
-            ))}
+              <span className="font-medium text-text">{value}</span>
+            </p>
+          ))}
+          {pills.map(pill => (
+            <span key={pill} className="chip-working">
+              {pill}
+            </span>
+          ))}
+        </div>
+      )}
+      {stackGroups.length > 0 && (
+        <p className="font-mono text-xs leading-relaxed text-muted-2">
+          {stackGroups.map(group => `${group.label}: ${group.items.join(', ')}`).join('   ·   ')}
+        </p>
+      )}
+      {note && <p className="text-xs italic leading-relaxed text-muted-2">{note}</p>}
+    </div>
+  )
+}
+
+const DEEP_DIVE_TONE = {
+  accent: { text: 'text-accent', ring: 'bg-accent/10' },
+  teal: { text: 'text-teal', ring: 'bg-teal/10' },
+}
+
+// Progressive disclosure for the technical weeds — pipeline diagram / system
+// design cards + the full list of key decisions. Collapsed by default so the
+// primary read-through stays fast; opt-in for anyone who wants the depth.
+function TechnicalDeepDive({ pipeline, technicalSystem, decisions, accent = 'accent' }) {
+  const tone = DEEP_DIVE_TONE[accent] ?? DEEP_DIVE_TONE.accent
+  const hasPipeline = Boolean(pipeline)
+  const hasSystem = Boolean(technicalSystem?.length)
+  const hasDecisions = Boolean(decisions?.length)
+  if (!hasPipeline && !hasSystem && !hasDecisions) return null
+
+  return (
+    <details className="group mb-12 overflow-hidden rounded-xl border border-border/80 bg-surface/60">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-6 py-4 select-none">
+        <span className="flex items-center gap-2.5 font-mono text-xs font-bold uppercase tracking-widest text-muted-2">
+          <ArchIcon />
+          Technical deep dive
+          <span className="hidden font-normal normal-case tracking-normal text-muted-2/80 sm:inline">
+            — architecture &amp; decisions
+          </span>
+        </span>
+        <span className="shrink-0 text-base leading-none text-muted-2 transition-transform duration-200 group-open:rotate-180">
+          ⌄
+        </span>
+      </summary>
+
+      <div className="space-y-8 border-t border-border/70 px-6 py-6">
+        {hasPipeline && (
+          <div>
+            <p className={`mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.text}`}>
+              System Architecture
+            </p>
+            <pre className="overflow-x-auto rounded-lg border border-border bg-bg-alt p-5 font-mono text-sm leading-relaxed text-muted">
+              {pipeline}
+            </pre>
           </div>
         )}
-        {note && (
-          <p className="mt-4 text-sm leading-relaxed text-muted">
-            {note}
-          </p>
+
+        {hasSystem && (
+          <div>
+            <p className={`mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.text}`}>
+              System Design
+            </p>
+            <div className="grid gap-4 md:grid-cols-2">
+              {technicalSystem.map(({ layer, description }) => (
+                <div key={layer} className="rounded-xl border border-border/75 bg-surface/80 p-5">
+                  <p className={`mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.text}`}>
+                    {layer}
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted">{description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {hasDecisions && (
+          <div>
+            <p className={`mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.text}`}>
+              Key Decisions
+            </p>
+            <ol className="space-y-4">
+              {decisions.map((d, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <span className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-mono text-xs font-bold ${tone.ring} ${tone.text}`}>
+                    {i + 1}
+                  </span>
+                  <p className="text-base leading-relaxed text-muted">{d}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         )}
       </div>
-    </section>
+    </details>
   )
 }
 
@@ -151,7 +266,11 @@ export default function ProjectDetail({ project, onBack }) {
   const stackGroups = getStackGroups(project)
   const meta = getMeta(project)
   const isProductStory = Boolean(project.productPillars?.length)
-  const primaryMetrics = getPrimaryMetrics(project)
+  const heroAccent = isProductStory ? 'teal' : 'accent'
+  const heroMetric = getHeroMetric(project)
+  const heroLine = getHeroLine(project)
+  const displayHighlights = getDisplayHighlights(project, heroLine)
+  const remainingMetrics = getRemainingMetrics(project)
 
   return (
     <div className="min-h-screen bg-bg text-text">
@@ -186,14 +305,16 @@ export default function ProjectDetail({ project, onBack }) {
           {project.summary ?? project.oneliner}
         </p>
 
-        <ProjectOverview
+        <HeroHighlight metric={heroMetric} line={heroLine} accent={heroAccent} />
+
+        <ProjectMetaBar
           meta={meta}
           stackGroups={stackGroups}
-          metrics={primaryMetrics}
+          pills={project.pills}
           note={project.reliabilityNote}
         />
 
-        <div className="flex flex-wrap items-center gap-5 mb-10 mt-8">
+        <div className="flex flex-wrap items-center gap-5 mb-10">
           {hasDemo && (
             <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn-primary">
               Try Demo →
@@ -214,9 +335,9 @@ export default function ProjectDetail({ project, onBack }) {
         {isProductStory ? (
           <div className="space-y-12">
 
-            <div>
-              <StoryKicker>The Problem</StoryKicker>
-              <p className="text-lg text-muted leading-relaxed max-w-2xl">{project.problem}</p>
+            <div className="max-w-2xl">
+              <SectionKicker icon={<ProblemIcon />} tone="warning">The Problem</SectionKicker>
+              <p className="font-display text-xl md:text-2xl leading-snug text-text">{project.problem}</p>
             </div>
 
             {project.editorialCallout && (
@@ -231,11 +352,8 @@ export default function ProjectDetail({ project, onBack }) {
             )}
 
             <div>
-              <StoryKicker>What I Built</StoryKicker>
-              <p className="text-lg text-muted leading-relaxed max-w-3xl mb-8">
-                {project.technicalContribution ?? project.solution}
-              </p>
-              <div className="grid gap-6 md:grid-cols-3 mb-8">
+              <SectionKicker icon={<SolutionIcon />} tone="accent">What I Built</SectionKicker>
+              <div className="grid gap-6 md:grid-cols-3 mb-6">
                 {project.productPillars.map((pillar, i) => (
                   <div key={pillar.title} className="rounded-xl border border-border/70 bg-surface/75 p-5">
                     <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-teal/10 font-mono text-xs font-bold text-teal">
@@ -246,6 +364,9 @@ export default function ProjectDetail({ project, onBack }) {
                   </div>
                 ))}
               </div>
+              <p className="max-w-3xl text-base leading-relaxed text-muted-2 mb-6">
+                {project.technicalContribution ?? project.solution}
+              </p>
               <div className="max-w-3xl overflow-hidden rounded-lg border border-teal/20 shadow-sm">
                 <ProjectGraphic
                   id={project.id}
@@ -257,24 +378,8 @@ export default function ProjectDetail({ project, onBack }) {
               </div>
             </div>
 
-            {project.technicalSystem?.length > 0 && (
-              <div>
-                <StoryKicker accent>System Design</StoryKicker>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {project.technicalSystem.map(({ layer, description }) => (
-                    <div key={layer} className="rounded-xl border border-border/75 bg-surface/80 p-5">
-                      <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
-                        {layer}
-                      </p>
-                      <p className="text-sm leading-relaxed text-muted">{description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             <div>
-              <StoryKicker accent>How It Works</StoryKicker>
+              <SectionKicker tone="teal">How It Works</SectionKicker>
               <ol className="relative space-y-6 pl-9 sm:pl-11">
                 <div
                   aria-hidden="true"
@@ -291,27 +396,22 @@ export default function ProjectDetail({ project, onBack }) {
               </ol>
             </div>
 
-            <div>
-              <StoryKicker>Key Decisions</StoryKicker>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {project.decisions.map((d, i) => (
-                  <div key={i} className="rounded-lg bg-surface/60 p-4">
-                    <p className="text-base text-muted leading-relaxed">{d}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <TechnicalDeepDive
+              technicalSystem={project.technicalSystem}
+              decisions={project.decisions}
+              accent="teal"
+            />
 
-            {project.metrics && project.metrics.length > 0 && (
+            {remainingMetrics.length >= 2 && (
               <div>
-                <StoryKicker accent>Results</StoryKicker>
+                <SectionKicker icon={<ResultsIcon />} tone="success">By The Numbers</SectionKicker>
                 {project.metricNote && (
                   <p className="mb-4 max-w-3xl text-sm leading-relaxed text-muted-2">{project.metricNote}</p>
                 )}
-                <div className={`grid grid-cols-1 ${getMetricsGridClass(project.metrics.length)} gap-4`}>
-                  {project.metrics.map(m => (
-                    <div key={m} className="rounded-lg bg-teal/[0.06] px-5 py-4 text-center">
-                      <p className="font-mono text-teal font-bold text-lg leading-snug">{m}</p>
+                <div className={`grid grid-cols-1 ${getMetricsGridClass(remainingMetrics.length)} gap-4`}>
+                  {remainingMetrics.map(m => (
+                    <div key={m} className="rounded-lg bg-teal/[0.06] px-5 py-6 text-center">
+                      <p className="font-mono text-teal font-bold text-xl md:text-2xl leading-snug">{m}</p>
                     </div>
                   ))}
                 </div>
@@ -327,63 +427,46 @@ export default function ProjectDetail({ project, onBack }) {
 
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-12">
 
-            <div className="rounded-lg border border-warning/25 bg-warning/[0.05] p-6 shadow-sm">
-              <SectionHeader icon={<ProblemIcon />} label="The Problem" color="orange" />
-              <p className="text-base text-muted leading-relaxed">{project.problem}</p>
+            <div className="max-w-2xl">
+              <SectionKicker icon={<ProblemIcon />} tone="warning">The Problem</SectionKicker>
+              <p className="font-display text-xl md:text-2xl leading-snug text-text">{project.problem}</p>
             </div>
 
-            <div className="rounded-lg border border-accent/25 bg-accent/[0.04] p-6 shadow-sm">
-              <SectionHeader icon={<SolutionIcon />} label="What I Built" color="violet" />
-              <div className="space-y-4">
-                <p className="text-base text-muted leading-relaxed">
-                  {project.technicalContribution ?? project.solution}
-                </p>
-                {project.highlights && project.highlights.length > 0 && (
-                  <ul className="grid gap-3 md:grid-cols-2">
-                    {project.highlights.map(item => (
-                      <li key={item} className="flex gap-3 rounded-md bg-bg/70 p-3 text-sm leading-relaxed text-muted">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+            <div>
+              <SectionKicker icon={<SolutionIcon />} tone="accent">What I Built</SectionKicker>
+              {displayHighlights.length > 0 && (
+                <ul className="mb-5 grid gap-3 md:grid-cols-2">
+                  {displayHighlights.map(item => (
+                    <li key={item} className="flex gap-3 rounded-md bg-accent/[0.03] p-3 text-sm leading-relaxed text-muted">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p className="max-w-2xl text-base leading-relaxed text-muted-2">
+                {project.technicalContribution ?? project.solution}
+              </p>
             </div>
 
-            <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
-              <SectionHeader icon={<ArchIcon />} label="How It Works" color="code" />
-              <pre className="font-mono text-sm text-muted bg-bg-alt rounded-lg p-5 overflow-x-auto leading-relaxed border border-border">
-                {project.pipeline}
-              </pre>
-            </div>
+            <TechnicalDeepDive
+              pipeline={project.pipeline}
+              decisions={project.decisions}
+              accent="accent"
+            />
 
-            <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
-              <SectionHeader icon={<DecisionIcon />} label="Key Decisions" color="blue" />
-              <ol className="space-y-4">
-                {project.decisions.map((d, i) => (
-                  <li key={i} className="flex gap-4 items-start">
-                    <span className="shrink-0 w-7 h-7 rounded-full bg-accent/10 text-accent text-xs font-bold font-mono flex items-center justify-center mt-0.5">
-                      {i + 1}
-                    </span>
-                    <p className="text-base text-muted leading-relaxed">{d}</p>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            {project.metrics && project.metrics.length > 0 && (
-              <div className="rounded-lg border border-success/25 bg-success/[0.04] p-6 shadow-sm">
-                <SectionHeader icon={<ResultsIcon />} label="Results" color="green" />
+            {remainingMetrics.length >= 2 && (
+              <div>
+                <SectionKicker icon={<ResultsIcon />} tone="success">By The Numbers</SectionKicker>
                 {project.metricNote && (
                   <p className="mb-4 text-sm text-muted-2 leading-relaxed">{project.metricNote}</p>
                 )}
-                <div className={`grid grid-cols-1 ${getMetricsGridClass(project.metrics.length)} gap-4`}>
-                  {project.metrics.map(m => (
-                    <div key={m} className="bg-success/[0.06] border border-success/15 rounded-lg px-5 py-4 text-center">
-                      <p className="font-mono text-success font-bold text-lg leading-snug">{m}</p>
+                <div className={`grid grid-cols-1 ${getMetricsGridClass(remainingMetrics.length)} gap-4`}>
+                  {remainingMetrics.map(m => (
+                    <div key={m} className="bg-success/[0.06] border border-success/15 rounded-lg px-5 py-6 text-center">
+                      <p className="font-mono text-success font-bold text-xl md:text-2xl leading-snug">{m}</p>
                     </div>
                   ))}
                 </div>
@@ -391,17 +474,10 @@ export default function ProjectDetail({ project, onBack }) {
             )}
 
             {project.nextImprovements && project.nextImprovements.length > 0 && (
-              <div className="rounded-lg border border-border bg-surface p-6 shadow-sm">
-                <SectionHeader icon={<DecisionIcon />} label="Next Improvements" color="blue" />
-                <ul className="grid gap-3">
-                  {project.nextImprovements.map(item => (
-                    <li key={item} className="flex gap-3 text-base leading-relaxed text-muted">
-                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/70" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="text-sm text-muted-2 leading-relaxed">
+                <span className="font-medium text-muted">Still ahead: </span>
+                {project.nextImprovements.join(' · ')}
+              </p>
             )}
 
           </div>

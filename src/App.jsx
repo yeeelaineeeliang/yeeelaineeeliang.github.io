@@ -106,8 +106,16 @@ export default function App() {
     return () => io.disconnect()
   }, [selectedProject])
 
-  // Navigate scrolls to a section or nav page ID
+  // Navigate scrolls to a section or nav page ID. If a project detail page is
+  // open, its sections aren't in the DOM, so close it first and scroll once
+  // the home page has rendered.
   function handleNavigate(id) {
+    if (selectedProject) {
+      setSelectedProject(null)
+      window.history.pushState(null, '', '/AboutMe')
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'instant' }), 60)
+      return
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'instant' })
   }
 

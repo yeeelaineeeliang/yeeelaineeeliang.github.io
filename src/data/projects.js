@@ -13,7 +13,7 @@ export const projects = [
   category: ['Current Work', 'AI Systems', 'Full-Stack', 'Agents', 'Data Engineering'],
 
   summary:
-    'A neighborhood is not one score. LiveThere helps you understand what it means for your life by comparing the commute, cost, safety, transit, and everyday places based on what matters to you.', 
+    'Neighborhood tools reduce a place to a single score. LiveThere compares commute, cost, safety, transit, and everyday amenities against what matters to you, so you can see what daily life would actually look like before you move.',
   domainTags: ['Civic Data', 'Simulation', 'Grounded AI'],
 
   oneliner:
@@ -94,7 +94,7 @@ export const projects = [
   pills: ['Civic Data', 'Grounded AI', 'Full-Stack Product'],
 
   reliabilityNote:
-    'The advisor checks structured civic data before generating neighborhood recommendations.',
+    'Checks structured civic data before generating neighborhood recommendations.',
 
   productPillars: [
     {
@@ -154,10 +154,10 @@ export const projects = [
     role: 'Solo AI systems builder',
     focus: 'Agent routing, career workflows, persistent context',
     summary:
-      'What if one AI career team understood your goals, tailored every application, tracked your progress, closed skill gaps, and coached you through the entire job search?',
+      'Job seekers juggle separate tools for resumes, interviews, and networking. CareerCoach routes each question to the right specialist agent, then synthesizes one coherent, goal-aware plan.',
     domainTags: ['Multi-Agent', 'LLM Orchestration'],
     oneliner:
-      'A career coach that routes questions through specialist agents before giving one plan.',
+      'Routes career questions through specialist agents, then gives one coherent plan.',
     technicalContribution:
       'Designed a routed multi-agent workflow where specialized career agents share state, persist progress, and synthesize one coherent answer.',
     problem:
@@ -194,14 +194,14 @@ export const projects = [
       'Separated graph logic from Streamlit so the system can move to other interfaces',
     ],
     decisions: [
-      'Used Claude Haiku 4.5 for routing and classification, Claude Sonnet 4.5 for deep reasoning: fast and cheap classification where it matters, heavier inference only where needed',
-      'Regex-based weak area extraction from interview output avoids an extra LLM call while keeping the pipeline reliable',
-      'Project matching uses a keyword scoring fallback chain. LLM ranking only triggers for large libraries (>8 projects).',
-      'Zero Streamlit imports inside graph/ keeps the workflow portable across future interfaces',
-      'Synthesis node strips raw sub-agent messages to force coherent narrative instead of verbatim pasting',
-      'Reduced unnecessary LLM calls with intent bypass, cached resume bullets, and conditional synthesis.',
+      'Used Claude Haiku 4.5 for routing and classification, and Claude Sonnet 4.5 for deep reasoning, so cheap models handle high-volume classification and heavier inference is reserved for where it matters.',
+      'Extracted weak areas from interview output with regex instead of another LLM call, keeping the pipeline fast and reliable.',
+      'Matched projects with a keyword scoring fallback chain first, only calling an LLM to rank results when a library exceeds 8 projects.',
+      'Kept Streamlit imports out of the graph/ package entirely, so the workflow logic stays portable to other interfaces.',
+      'Stripped raw sub-agent messages in the synthesis node, forcing a coherent narrative instead of verbatim pasting.',
+      'Reduced unnecessary LLM calls with intent bypass, cached resume bullets, and conditional synthesis, keeping cost down without sacrificing response quality.',
     ],
-    metrics: ['9 specialized agents', '6 intent-routed paths', 'Cross-session memory', 'Shipped app'],
+    metrics: ['9 specialized agents', '6 intent-routed paths'],
     nextImprovements: [
       'Add evaluator traces for routing accuracy across career-question categories',
       'Expose agent reasoning summaries so users can see which specialist handled each request',
@@ -222,10 +222,10 @@ export const projects = [
     role: 'Solo ML pipeline builder',
     focus: 'Explainable ML, retrieval, analyst reports',
     summary:
-     'A transaction gets flagged. Within seconds, the analyst receives the model’s reasoning, similar fraud patterns, and a structured investigation brief.' ,
+     'Flagged transactions usually give analysts nothing to act on. This copilot explains why a transaction was flagged, surfaces similar historical fraud cases, and drafts a structured investigation brief for review.',
       domainTags: ['XGBoost', 'SHAP', 'RAG', 'Claude API'],
     oneliner:
-      'Explains flagged transactions, retrieves similar fraud patterns, and generates analyst-ready investigation summaries.',
+      'Explains flagged transactions, retrieves similar fraud cases, and drafts analyst-ready investigation briefs.',
     cardBadge: 'Human-in-the-loop AI',
     technicalContribution:
       'Combined fraud scoring, SHAP explanations, FAISS vector retrieval, and LLM-generated reports into one analyst-in-the-loop investigation flow.',
@@ -259,13 +259,16 @@ export const projects = [
       'Generated analyst-ready investigation summaries via Claude Sonnet API while keeping final judgment human-led',
     ],
     decisions: [
-      'Used FAISS over a hosted vector DB like Pinecone to keep the system self-contained with no external index dependency',
-      'Chose SHAP TreeExplainer over LIME for more consistent explanations given XGBoost tree structure',
-      'Applied SMOTE to training data only to avoid leaking resampling information into the test set',
-      'Kept the analyst in the loop by design: the copilot recommends, never acts autonomously',
-      'Surfaced the PCA-transformed feature privacy tradeoff in the UI rather than hiding it',
+      'Used FAISS instead of a hosted vector DB like Pinecone, so the system stays self-contained with no external index dependency.',
+      'Chose SHAP TreeExplainer over LIME, since it gives more consistent explanations for XGBoost\'s tree structure.',
+      'Applied SMOTE to training data only, avoiding any leakage of resampling information into the test set.',
+      'Kept the analyst in the loop by design, so the copilot recommends and never acts autonomously.',
+      'Surfaced the PCA-transformed feature privacy tradeoff directly in the UI instead of hiding it.',
     ],
-    metrics: ['90% recall', '0.6% false-positive rate', 'SHAP explanations', 'FAISS retrieval'],
+    metrics: ['90% recall', '0.6% false-positive rate'],
+    // Presentational-only override: combines the two metrics above into the
+    // single headline stat for the case-study hero (see ProjectDetail.jsx).
+    heroMetric: '90% recall at 0.6% false-positive rate',
     nextImprovements: [
       'Add side-by-side analyst feedback capture for report quality',
       'Track retrieval hit quality against confirmed fraud categories',
@@ -273,6 +276,7 @@ export const projects = [
     ],
     links: {
       github: 'https://github.com/yeeelaineeeliang/fraud-copilot.git',
+      demo: 'https://fraud-copilotgit-mmsrktsf5ja4nwllax5hrt.streamlit.app',
     },
   },
   {
@@ -286,14 +290,14 @@ export const projects = [
     role: 'HRI research engineer',
     focus: 'social interaction, constrained generation, rapport',
     summary:
-    'Rapport with a robot may depend less on what it knows and more on how it responds to you.',
+    'Social robots typically reset with every interaction. This rapport engine gives Temi memory of prior sessions and tests, in a live HRI study, whether that continuity changes how warm and rapport-building it feels.',
     domainTags: ['Robotics', 'HRI Research'],
     oneliner:
-      'Memory for social robots, built around interaction continuity.',
+      'Gives a social robot memory of you, carried across sessions.',
     technicalContribution:
       'Built a Temi robot rapport engine that retrieves prior-session context using keyword extraction and Jaccard similarity, then constrains LLM responses for a human-robot interaction study.',
     problem:
-      'Social robots typically have no memory of previous interactions, which makes any sense of ongoing relationship impossible. The research question: can an LLM-powered memory system make robot rapport feel meaningfully continuous?',
+      'Social robots typically have no memory of previous interactions, which makes any sense of an ongoing relationship impossible. The open research question is whether an LLM-powered memory system can make robot rapport feel meaningfully continuous.',
     solution:
       'Built a Kotlin/Android rapport engine for the Temi robot that retrieves user-specific context from prior sessions using keyword extraction with Jaccard similarity and synonym expansion, selects appropriate self-disclosure strategies, and generates responses via a prompted LLM under tight real-time constraints. The system runs inside a 2×2 factorial mixed-design study measuring CCR rapport subscales and ROSAS warmth scores.',
     pipeline: `Prior session data
@@ -316,14 +320,13 @@ export const projects = [
     highlights: [
       'Retrieved user-specific prior-session context during live robot dialogue using keyword extraction and Jaccard similarity',
       'Constrained LLM self-disclosures for research validity and reduced hallucinated responses via post-generation validation',
-      'System runs inside a 2×2 factorial study measuring CCR rapport subscales and ROSAS warmth scores',
+      'Ran the study inside a 2×2 factorial design measuring CCR rapport subscales and ROSAS warmth scores',
     ],
     decisions: [
-      'Used keyword extraction with Jaccard similarity and synonym expansion rather than embedding-based retrieval: this is an on-device system with strict latency constraints, and the simpler approach is more auditable under research conditions',
-      'Research validity constrained engineering more tightly than a product context would. Free-form A/B testing was not appropriate.',
-      'Reduced hallucinated self-disclosures by tightening prompt constraints and adding post-generation validation before the robot speaks',
+      'Used keyword extraction with Jaccard similarity and synonym expansion instead of embedding-based retrieval, since this is an on-device system with strict latency constraints and the simpler approach is easier to audit under research conditions.',
+      'Held the study design fixed instead of iterating with free-form A/B testing, since research validity required tighter constraints than a typical product context.',
+      'Reduced hallucinated self-disclosures by tightening prompt constraints and adding post-generation validation before the robot speaks.',
     ],
-    metrics: [ 'UChicago HRI Lab', '2×2 factorial study', 'CCR + ROSAS measures'],
     nextImprovements: [
       'Complete mixed-methods thematic analysis of participant interviews',
       'Compare rapport outcomes across memory and no-memory study conditions',
@@ -341,16 +344,16 @@ export const projects = [
     role: 'Full-stack mobile builder',
     focus: 'Campus support, location matching, safety guardrails',
     summary:
-    'Small acts of help can turn nearby strangers into a stronger, more supportive community.',
+    'Students in distress often don’t know who nearby can help. CalPin matches peer support requests by location and urgency across a Berkeley-only network, with safety checks enforced at the API layer.',
     domainTags: ['Community', 'Mobile'],
     oneliner:
-      'Nearby peer support, with safety checks built into the flow.',
+      'Matches nearby peer support requests, with safety checks built into the flow.',
     technicalContribution:
       'Built a location-aware iOS app and Node.js/Express backend with 15+ REST endpoints, Berkeley email authentication, distance-based matching, and Claude Sonnet API content moderation.',
     problem:
-      'Students in distress often do not know who around them can help, and existing campus resources are not always accessible in the moment. CalPin was built to close that gap.',
+      'Students in distress often do not know who around them can help, and existing campus resources are not always accessible in the moment.',
     solution:
-      'Full-stack mobile application with Google OAuth restricted to Berkeley email domain, real-time location-based request matching, an interactive map UI with draggable request cards, and Claude Sonnet API for content moderation across 9 categories. The backend exposes 15+ REST endpoints. Not published to the App Store. Built and evaluated as a prototype.',
+      'A full-stack mobile app with Google OAuth restricted to the Berkeley email domain, real-time location-based request matching, an interactive map UI with draggable request cards, and Claude Sonnet API content moderation across 9 categories, backed by a Node.js API with 15+ REST endpoints. Built and evaluated as a prototype rather than published to the App Store.',
     pipeline: `iOS (SwiftUI + MapKit)
      │
 [Google Sign-In SDK] → Berkeley email domain verification
@@ -379,10 +382,10 @@ export const projects = [
     ],
     decisions: [
       'Enforced "cannot help your own request" at the API layer so the rule holds under any client.',
-      'Used a notification-based auto-refresh pattern instead of polling to keep map state consistent across views',
-      'Made urgency and distance the primary filters to reduce cognitive load for helpers acting quickly',
+      'Used notification-based auto-refresh instead of polling, keeping map state consistent across views.',
+      'Made urgency and distance the primary filters, reducing cognitive load for helpers who need to act quickly.',
     ],
-    metrics: ['Mobile App', 'Berkeley OAuth', 'Claude Sonnet moderation'],
+    metrics: ['15+ REST endpoints', '9 moderation categories'],
     nextImprovements: [
       'Add clearer safety escalation paths for high-urgency requests',
       'Build moderation and reporting workflows before broader campus rollout',
@@ -404,10 +407,10 @@ export const projects = [
     role: 'ML pipeline builder',
     focus: 'Feature selection, held-out evaluation, directional prediction',
     summary:
-      'A principled ML pipeline for crypto direction prediction, built around the insight that collinearity kills models before they ever reach production.',
+      'Crypto price signals are noisy and highly collinear, which makes naive models overfit. This pipeline uses VIF-based feature selection and held-out evaluation to predict BTC/ETH direction, then runs live with rolling refits.',
     domainTags: ['Fintech', 'Forecasting'],
     oneliner:
-      'Rolling crypto prediction with live logs and held-out evaluation.',
+      'Predicts crypto price direction with disciplined feature selection and held-out evaluation.',
     technicalContribution:
       'Built a Binance data pipeline with technical indicators, VIF-based feature selection, OLS regression, and held-out directional evaluation on 50,000+ hourly records. Extended into a live deployed system on Railway.',
     problem:
@@ -442,10 +445,10 @@ export const projects = [
       'Extended into a live system on Railway with 30-second rolling refit and Supabase Realtime delivery',
     ],
     decisions: [
-      'Used VIF (Variance Inflation Factor) rather than simple correlation matrices for more principled multicollinearity detection in OLS regression inputs',
-      'Chose directional accuracy as the primary metric because absolute price prediction is unreliable, but direction is actionable',
+      'Used VIF (Variance Inflation Factor) instead of simple correlation matrices, for more principled multicollinearity detection in the OLS inputs.',
+      'Chose directional accuracy as the primary metric, since absolute price prediction is unreliable but direction is actionable.',
     ],
-    metrics: ['65% directional accuracy', '50,000+ hourly records', 'VIF feature selection', 'Live on Railway'],
+    metrics: ['65% directional accuracy', '50,000+ hourly records'],
     nextImprovements: [
       'Benchmark against tree-based and regularized models with the same feature set',
       'Add walk-forward validation to better match trading deployment conditions',
@@ -453,7 +456,7 @@ export const projects = [
     ],
     links: {
       github: 'https://github.com/yeeelaineeeliang/crypto-currency.git',
-      demo: null,
+      demo: 'https://cryptosignals-gray.vercel.app/',
     },
   },
 ]
