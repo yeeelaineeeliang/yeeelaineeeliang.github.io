@@ -1,4 +1,5 @@
 import ProjectGraphic from './ProjectGraphic'
+import ProjectVideo from './ProjectVideo'
 
 function useSpotlight() {
   function onMouseMove(e) {
@@ -40,13 +41,17 @@ export default function FeaturedProject({ project, onViewDetail, id }) {
 
       {/* Left — project graphic */}
       <div className="relative min-h-[260px] md:min-h-[360px]">
-        <ProjectGraphic
-          id={project.id}
-          gradient={project.gradient}
-          title={project.title}
-          className="absolute inset-0 h-full w-full transition-transform duration-600"
-          variant="detail"
-        />
+        {project.video ? (
+          <ProjectVideo project={project} variant="teaser" onOpen={onViewDetail} />
+        ) : (
+          <ProjectGraphic
+            id={project.id}
+            gradient={project.gradient}
+            title={project.title}
+            className="absolute inset-0 h-full w-full transition-transform duration-600"
+            variant="detail"
+          />
+        )}
       </div>
 
       {/* Right — text panel */}

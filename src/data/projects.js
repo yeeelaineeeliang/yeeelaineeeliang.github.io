@@ -142,6 +142,10 @@ export const projects = [
     github: 'https://github.com/yeeelaineeeliang/citysim.git',
     demo: 'https://citysim-gamma.vercel.app/',
   },
+  video: {
+    src: '/videos/livingthere-demo.mp4',
+    poster: '/project-images/livingthere-video-poster.jpg',
+  },
 },
   {
     id: 'career-coach',

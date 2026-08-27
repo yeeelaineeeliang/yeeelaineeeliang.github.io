@@ -1,4 +1,5 @@
 import ProjectGraphic from './ProjectGraphic'
+import ProjectVideo from './ProjectVideo'
 
 const ProblemIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -283,14 +284,20 @@ export default function ProjectDetail({ project, onBack }) {
           ← Back to Projects
         </button>
 
-        <div className="w-full rounded-lg overflow-hidden mb-8 border border-border shadow-sm">
-          <ProjectGraphic
-            id={project.id}
-            gradient={project.gradient}
-            title={project.title}
-            className="w-full h-64 md:h-80"
-            variant="detail"
-          />
+        <div className="mb-10 w-full">
+          {project.video ? (
+            <ProjectVideo project={project} />
+          ) : (
+            <div className="overflow-hidden rounded-lg border border-border shadow-sm">
+              <ProjectGraphic
+                id={project.id}
+                gradient={project.gradient}
+                title={project.title}
+                className="w-full h-64 md:h-80"
+                variant="detail"
+              />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-wrap items-start gap-3 mb-3">
